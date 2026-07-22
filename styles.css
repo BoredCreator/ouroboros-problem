@@ -234,20 +234,16 @@ figure.infographic figcaption a { color: var(--red); }
 a.node { cursor: pointer; outline: none; }
 
 .node circle {
-  fill: var(--paper);
-  stroke: var(--ink);
-  stroke-width: 3;
-  transition: fill 0.18s ease, stroke 0.18s ease, r 0.18s ease;
+  fill: var(--ink);
+  transition: fill 0.18s ease;
 }
 
 .node .nnum {
   font-family: ui-sans-serif, -apple-system, "Helvetica Neue", Arial, sans-serif;
-  font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.04em;
-  fill: var(--ink);
+  fill: var(--paper);
   pointer-events: none;
-  transition: fill 0.18s ease;
 }
 
 .node .nlabel {
@@ -261,15 +257,11 @@ a.node { cursor: pointer; outline: none; }
   transition: opacity 0.18s ease, fill 0.18s ease;
 }
 
-.node:hover circle, .node:focus-visible circle { fill: var(--ink); }
-.node:hover .nnum,  .node:focus-visible .nnum  { fill: var(--paper); }
-.node:hover .nlabel, .node:focus-visible .nlabel { opacity: 1; fill: var(--ink); }
+.node:hover circle, .node:focus-visible circle { fill: var(--red); }
+.node:hover .nlabel, .node:focus-visible .nlabel { opacity: 1; fill: var(--red); }
 
-.node.cur circle { stroke: var(--red); }
-.node.cur .nnum { fill: var(--red); }
+.node.cur circle { fill: var(--red); }
 .node.cur .nlabel { fill: var(--red); opacity: 0.8; }
-.node.cur:hover circle { fill: var(--red); stroke: var(--red); }
-.node.cur:hover .nnum { fill: var(--paper); }
 
 /* ---------- Mini ouroboros page locator ---------- */
 
@@ -296,15 +288,13 @@ a.mnode { cursor: pointer; }
 
 .mnode circle {
   fill: var(--ink);
-  opacity: 0.35;
-  transition: opacity 0.15s ease, fill 0.15s ease;
+  transition: fill 0.15s ease;
 }
 
-.mnode:hover circle { opacity: 1; }
+.mnode:hover circle { fill: var(--red); }
 
 .mnode.cur circle {
   fill: var(--red);
-  opacity: 1;
   transform-box: fill-box;
   transform-origin: center;
   animation: mpulse 2.4s ease-in-out infinite;

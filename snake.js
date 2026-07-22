@@ -15,10 +15,13 @@
     return [cx + r * Math.cos(a), cy + r * Math.sin(a)];
   }
 
-  // Body of tapering dots + head biting the red tail tip. Returns angle helpers.
+  /* Body of tightly packed tapering dots. The tail continues past the gap and
+     curls INTO the open mouth; the head is an open-jawed wedge (pac-man cut)
+     aimed straight at the red tail tip. Returns angle helpers. */
   function drawSnake(svg, o) {
-    const a0 = o.start + o.gap;
-    const span = 2 * Math.PI - 2 * o.gap;
+    const a0 = o.start + o.gap;                 // neck, just past the mouth
+    const aTail = o.start - o.gap * 0.55;       // tail tip, inside the jaws
+    const span = (2 * Math.PI - o.gap) + o.gap * 0.45; // neck → into the mouth
 
     for (let i = 0; i < o.segs; i++) {
       const t = i / (o.segs - 1);
@@ -28,27 +31,45 @@
       if (o.wave) c.style.animationDelay = (t * 5.2) + "s";
       if (i === o.segs - 1) {
         c.setAttribute("class", "seg tailtip");
-        c.setAttribute("r", (o.rMax * 0.28).toFixed(2));
+        c.setAttribute("r", (o.rMax * 0.3).toFixed(2));
       }
       svg.appendChild(c);
     }
 
-    // Head fused to the thick neck, mouth open toward the tail.
-    const ha = o.start + o.gap * 0.55;
+    // Head: an open-jawed wedge biting toward the tail tip.
+    const ha = o.start + o.gap * 0.5;
+    const H = o.rMax * 1.8;
     const [hx, hy] = polar(o.cx, o.cy, o.r, ha);
-    svg.appendChild(el("circle", { cx: hx, cy: hy, r: o.rMax * 1.55, class: "seg head" }));
-    const [ex, ey] = polar(o.cx, o.cy, o.r + o.rMax * 0.45, ha - 0.04);
-    svg.appendChild(el("circle", { cx: ex, cy: ey, r: o.rMax * 0.44, class: "eye" }));
-    svg.appendChild(el("circle", { cx: ex, cy: ey, r: o.rMax * 0.2, class: "pupil" }));
+    const [tx, ty] = polar(o.cx, o.cy, o.r, aTail);
+    const theta = Math.atan2(ty - hy, tx - hx);  // mouth aims at the tail
+    const m = 0.62;                              // jaw half-angle (~35°)
+    const [j1x, j1y] = [hx + H * Math.cos(theta - m), hy + H * Math.sin(theta - m)];
+    const [j2x, j2y] = [hx + H * Math.cos(theta + m), hy + H * Math.sin(theta + m)];
+    svg.appendChild(el("path", {
+      d: "M " + hx.toFixed(1) + " " + hy.toFixed(1) +
+         " L " + j1x.toFixed(1) + " " + j1y.toFixed(1) +
+         " A " + H + " " + H + " 0 1 0 " + j2x.toFixed(1) + " " + j2y.toFixed(1) + " Z",
+      class: "seg head"
+    }));
+    const [ex, ey] = polar(o.cx, o.cy, o.r + o.rMax * 0.62, ha - o.gap * 0.15);
+    svg.appendChild(el("circle", { cx: ex, cy: ey, r: H * 0.24, class: "eye" }));
+    svg.appendChild(el("circle", { cx: ex, cy: ey, r: H * 0.11, class: "pupil" }));
 
-    return { a0: a0, span: span };
+    return {
+      a0: a0,
+      // usable arc for nodes: stop before the tail curls into the mouth
+      nodeSpan: 2 * Math.PI - 2 * o.gap,
+      taperAt: function (t) {
+        return o.rMin + (o.rMax - o.rMin) * Math.pow(1 - t, 1.35);
+      }
+    };
   }
 
   window.buildHub = function (svg, pages, current) {
     const CX = 400, CY = 400, R = 300;
     const ring = drawSnake(svg, {
-      cx: CX, cy: CY, r: R, start: -Math.PI / 2, gap: 0.30,
-      segs: 110, rMin: 2.5, rMax: 11, wave: true
+      cx: CX, cy: CY, r: R, start: -Math.PI / 2, gap: 0.26,
+      segs: 120, rMin: 3, rMax: 12, wave: true
     });
 
     // Orbit path for the traveling red reader-dot (clockwise, reading order).
@@ -57,7 +78,7 @@
               " A " + R + " " + R + " 0 1 1 " + CX + " " + (CY - R);
     const orbit = el("path", { id: "orbit", d: d, fill: "none", stroke: "none" });
     svg.appendChild(orbit);
-    const trav = el("circle", { r: 5.5, class: "traveler" });
+    const trav = el("circle", { r: 5, class: "traveler" });
     const mo = el("animateMotion", { dur: "36s", repeatCount: "indefinite" });
     const mp = el("mpath", {});
     mp.setAttribute("href", "#orbit");
@@ -66,21 +87,23 @@
     trav.appendChild(mo);
     svg.appendChild(trav);
 
-    // Section nodes: the pages ARE segments of the snake. 01 sits just behind
-    // the head; 11 (Works Cited) ends at the tail being eaten.
+    // Section nodes: solid segments OF the body, sized to the local taper.
+    // 01 sits just behind the head; 11 (Works Cited) rides the tail being eaten.
     pages.forEach(function (p, i) {
       const t = (i + 1) / (pages.length + 1);
-      const a = ring.a0 + t * ring.span;
+      const a = ring.a0 + t * ring.nodeSpan;
       const [x, y] = polar(CX, CY, R, a);
+      const nr = Math.max(10.5, Math.min(17, ring.taperAt(t) * 1.55));
 
       const link = el("a", { class: "node" + (i === current ? " cur" : "") });
       link.setAttribute("href", p.href);
       link.setAttribute("aria-label", p.num + " " + p.label);
 
-      link.appendChild(el("circle", { cx: x, cy: y, r: 16 }));
+      link.appendChild(el("circle", { cx: x, cy: y, r: nr.toFixed(1) }));
 
       const num = el("text", {
         x: x, y: y, class: "nnum",
+        "font-size": Math.max(8.5, nr * 0.7).toFixed(1),
         "text-anchor": "middle", "dominant-baseline": "central"
       });
       num.textContent = p.num;
@@ -101,14 +124,15 @@
   window.buildMini = function (svg, pages, current) {
     const CX = 60, CY = 60, R = 44;
     const ring = drawSnake(svg, {
-      cx: CX, cy: CY, r: R, start: -Math.PI / 2, gap: 0.42,
-      segs: 46, rMin: 0.9, rMax: 4.6, wave: false
+      cx: CX, cy: CY, r: R, start: -Math.PI / 2, gap: 0.38,
+      segs: 50, rMin: 1.1, rMax: 4.8, wave: false
     });
 
     pages.forEach(function (p, i) {
       const t = (i + 1) / (pages.length + 1);
-      const a = ring.a0 + t * ring.span;
+      const a = ring.a0 + t * ring.nodeSpan;
       const [x, y] = polar(CX, CY, R, a);
+      const nr = i === current ? 5.6 : Math.max(2.6, ring.taperAt(t) * 1.3);
 
       const link = el("a", { class: "mnode" + (i === current ? " cur" : "") });
       link.setAttribute("href", p.href);
@@ -116,7 +140,7 @@
       const title = el("title", {});
       title.textContent = p.num + " · " + p.label;
       link.appendChild(title);
-      link.appendChild(el("circle", { cx: x, cy: y, r: i === current ? 6 : 4.4 }));
+      link.appendChild(el("circle", { cx: x, cy: y, r: nr.toFixed(1) }));
       svg.appendChild(link);
     });
   };
