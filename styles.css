@@ -227,11 +227,100 @@ figure.infographic figcaption a { color: var(--red); }
 .pupil { fill: var(--red); }
 .tailtip { fill: var(--red); }
 
+/* ---------- Interactive hub: sections as snake segments ---------- */
+
+.traveler { fill: var(--red); }
+
+a.node { cursor: pointer; outline: none; }
+
+.node circle {
+  fill: var(--paper);
+  stroke: var(--ink);
+  stroke-width: 3;
+  transition: fill 0.18s ease, stroke 0.18s ease, r 0.18s ease;
+}
+
+.node .nnum {
+  font-family: ui-sans-serif, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  fill: var(--ink);
+  pointer-events: none;
+  transition: fill 0.18s ease;
+}
+
+.node .nlabel {
+  font-family: ui-sans-serif, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  fill: var(--ink-soft);
+  opacity: 0.55;
+  transition: opacity 0.18s ease, fill 0.18s ease;
+}
+
+.node:hover circle, .node:focus-visible circle { fill: var(--ink); }
+.node:hover .nnum,  .node:focus-visible .nnum  { fill: var(--paper); }
+.node:hover .nlabel, .node:focus-visible .nlabel { opacity: 1; fill: var(--ink); }
+
+.node.cur circle { stroke: var(--red); }
+.node.cur .nnum { fill: var(--red); }
+.node.cur .nlabel { fill: var(--red); opacity: 0.8; }
+.node.cur:hover circle { fill: var(--red); stroke: var(--red); }
+.node.cur:hover .nnum { fill: var(--paper); }
+
+/* ---------- Mini ouroboros page locator ---------- */
+
+.pagehead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.pagehead .headings { min-width: 0; }
+
+.minimap {
+  width: 118px;
+  height: 118px;
+  flex: 0 0 auto;
+  margin-top: 0.3rem;
+  overflow: visible;
+}
+
+.minimap .seg { animation: none; }
+
+a.mnode { cursor: pointer; }
+
+.mnode circle {
+  fill: var(--ink);
+  opacity: 0.35;
+  transition: opacity 0.15s ease, fill 0.15s ease;
+}
+
+.mnode:hover circle { opacity: 1; }
+
+.mnode.cur circle {
+  fill: var(--red);
+  opacity: 1;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: mpulse 2.4s ease-in-out infinite;
+}
+
+@keyframes mpulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.35); }
+}
+
 .center {
   position: relative;
   text-align: center;
-  max-width: 70%;
+  max-width: 62%;
   z-index: 1;
+  pointer-events: none;
 }
 
 .center h1 {
@@ -317,18 +406,25 @@ footer a:hover { border-bottom-color: var(--red); }
 
 /* ---------- Small screens ---------- */
 
+@media (max-width: 760px) {
+  .node .nlabel { display: none; }
+}
+
 @media (max-width: 560px) {
   .masthead { padding-left: 1.25rem; padding-right: 1.25rem; }
   nav.toolbar { padding-left: 1.25rem; padding-right: 1.25rem; }
   footer { padding-left: 1.25rem; padding-right: 1.25rem; }
   .stage { width: min(88vmin, 580px); }
-  .center { max-width: 64%; }
+  .center { max-width: 60%; }
   .center h1 br { display: none; }
-  .center h1 { font-size: clamp(1.2rem, 6.2vmin, 1.55rem); }
+  .center h1 { font-size: clamp(1.1rem, 5.6vmin, 1.5rem); }
   .page { padding-top: 3rem; }
+  .pagehead { flex-direction: column-reverse; }
+  .minimap { width: 84px; height: 84px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ring, .seg { animation: none; }
+  .ring, .seg, .mnode.cur circle { animation: none; }
+  .traveler { display: none; }
   html { scroll-behavior: auto; }
 }

@@ -31,11 +31,16 @@
 
 <main>
   <article class="page">
-    <p class="kicker">Page 09 of 11</p>
-    <h1>Rebuttal &amp; Cognitive Biases</h1>
+    <div class="pagehead">
+      <div class="headings">
+        <p class="kicker">Page 09 of 11 &mdash; a segment of the loop</p>
+        <h1>Rebuttal &amp; Cognitive Biases</h1>
+      </div>
+      <svg class="minimap" id="minimap" viewBox="0 0 120 120" role="navigation" aria-label="Site map: the ouroboros with this page highlighted"></svg>
+    </div>
     <div class="placeholder">
       <span class="soon">Coming soon</span>
-      <p>This page is under construction. Use the toolbar above to keep exploring.</p>
+      <p>This segment of the snake is still being digested. Use the toolbar or the loop above to keep moving.</p>
     </div>
   </article>
 </main>
@@ -44,6 +49,10 @@
   <span>Neel Anshu &mdash; Critical Thinking &amp; Writing</span>
   <span>Next &mdash; <a href="conclusion.html">10 Conclusion</a></span>
 </footer>
+
+<script>window.SITE_PAGES = [{"href": "index.html", "num": "01", "label": "Home"}, {"href": "dilemma.html", "num": "02", "label": "The Dilemma"}, {"href": "thesis.html", "num": "03", "label": "Thesis"}, {"href": "frameworks.html", "num": "04", "label": "Frameworks"}, {"href": "argument-1.html", "num": "05", "label": "Argument I"}, {"href": "argument-2.html", "num": "06", "label": "Argument II"}, {"href": "argument-3.html", "num": "07", "label": "Argument III"}, {"href": "argument-4.html", "num": "08", "label": "Argument IV"}, {"href": "rebuttal.html", "num": "09", "label": "Rebuttal"}, {"href": "conclusion.html", "num": "10", "label": "Conclusion"}, {"href": "works-cited.html", "num": "11", "label": "Works Cited"}];</script>
+<script src="snake.js"></script>
+<script>buildMini(document.getElementById('minimap'), window.SITE_PAGES, 8);</script>
 
 </body>
 </html>

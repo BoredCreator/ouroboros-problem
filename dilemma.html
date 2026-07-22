@@ -31,8 +31,13 @@
 
 <main>
   <article class="page">
-    <p class="kicker">Page 02 of 11</p>
-    <h1>Structural Dilemma, Context &amp; Why It Matters</h1>
+    <div class="pagehead">
+      <div class="headings">
+        <p class="kicker">Page 02 of 11 &mdash; a segment of the loop</p>
+        <h1>Structural Dilemma, Context &amp; Why It Matters</h1>
+      </div>
+      <svg class="minimap" id="minimap" viewBox="0 0 120 120" role="navigation" aria-label="Site map: the ouroboros with this page highlighted"></svg>
+    </div>
 
     <h2>The Structural Dilemma</h2>
     <p>Frontier AI labs built their models by scraping the internet&rsquo;s trove of human intelligence &mdash; books, art, code, and forums &mdash; without asking, and without care for silly things like intellectual property rights or terms of service. They argued their actions constituted transformative fair use. Then Chinese labs began distilling those same models&rsquo; outputs to train cheaper competitors, and the frontier labs, without any appreciation for the irony of the situation, began fighting a war to stop the &ldquo;thievery&rdquo; of their models. This conflict is only going to keep becoming louder, as the labs are attempting to hold two incompatible ideologies at once. If learning from anything publicly reachable is fair, they have little ground to stand on against their imitators. If taking requires consent, the models we already depend on were built wrong from the start. The people inside the industry cannot simply choose the ethical option, because systemic pressures close it off: frontier training requires data at a scale only mass extraction makes viable, the law of the jungle punishes any lab that unilaterally pays for what rivals take freely, and the courts have so far drawn the line at how data was acquired rather than whether taking it was right (<em>Bartz v. Anthropic</em>). As a computer science major working in the AI industry, I am investigating the dilemma my own field is being built on.</p>
@@ -51,6 +56,10 @@
   <span>Neel Anshu &mdash; Critical Thinking &amp; Writing</span>
   <span>Next &mdash; <a href="thesis.html">03 Thesis</a></span>
 </footer>
+
+<script>window.SITE_PAGES = [{"href": "index.html", "num": "01", "label": "Home"}, {"href": "dilemma.html", "num": "02", "label": "The Dilemma"}, {"href": "thesis.html", "num": "03", "label": "Thesis"}, {"href": "frameworks.html", "num": "04", "label": "Frameworks"}, {"href": "argument-1.html", "num": "05", "label": "Argument I"}, {"href": "argument-2.html", "num": "06", "label": "Argument II"}, {"href": "argument-3.html", "num": "07", "label": "Argument III"}, {"href": "argument-4.html", "num": "08", "label": "Argument IV"}, {"href": "rebuttal.html", "num": "09", "label": "Rebuttal"}, {"href": "conclusion.html", "num": "10", "label": "Conclusion"}, {"href": "works-cited.html", "num": "11", "label": "Works Cited"}];</script>
+<script src="snake.js"></script>
+<script>buildMini(document.getElementById('minimap'), window.SITE_PAGES, 1);</script>
 
 </body>
 </html>

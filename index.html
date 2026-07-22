@@ -31,14 +31,12 @@
 
 <main>
   <section class="hero">
-    <div class="stage" aria-label="An ouroboros — a snake devouring its own tail — drawn as a ring of tapering dots. The swallowed tail tip is red.">
-      <svg viewBox="0 0 800 800" role="img" aria-hidden="true">
-        <g class="ring" id="ring"></g>
-      </svg>
+    <div class="stage" aria-label="An ouroboros — a snake devouring its own tail — whose body segments are the 11 pages of this site. Works Cited sits at the tail being eaten.">
+      <svg id="hub" viewBox="0 0 800 800" overflow="visible"></svg>
 
       <div class="center">
         <h1>Everything it learned,<br> it <em>ate</em>.</h1>
-        <p>Human work feeds the model. The model feeds its imitators. The copies flood the internet the original learned from.</p>
+        <p>Human work feeds the model. The model feeds its imitators. The copies flood the internet the original learned from. Pick a segment of the snake to enter the loop.</p>
       </div>
     </div>
   </section>
@@ -46,76 +44,19 @@
   <section class="welcome">
     <div class="rule"></div>
     <h2>Welcome</h2>
-    <p>I&rsquo;m Neel Anshu, and this site is my project for ENGL C1001: Critical Thinking &amp; Writing. It examines a contradiction my own industry is built on: the AI labs that scraped the world&rsquo;s writing, art, and code to build their models are now fighting to stop imitators from doing the same thing to them. Use the toolbar above to jump to any page, or start with the dilemma itself and follow the loop around.</p>
+    <p>I&rsquo;m Neel Anshu, and this site is my project for ENGL C1001: Critical Thinking &amp; Writing. It examines a contradiction my own industry is built on: the AI labs that scraped the world&rsquo;s writing, art, and code to build their models are now fighting to stop imitators from doing the same thing to them. Every page of the argument is a segment of the ouroboros above &mdash; and the Works Cited sits at the tail, right where the snake is swallowing it.</p>
     <p class="byline">Neel Anshu &middot; ENGL C1001</p>
   </section>
-
-  <script>
-    // Build the snake: a ring of dots tapering from head to tail,
-    // with a simple head biting the red tail tip at 12 o'clock.
-    const NS = "http://www.w3.org/2000/svg";
-    const ring = document.getElementById("ring");
-    const CX = 400, CY = 400, R = 300;
-    const N = 64;                    // body segments
-    const GAP = 0.30;                // radians of open mouth at the top
-    const START = -Math.PI / 2;      // head sits at 12 o'clock
-
-    for (let i = 0; i < N; i++) {
-      const t = i / (N - 1);                       // 0 = behind the head, 1 = tail tip
-      const a = START + GAP + t * (2 * Math.PI - GAP * 2);
-      const x = CX + R * Math.cos(a);
-      const y = CY + R * Math.sin(a);
-      // Smooth taper: thick behind the head, vanishing at the tail.
-      const r = 4 + 18 * Math.pow(1 - t, 1.35);
-
-      const c = document.createElementNS(NS, "circle");
-      c.setAttribute("cx", x);
-      c.setAttribute("cy", y);
-      c.setAttribute("r", r.toFixed(2));
-      c.classList.add("seg");
-      c.style.animationDelay = (t * 5.2) + "s";    // peristaltic wave head → tail
-      if (i === N - 1) {
-        c.classList.add("tailtip");                // the disputed act, in red
-        c.setAttribute("r", "7");
-      }
-      ring.appendChild(c);
-    }
-
-    // Head: one larger circle fused to the thick neck, mouth open toward the tail.
-    const ha = START + GAP * 0.55;
-    const hx = CX + R * Math.cos(ha);
-    const hy = CY + R * Math.sin(ha);
-
-    const head = document.createElementNS(NS, "circle");
-    head.setAttribute("cx", hx);
-    head.setAttribute("cy", hy);
-    head.setAttribute("r", 30);
-    head.classList.add("seg");
-    ring.appendChild(head);
-
-    // Eye — offset outward and toward the mouth so it reads at any rotation.
-    const ex = CX + (R + 9) * Math.cos(ha - 0.04);
-    const ey = CY + (R + 9) * Math.sin(ha - 0.04);
-    const eye = document.createElementNS(NS, "circle");
-    eye.setAttribute("cx", ex);
-    eye.setAttribute("cy", ey);
-    eye.setAttribute("r", 8.5);
-    eye.classList.add("eye");
-    ring.appendChild(eye);
-
-    const pupil = document.createElementNS(NS, "circle");
-    pupil.setAttribute("cx", ex);
-    pupil.setAttribute("cy", ey);
-    pupil.setAttribute("r", 4);
-    pupil.classList.add("pupil");
-    ring.appendChild(pupil);
-  </script>
 </main>
 
 <footer>
   <span>Neel Anshu &mdash; Critical Thinking &amp; Writing</span>
   <span>Next &mdash; <a href="dilemma.html">02 The Dilemma</a></span>
 </footer>
+
+<script>window.SITE_PAGES = [{"href": "index.html", "num": "01", "label": "Home"}, {"href": "dilemma.html", "num": "02", "label": "The Dilemma"}, {"href": "thesis.html", "num": "03", "label": "Thesis"}, {"href": "frameworks.html", "num": "04", "label": "Frameworks"}, {"href": "argument-1.html", "num": "05", "label": "Argument I"}, {"href": "argument-2.html", "num": "06", "label": "Argument II"}, {"href": "argument-3.html", "num": "07", "label": "Argument III"}, {"href": "argument-4.html", "num": "08", "label": "Argument IV"}, {"href": "rebuttal.html", "num": "09", "label": "Rebuttal"}, {"href": "conclusion.html", "num": "10", "label": "Conclusion"}, {"href": "works-cited.html", "num": "11", "label": "Works Cited"}];</script>
+<script src="snake.js"></script>
+<script>buildHub(document.getElementById('hub'), window.SITE_PAGES, 0);</script>
 
 </body>
 </html>
