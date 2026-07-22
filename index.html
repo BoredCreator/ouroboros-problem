@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Ouroboros Problem</title>
+<meta name="description" content="A project on AI, fair use, and the loop that feeds itself.">
+<style>
+  :root {
+    --ink: #111111;
+    --ink-soft: #55524e;
+    --red: #8f1d1d;
+    --paper: #fdfcfa;
+    --hairline: #e6e2dc;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body { height: 100%; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: ui-sans-serif, -apple-system, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+    flex-direction: column;
+    min-height: 100svh;
+    overflow-x: hidden;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 1.5rem 2rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  header .mark { color: var(--ink); font-weight: 600; }
+  header .tag  { font-variant-numeric: tabular-nums; }
+
+  main {
+    flex: 1;
+    display: grid;
+    place-items: center;
+    padding: 3rem 1.5rem;
+  }
+
+  .stage {
+    position: relative;
+    width: min(74vmin, 620px);
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+  }
+
+  .stage svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .ring {
+    transform-origin: 400px 400px;
+    animation: spin 140s linear infinite;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  .seg {
+    fill: var(--ink);
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: swell 5.2s ease-in-out infinite;
+  }
+
+  @keyframes swell {
+    0%, 100% { transform: scale(1);    opacity: 1; }
+    12%      { transform: scale(1.28); opacity: 0.92; }
+    28%      { transform: scale(1);    opacity: 1; }
+  }
+
+  .eye { fill: var(--paper); }
+  .pupil { fill: var(--red); }
+  .tailtip { fill: var(--red); }
+
+  .center {
+    position: relative;
+    text-align: center;
+    max-width: 70%;
+    z-index: 1;
+  }
+
+  .center h1 {
+    font-family: ui-serif, "New York", Georgia, "Times New Roman", serif;
+    font-weight: 500;
+    font-size: clamp(1.5rem, 5.2vmin, 2.6rem);
+    line-height: 1.12;
+    letter-spacing: -0.015em;
+  }
+
+  .center h1 em {
+    font-style: italic;
+    color: var(--red);
+  }
+
+  .center p {
+    margin-top: 0.9rem;
+    font-size: clamp(0.72rem, 1.9vmin, 0.85rem);
+    line-height: 1.55;
+    color: var(--ink-soft);
+    letter-spacing: 0.01em;
+  }
+
+  .center .soon {
+    display: inline-block;
+    margin-top: 1.3rem;
+    font-size: 0.64rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    border: 1px solid var(--hairline);
+    border-radius: 999px;
+    padding: 0.45em 1.1em;
+    background: rgba(253, 252, 250, 0.85);
+  }
+
+  footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 1.4rem 2rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    border-top: 1px solid var(--hairline);
+  }
+
+  footer .red-note::before {
+    content: "";
+    display: inline-block;
+    width: 0.55em;
+    height: 0.55em;
+    border-radius: 50%;
+    background: var(--red);
+    margin-right: 0.6em;
+    vertical-align: 6%;
+  }
+
+  @media (max-width: 560px) {
+    header, footer { padding-left: 1.25rem; padding-right: 1.25rem; }
+    footer { flex-direction: column; gap: 0.5rem; }
+    .stage { width: min(92vmin, 620px); }
+    .center { max-width: 64%; }
+    .center h1 br { display: none; }
+    .center h1 { font-size: clamp(1.25rem, 6.4vmin, 1.6rem); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ring, .seg { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="mark">The Ouroboros Problem</span>
+  <span class="tag">ENGL C1001 · 2026</span>
+</header>
+
+<main>
+  <div class="stage" aria-label="An ouroboros — a snake devouring its own tail — drawn as a ring of tapering dots. The swallowed tail tip is red.">
+    <svg viewBox="0 0 800 800" role="img" aria-hidden="true">
+      <g class="ring" id="ring"></g>
+    </svg>
+
+    <div class="center">
+      <h1>Everything it learned,<br> it <em>ate</em>.</h1>
+      <p>Human work feeds the model. The model feeds its imitators. The copies flood the internet the original learned from.</p>
+      <span class="soon">Coming soon</span>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <span>Neel Anshu — Critical Thinking &amp; Writing</span>
+  <span class="red-note">Red means someone is losing</span>
+</footer>
+
+<script>
+  // Build the snake: a ring of dots tapering from head to tail,
+  // with a simple head biting the red tail tip at 12 o'clock.
+  const NS = "http://www.w3.org/2000/svg";
+  const ring = document.getElementById("ring");
+  const CX = 400, CY = 400, R = 300;
+  const N = 64;                    // body segments
+  const GAP = 0.30;                // radians of open mouth at the top
+  const START = -Math.PI / 2;      // head sits at 12 o'clock
+
+  for (let i = 0; i < N; i++) {
+    const t = i / (N - 1);                       // 0 = behind the head, 1 = tail tip
+    const a = START + GAP + t * (2 * Math.PI - GAP * 2);
+    const x = CX + R * Math.cos(a);
+    const y = CY + R * Math.sin(a);
+    // Smooth taper: thick behind the head, vanishing at the tail.
+    const r = 4 + 18 * Math.pow(1 - t, 1.35);
+
+    const c = document.createElementNS(NS, "circle");
+    c.setAttribute("cx", x);
+    c.setAttribute("cy", y);
+    c.setAttribute("r", r.toFixed(2));
+    c.classList.add("seg");
+    c.style.animationDelay = (t * 5.2) + "s";    // peristaltic wave head → tail
+    if (i === N - 1) {
+      c.classList.add("tailtip");                // the disputed act, in red
+      c.setAttribute("r", "7");
+    }
+    ring.appendChild(c);
+  }
+
+  // Head: one larger circle fused to the thick neck, mouth open toward the tail.
+  const ha = START + GAP * 0.55;
+  const hx = CX + R * Math.cos(ha);
+  const hy = CY + R * Math.sin(ha);
+
+  const head = document.createElementNS(NS, "circle");
+  head.setAttribute("cx", hx);
+  head.setAttribute("cy", hy);
+  head.setAttribute("r", 30);
+  head.classList.add("seg");
+  ring.appendChild(head);
+
+  // Eye — offset outward and toward the mouth so it reads at any rotation.
+  const ex = CX + (R + 9) * Math.cos(ha - 0.04);
+  const ey = CY + (R + 9) * Math.sin(ha - 0.04);
+  const eye = document.createElementNS(NS, "circle");
+  eye.setAttribute("cx", ex);
+  eye.setAttribute("cy", ey);
+  eye.setAttribute("r", 8.5);
+  eye.classList.add("eye");
+  ring.appendChild(eye);
+
+  const pupil = document.createElementNS(NS, "circle");
+  pupil.setAttribute("cx", ex);
+  pupil.setAttribute("cy", ey);
+  pupil.setAttribute("r", 4);
+  pupil.classList.add("pupil");
+  ring.appendChild(pupil);
+</script>
+
+</body>
+</html>
