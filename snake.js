@@ -38,11 +38,11 @@
 
     // Head: an open-jawed wedge biting toward the tail tip.
     const ha = o.start + o.gap * 0.5;
-    const H = o.rMax * 1.8;
+    const H = o.rMax * 2.0;
     const [hx, hy] = polar(o.cx, o.cy, o.r, ha);
     const [tx, ty] = polar(o.cx, o.cy, o.r, aTail);
     const theta = Math.atan2(ty - hy, tx - hx);  // mouth aims at the tail
-    const m = 0.62;                              // jaw half-angle (~35°)
+    const m = 0.58;                              // jaw half-angle (~33°)
     const [j1x, j1y] = [hx + H * Math.cos(theta - m), hy + H * Math.sin(theta - m)];
     const [j2x, j2y] = [hx + H * Math.cos(theta + m), hy + H * Math.sin(theta + m)];
     svg.appendChild(el("path", {
@@ -51,9 +51,15 @@
          " A " + H + " " + H + " 0 1 0 " + j2x.toFixed(1) + " " + j2y.toFixed(1) + " Z",
       class: "seg head"
     }));
-    const [ex, ey] = polar(o.cx, o.cy, o.r + o.rMax * 0.62, ha - o.gap * 0.15);
-    svg.appendChild(el("circle", { cx: ex, cy: ey, r: H * 0.24, class: "eye" }));
-    svg.appendChild(el("circle", { cx: ex, cy: ey, r: H * 0.11, class: "pupil" }));
+    // Eye: high on the skull, perpendicular to the mouth on the outward side
+    // and pulled back from the jaws, so it never touches the mouth cut.
+    const [rox, roy] = [Math.cos(ha), Math.sin(ha)];          // outward radial
+    let phi = theta - Math.PI / 2;
+    if (Math.cos(phi) * rox + Math.sin(phi) * roy < 0) phi = theta + Math.PI / 2;
+    const ex = hx + H * 0.52 * Math.cos(phi) - H * 0.14 * Math.cos(theta);
+    const ey = hy + H * 0.52 * Math.sin(phi) - H * 0.14 * Math.sin(theta);
+    svg.appendChild(el("circle", { cx: ex, cy: ey, r: H * 0.17, class: "eye" }));
+    svg.appendChild(el("circle", { cx: ex, cy: ey, r: H * 0.08, class: "pupil" }));
 
     return {
       a0: a0,
@@ -69,7 +75,7 @@
     const CX = 400, CY = 400, R = 300;
     const ring = drawSnake(svg, {
       cx: CX, cy: CY, r: R, start: -Math.PI / 2, gap: 0.26,
-      segs: 120, rMin: 3, rMax: 12, wave: true
+      segs: 170, rMin: 3, rMax: 11.5, wave: true
     });
 
     // Orbit path for the traveling red reader-dot (clockwise, reading order).
@@ -125,7 +131,7 @@
     const CX = 60, CY = 60, R = 44;
     const ring = drawSnake(svg, {
       cx: CX, cy: CY, r: R, start: -Math.PI / 2, gap: 0.38,
-      segs: 50, rMin: 1.1, rMax: 4.8, wave: false
+      segs: 70, rMin: 1.1, rMax: 4.8, wave: false
     });
 
     pages.forEach(function (p, i) {
