@@ -226,6 +226,7 @@ figure.infographic figcaption a { color: var(--red); }
 .eye { fill: var(--paper); }
 .pupil { fill: var(--red); }
 .tailtip { fill: var(--red); }
+.head { fill: var(--ink); }
 
 /* ---------- Interactive hub: sections as snake segments ---------- */
 

@@ -15,33 +15,34 @@
     return [cx + r * Math.cos(a), cy + r * Math.sin(a)];
   }
 
-  /* Body of tightly packed tapering dots. The tail continues past the gap and
-     curls INTO the open mouth; the head is an open-jawed wedge (pac-man cut)
-     aimed straight at the red tail tip. Returns angle helpers. */
+  /* Body of tightly packed tapering dots. The tail runs up to the open jaws;
+     the red tail tip floats in the middle of the mouth, mid-bite. The head is
+     an open-jawed wedge (pac-man cut) fused to the neck. Returns helpers. */
   function drawSnake(svg, o) {
-    const a0 = o.start + o.gap;                 // neck, just past the mouth
-    const aTail = o.start - o.gap * 0.55;       // tail tip, inside the jaws
-    const span = (2 * Math.PI - o.gap) + o.gap * 0.45; // neck → into the mouth
+    const a0 = o.start + o.gap;                  // neck, just past the mouth
+    const ha = o.start + o.gap * 0.5;            // head centre on the ring
+    const H = o.rMax * 2.0;                      // head radius
+    const [hx, hy] = polar(o.cx, o.cy, o.r, ha);
+
+    // Mouth aims across the gap at the incoming tail.
+    const [mx, my] = polar(o.cx, o.cy, o.r, o.start - o.gap * 0.5);
+    const theta = Math.atan2(my - hy, mx - hx);
+
+    // Body starts inside the back of the skull (fused joint) and ends just
+    // short of the jaw tips so nothing pokes into the mouth.
+    const aBody = ha + (H / o.r) * 0.5;
+    const span = (a0 + 2 * Math.PI - o.gap * 1.5 - (H / o.r) * 1.2) - aBody;
 
     for (let i = 0; i < o.segs; i++) {
       const t = i / (o.segs - 1);
-      const [x, y] = polar(o.cx, o.cy, o.r, a0 + t * span);
+      const [x, y] = polar(o.cx, o.cy, o.r, aBody + t * span);
       const r = o.rMin + (o.rMax - o.rMin) * Math.pow(1 - t, 1.35);
       const c = el("circle", { cx: x, cy: y, r: r.toFixed(2), class: "seg" });
       if (o.wave) c.style.animationDelay = (t * 5.2) + "s";
-      if (i === o.segs - 1) {
-        c.setAttribute("class", "seg tailtip");
-        c.setAttribute("r", (o.rMax * 0.3).toFixed(2));
-      }
       svg.appendChild(c);
     }
 
-    // Head: an open-jawed wedge biting toward the tail tip.
-    const ha = o.start + o.gap * 0.5;
-    const H = o.rMax * 2.0;
-    const [hx, hy] = polar(o.cx, o.cy, o.r, ha);
-    const [tx, ty] = polar(o.cx, o.cy, o.r, aTail);
-    const theta = Math.atan2(ty - hy, tx - hx);  // mouth aims at the tail
+    // Head: an open-jawed wedge biting toward the tail.
     const m = 0.58;                              // jaw half-angle (~33°)
     const [j1x, j1y] = [hx + H * Math.cos(theta - m), hy + H * Math.sin(theta - m)];
     const [j2x, j2y] = [hx + H * Math.cos(theta + m), hy + H * Math.sin(theta + m)];
@@ -49,17 +50,25 @@
       d: "M " + hx.toFixed(1) + " " + hy.toFixed(1) +
          " L " + j1x.toFixed(1) + " " + j1y.toFixed(1) +
          " A " + H + " " + H + " 0 1 0 " + j2x.toFixed(1) + " " + j2y.toFixed(1) + " Z",
-      class: "seg head"
+      class: "head"
     }));
-    // Eye: high on the skull, perpendicular to the mouth on the outward side
-    // and pulled back from the jaws, so it never touches the mouth cut.
+
+    // The red tail tip, held mid-mouth between the open jaws.
+    svg.appendChild(el("circle", {
+      cx: (hx + H * 0.58 * Math.cos(theta)).toFixed(1),
+      cy: (hy + H * 0.58 * Math.sin(theta)).toFixed(1),
+      r: (o.rMax * 0.34).toFixed(2),
+      class: "tailtip"
+    }));
+
+    // Eye: on the back of the skull, outward side, well clear of the jaw cut.
     const [rox, roy] = [Math.cos(ha), Math.sin(ha)];          // outward radial
     let phi = theta - Math.PI / 2;
     if (Math.cos(phi) * rox + Math.sin(phi) * roy < 0) phi = theta + Math.PI / 2;
-    const ex = hx + H * 0.52 * Math.cos(phi) - H * 0.14 * Math.cos(theta);
-    const ey = hy + H * 0.52 * Math.sin(phi) - H * 0.14 * Math.sin(theta);
-    svg.appendChild(el("circle", { cx: ex, cy: ey, r: H * 0.17, class: "eye" }));
-    svg.appendChild(el("circle", { cx: ex, cy: ey, r: H * 0.08, class: "pupil" }));
+    const ex = hx + H * 0.42 * Math.cos(phi) - H * 0.3 * Math.cos(theta);
+    const ey = hy + H * 0.42 * Math.sin(phi) - H * 0.3 * Math.sin(theta);
+    svg.appendChild(el("circle", { cx: ex, cy: ey, r: H * 0.21, class: "eye" }));
+    svg.appendChild(el("circle", { cx: ex, cy: ey, r: H * 0.1, class: "pupil" }));
 
     return {
       a0: a0,
