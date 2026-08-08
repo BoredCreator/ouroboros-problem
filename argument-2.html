@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Argument II: Matter of Degree &mdash; The Ouroboros Problem</title>
+<meta name="description" content="A project on AI, fair use, and the loop that feeds itself.">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ── Page 06 · Argument II · GOLDEN HOUR ──────────────────────────
+   Scoped under body.p-arg2. Flat poster bands, solid fills only,
+   radius 0. Vista focal: the fire spotter with binoculars (the
+   referee). Signature animation: the low sun settling toward the
+   ridge on load. Everything else reuses shared .reveal utilities. */
+
+body.p-arg2 main { padding-bottom: 4rem; }
+
+/* ── The vista: five flat golden-hour bands ── */
+body.p-arg2 .vista { min-height: clamp(380px, 62vh, 620px); }
+body.p-arg2 .v-sun    { fill: var(--paper); }
+body.p-arg2 .v-far    { fill: var(--far); }
+body.p-arg2 .v-mid    { fill: var(--mid); }
+body.p-arg2 .v-near   { fill: var(--near); }
+body.p-arg2 .v-ground { fill: var(--ground); }
+body.p-arg2 .v-spotter{ fill: var(--ground); }
+body.p-arg2 .v-birds  { fill: var(--near); }
+
+/* quest.js seats its chapter strip after .pagehead, which lives in
+   the vista here — restate it as a legible sign line on the dark
+   foreground bands. */
+body.p-arg2 .vista .quest-strip {
+  border-top-color: rgba(247, 241, 227, 0.4);
+  color: var(--paper);
+}
+body.p-arg2 .vista .quest-strip .q-chap,
+body.p-arg2 .vista .quest-strip .q-prog b { color: var(--sky); }
+
+/* Below ~1080px the right-third crop brings the lookout tower into
+   the reading zone: seat the headline at the top of the vista, over
+   the open sky, and let the art own the lower half. */
+@media (max-width: 1080px) {
+  body.p-arg2 .vista { align-items: flex-start; }
+  body.p-arg2 .vista .quest-strip {
+    color: var(--ink);
+    border-top-color: rgba(29, 27, 22, 0.3);
+  }
+  body.p-arg2 .vista .quest-strip .q-chap,
+  body.p-arg2 .vista .quest-strip .q-prog b { color: var(--ink); }
+}
+
+/* Signature animation: the sun settles a few px toward the ridge. */
+@media (prefers-reduced-motion: no-preference) {
+  body.p-arg2 .v-sun { animation: p2-sun-settle 3s var(--ease-stamp) both; }
+  @keyframes p2-sun-settle {
+    from { transform: translateY(-30px); }
+    to   { transform: translateY(0); }
+  }
+}
+
+/* ── The record strip: trail-register placard under the vista ── */
+body.p-arg2 .record { padding-top: 2.1rem; }
+body.p-arg2 .hr { height: 1px; background: var(--ink); border: 0; }
+
+body.p-arg2 .recgrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: 2rem 3.5rem;
+  align-items: center;
+  padding: 2.1rem 0 2.5rem;
+}
+body.p-arg2 .docket { font-family: var(--font-mono); max-width: 30rem; }
+body.p-arg2 .docket .dk-label {
+  display: block;
+  font-size: 0.62rem; font-weight: 600;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--accent-ink);
+  margin-bottom: 0.7rem;
+}
+body.p-arg2 .docket .dk-title { font-size: 0.86rem; line-height: 1.68; margin-bottom: 0.6rem; }
+body.p-arg2 .docket .dk-title em { font-style: normal; font-weight: 600; }
+body.p-arg2 .docket .dk-meta {
+  font-size: 0.66rem; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-soft); line-height: 1.9;
+}
+
+body.p-arg2 .stampcol {
+  display: flex; flex-direction: column; align-items: flex-start;
+  gap: 1.05rem;
+  justify-self: end;
+  padding: 0.5rem 1.2rem 0.7rem 0;
+}
+body.p-arg2 .stamprow { display: flex; align-items: center; gap: 0.95rem; }
+body.p-arg2 .stamprow.s2 { margin-left: 4.5rem; margin-top: -0.3rem; }
+body.p-arg2 .ptag {
+  font-family: var(--font-mono);
+  font-size: 0.64rem; font-weight: 600;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ink-soft); white-space: nowrap;
+}
+
+/* ── Essay: prose column; evidence forms around it ── */
+body.p-arg2 .essay { margin-top: 2.9rem; }
+body.p-arg2 .essay .lead { font-size: 1.13rem; line-height: 1.74; }
+body.p-arg2 .bridge { margin-top: 2.6rem; }
+
+/* Pull-alongside: a short paragraph seats beside its quote placard. */
+@media (min-width: 900px) {
+  body.p-arg2 .pair {
+    display: grid;
+    grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+    gap: 0 2.4rem;
+    align-items: center;
+    margin: 2.6rem 0;
+  }
+  body.p-arg2 .pair > p { margin-bottom: 0; }
+  body.p-arg2 .pair blockquote.qs { margin: 0; }
+}
+
+/* Trail placards jut into the margin on wide screens. */
+@media (min-width: 1120px) {
+  body.p-arg2 figure.exhibit.pull-r { margin-right: -9rem; }
+  body.p-arg2 figure.exhibit.pull-l { margin-left: -9rem; }
+  body.p-arg2 .pair { margin-right: -6rem; }
+}
+
+/* ── The referee's instrument: the degree dial (interactive) ── */
+body.p-arg2 .dialband {
+  margin-top: 3.4rem;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--hairline);
+  padding-top: 2.2rem;
+  padding-bottom: 2.6rem;
+}
+body.p-arg2 .db-head {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  gap: 1.5rem 2.5rem; flex-wrap: wrap;
+  margin-bottom: 2.1rem;
+}
+body.p-arg2 .db-sub {
+  font-size: 0.93rem; line-height: 1.6;
+  color: var(--ink-soft);
+  max-width: 36rem;
+  margin-top: 0.55rem;
+}
+body.p-arg2 .replay {
+  font-family: var(--font-mono);
+  font-size: 0.62rem; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  padding: 0.6em 1em 0.55em;
+  cursor: pointer;
+  transition: background-color 0.18s var(--ease-stamp), color 0.18s var(--ease-stamp);
+}
+body.p-arg2 .replay:hover { background: var(--ink); color: var(--paper); }
+body.p-arg2 .replay:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+
+body.p-arg2 .db-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 1.6rem 3.6rem;
+  align-items: center;
+}
+body.p-arg2 .db-gauge { max-width: 660px; }
+body.p-arg2 #gauge {
+  display: block; width: 100%; height: auto;
+  touch-action: none;
+  cursor: ew-resize;
+}
+body.p-arg2 .g-base { stroke: var(--hairline); stroke-width: 2; }
+body.p-arg2 .g-arc  { fill: none; stroke: var(--hairline); stroke-width: 4; }
+body.p-arg2 .g-prog { fill: none; stroke: var(--ink); stroke-width: 4; }
+body.p-arg2 .g-prog.hot { stroke: var(--red); }
+body.p-arg2 .g-tick { stroke: var(--hairline); stroke-width: 2; }
+body.p-arg2 .g-det  { fill: var(--paper); stroke: var(--ink); stroke-width: 2; }
+body.p-arg2 .g-det.on { fill: var(--ink); }
+body.p-arg2 .g-det.harm { stroke: var(--red); }
+body.p-arg2 .g-det.harm.on { fill: var(--red); }
+body.p-arg2 .g-lab {
+  font-family: var(--font-mono);
+  font-size: 17px; font-weight: 600;
+  letter-spacing: 0.1em;
+  fill: var(--ink-soft);
+}
+body.p-arg2 .g-lab.harm { fill: var(--red); }
+body.p-arg2 .g-axis {
+  font-family: var(--font-mono);
+  font-size: 14px; font-weight: 600;
+  letter-spacing: 0.22em;
+  fill: var(--ink-soft);
+}
+body.p-arg2 .g-needle line { stroke: var(--ink); stroke-width: 3; }
+body.p-arg2 .g-needle circle { fill: var(--ink); }
+body.p-arg2 .g-pivot { fill: var(--ink); }
+
+body.p-arg2 #degree {
+  -webkit-appearance: none; appearance: none;
+  display: block;
+  width: 78.2%;
+  margin: 0.5rem 10.9% 0;
+  height: 26px;
+  background: transparent;
+  cursor: ew-resize;
+}
+body.p-arg2 #degree::-webkit-slider-runnable-track { height: 2px; background: var(--hairline); }
+body.p-arg2 #degree::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 15px; height: 15px;
+  margin-top: -6.5px;
+  background: var(--ink);
+  border: 0; border-radius: 0;
+}
+body.p-arg2 #degree::-moz-range-track { height: 2px; background: var(--hairline); }
+body.p-arg2 #degree::-moz-range-thumb {
+  width: 15px; height: 15px;
+  background: var(--ink);
+  border: 0; border-radius: 0;
+}
+body.p-arg2 #degree:focus-visible { outline: 2px solid var(--red); outline-offset: 5px; }
+
+body.p-arg2 .poles {
+  display: flex; justify-content: space-between; gap: 2rem;
+  margin-top: 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.62rem; font-weight: 600;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ink-soft);
+  line-height: 1.75;
+}
+body.p-arg2 .pole.harm { color: var(--red); text-align: right; }
+
+body.p-arg2 .db-stops { display: flex; flex-direction: column; gap: 0.9rem; }
+body.p-arg2 .stopcard {
+  border: 1px solid var(--hairline);
+  background: var(--paper);
+  padding: 1.05rem 1.15rem 1rem;
+  transition: border-color 0.25s var(--ease-stamp),
+              background-color 0.25s var(--ease-stamp),
+              opacity 0.25s linear;
+}
+body.p-arg2 .stopcard p {
+  font-size: 0.94rem; line-height: 1.62;
+  margin: 0.5rem 0 0;
+  text-wrap: pretty;
+}
+body.p-arg2 .sc-tag {
+  font-family: var(--font-mono);
+  font-size: 0.62rem; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--ink-soft);
+}
+body.p-arg2 .stopcard.dim { opacity: 0.5; }
+body.p-arg2 .stopcard.hot { border-color: var(--ink); background: var(--paper-dim); }
+body.p-arg2 .stopcard.hot .sc-tag { color: var(--ink); }
+body.p-arg2 .stopcard.harm.hot { border-color: var(--red); }
+body.p-arg2 .stopcard.harm.hot .sc-tag { color: var(--red); }
+
+/* Visually hidden (label + outline heading) */
+body.p-arg2 .vh {
+  position: absolute; width: 1px; height: 1px;
+  margin: -1px; padding: 0; border: 0;
+  overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Breakpoints */
+@media (max-width: 920px) {
+  body.p-arg2 .db-grid { grid-template-columns: 1fr; }
+  body.p-arg2 .db-gauge { margin: 0 auto; width: 100%; }
+}
+@media (max-width: 700px) {
+  body.p-arg2 .recgrid { grid-template-columns: 1fr; gap: 1.9rem; padding-top: 1.7rem; }
+  body.p-arg2 .stampcol { justify-self: start; padding-right: 0; }
+  body.p-arg2 .stamprow.s2 { margin-left: 2rem; }
+}
+@media (max-width: 560px) {
+  body.p-arg2 .dialband { padding-top: 1.8rem; }
+  body.p-arg2 .stamprow { flex-wrap: wrap; gap: 0.55rem; }
+}
+
+/* Reduced motion: dial degrades to three static, fully readable stops */
+@media (prefers-reduced-motion: reduce) {
+  body.p-arg2 .replay { display: none; }
+  body.p-arg2 .stopcard { transition: none; }
+}
+/* Without JS the slider and its instruction would be dead weight */
+@media (scripting: none) {
+  body.p-arg2 #degree, body.p-arg2 .db-sub, body.p-arg2 .replay { display: none; }
+}
+</style>
+</head>
+<body class="p-arg2">
+
+<header class="site">
+  <div class="masthead">
+    <a class="mark" href="index.html">The Ouroboros <em>Problem</em></a>
+    <span class="tag">Neel Anshu &middot; ENGL C1001</span>
+  </div>
+  <nav class="toolbar" aria-label="Pages">
+    <a href="index.html"><span class="num">01</span>Home</a>
+    <a href="dilemma.html"><span class="num">02</span>The Dilemma</a>
+    <a href="thesis.html"><span class="num">03</span>Thesis</a>
+    <a href="frameworks.html"><span class="num">04</span>Frameworks</a>
+    <a href="argument-1.html"><span class="num">05</span>Argument I</a>
+    <a href="argument-2.html" aria-current="page"><span class="num">06</span>Argument II</a>
+    <a href="argument-3.html"><span class="num">07</span>Argument III</a>
+    <a href="argument-4.html"><span class="num">08</span>Argument IV</a>
+    <a href="rebuttal.html"><span class="num">09</span>Rebuttal</a>
+    <a href="conclusion.html"><span class="num">10</span>Conclusion</a>
+    <a href="works-cited.html"><span class="num">11</span>Works Cited</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- Hero vista: golden hour. The fire spotter (the referee) glasses
+       the valley from the lookout platform on the right third. -->
+  <section class="vista">
+    <svg viewBox="0 0 1440 560" preserveAspectRatio="xMaxYMax slice" aria-hidden="true" focusable="false">
+      <g class="v-sun"><circle cx="856" cy="286" r="58"/></g>
+      <g class="v-birds">
+        <path d="M470,168 l9,-6 9,6 -2,4 -7,-4 -7,4 Z"/>
+        <path d="M516,150 l8,-5 8,5 -2,4 -6,-4 -6,4 Z"/>
+        <path d="M552,176 l7,-5 7,5 -2,3 -5,-3 -5,3 Z"/>
+      </g>
+      <path class="v-far" d="M0,356 L110,330 L228,348 L342,302 L470,342 L608,312 L756,346 L918,306 L1034,338 L1160,314 L1298,342 L1440,318 L1440,560 L0,560 Z"/>
+      <path class="v-mid" d="M0,438 L128,406 C170,396 204,422 252,428 L388,388 C440,372 502,420 544,424 L664,398 L822,432 L962,392 L1102,422 L1244,398 L1362,424 L1440,408 L1440,560 L0,560 Z"/>
+      <path class="v-near" d="M0,502 L112,470 L242,494 L364,460 L502,490 L642,464 L782,492 L902,468 L1006,490 L1258,490 L1338,474 L1440,490 L1440,560 L0,560 Z"/>
+      <g class="v-spotter">
+        <path d="M1094,424 L1082,490 L1090,490 L1101,424 Z"/>
+        <path d="M1186,424 L1198,490 L1190,490 L1179,424 Z"/>
+        <path d="M1087,482 L1189,436 L1191,441 L1089,487 Z"/>
+        <path d="M1193,482 L1091,436 L1089,441 L1191,487 Z"/>
+        <rect x="1076" y="415" width="128" height="9"/>
+        <rect x="1080" y="396" width="3.5" height="19"/>
+        <rect x="1196.5" y="396" width="3.5" height="19"/>
+        <rect x="1076" y="393" width="128" height="4"/>
+        <rect x="1146" y="392" width="6" height="23"/>
+        <rect x="1156" y="392" width="6" height="23"/>
+        <path d="M1144,362 L1164,362 L1166,393 L1142,393 Z"/>
+        <circle cx="1152" cy="351" r="7"/>
+        <rect x="1140" y="342" width="24" height="3.5"/>
+        <path d="M1145,342 L1146,334 L1158,334 L1159,342 Z"/>
+        <path d="M1146,368 L1134,357 L1139,351 L1151,362 Z"/>
+        <rect x="1128" y="348" width="5" height="9"/>
+        <rect x="1135" y="348" width="5" height="9"/>
+      </g>
+      <path class="v-ground" d="M0,548 L206,534 L428,546 L648,532 L906,544 L1156,532 L1440,542 L1440,560 L0,560 Z"/>
+    </svg>
+    <div class="vista-content">
+      <div class="pagehead">
+        <div class="headings">
+          <p class="kicker">Page 06 of 11 &mdash; Supporting Argument II</p>
+          <h1 class="display">Even the Referee<br>Splits the Stamp</h1>
+        </div>
+        <svg class="minimap" id="minimap" viewBox="0 0 120 120" role="navigation"
+             aria-label="Site map: the ouroboros with this page highlighted"></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- The record strip: the docket and the split verdict -->
+  <section class="wide record">
+    <div class="hr rule-draw" aria-hidden="true"></div>
+    <div class="recgrid">
+      <div class="docket reveal">
+        <span class="dk-label">The record</span>
+        <p class="dk-title">U.S. Copyright Office &mdash; <em>Copyright and Artificial Intelligence, Part&nbsp;3: Generative AI Training</em></p>
+        <p class="dk-meta">Built on 10,000+ comments &middot; pre&#8209;publication version</p>
+      </div>
+      <div class="stampcol" role="img"
+           aria-label="Two rubber stamps one page apart: 'often transformative' stamped in ink from page 45, and 'a matter of degree' stamped in red from page 46.">
+        <div class="stamprow">
+          <span class="stampbox stamp">Often transformative</span>
+          <span class="ptag">p. 45</span>
+        </div>
+        <div class="stamprow s2">
+          <span class="stampbox red stamp d2">A matter of degree</span>
+          <span class="ptag">p. 46</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ridge-divider" aria-hidden="true"></div>
+
+  <!-- Essay -->
+  <section class="col essay">
+
+    <p class="lead">Strip out everyone with money riding on the answer and the strongest voice left is the referee. The Copyright Office built a report on more than 10,000 comments from the public, and it didn&rsquo;t hand either side the win. First, the half the labs like to quote:</p>
+
+    <blockquote class="qs reveal">
+      <span class="qtag">Exhibit 06-A &middot; U.S. Copyright Office, p. 45</span>
+      <p>&ldquo;In the Office&rsquo;s view, training a generative AI foundation model on a large and diverse dataset will often be transformative.&rdquo;</p>
+      <footer>(United States, Copyright Office 45)</footer>
+    </blockquote>
+
+    <figure class="exhibit pull-r reveal">
+      <span class="etag"><b>Exhibit 06-A</b> &middot; the passage in the record, p. 45</span>
+      <img src="assets/evidence/usco-often-zoom.png" width="1921" height="525" loading="lazy"
+           alt="Scanned lines from page 45 of the Copyright Office report. The paragraph begins: 'In the Office's view, training a generative AI foundation model on a large and diverse dataset will often be transformative,' and goes on to describe converting a massive collection of training examples into a statistical model.">
+      <figcaption>The sentence quoted above as it sits on the page &mdash; the referee&rsquo;s blessing, in the record&rsquo;s own type. <span class="src">United States, Copyright Office, Copyright and Artificial Intelligence, Part 3: Generative AI Training, pre-publication version, p.&nbsp;45.</span></figcaption>
+    </figure>
+
+    <div class="pair">
+      <p>Then one page later, the Office takes half of it back:</p>
+
+      <blockquote class="qs reveal">
+        <span class="qtag">Exhibit 06-B &middot; U.S. Copyright Office, p. 46</span>
+        <p>&ldquo;But transformativeness is a matter of degree, and how transformative or justified a use is will depend on the functionality of the model and how it is deployed.&rdquo;</p>
+        <footer>(United States, Copyright Office 46)</footer>
+      </blockquote>
+    </div>
+
+    <p>So instead of a blanket blessing, every model gets judged by its own training circumstances. The report doesn&rsquo;t stop there, however:</p>
+
+    <blockquote class="qs reveal">
+      <span class="qtag">Exhibit 06-C &middot; U.S. Copyright Office, p. 65</span>
+      <p>&ldquo;If thousands of AI-generated romance novels are put on the market, fewer of the human-authored romance novels that the AI was trained on are likely to be sold.&rdquo;</p>
+      <footer>(United States, Copyright Office 65)</footer>
+    </blockquote>
+
+    <figure class="exhibit pull-l reveal">
+      <span class="etag"><b>Exhibit 06-C</b> &middot; the passage in the record, p. 65</span>
+      <img src="assets/evidence/usco-romance-zoom.png" width="1921" height="525" loading="lazy"
+           alt="Scanned lines from page 65 of the Copyright Office report, warning that the speed and scale at which AI systems generate content 'pose a serious risk of diluting markets for works of the same kind as in their training data,' followed by the sentence: 'If thousands of AI-generated romance novels are put on the market, fewer of the human-authored romance novels that the AI was trained on are likely to be sold.'">
+      <figcaption>Twenty pages after the blessing, the same type carries the fear: machine-made romance novels crowding the shelves that trained them. <span class="src">United States, Copyright Office, Copyright and Artificial Intelligence, Part 3: Generative AI Training, pre-publication version, p.&nbsp;65.</span></figcaption>
+    </figure>
+
+    <p>The Office&rsquo;s conclusion doubles down on the same line <em>Bartz</em> drew. Commercial training on &ldquo;vast troves of copyrighted works&rdquo; that competes in their markets, &ldquo;especially where this is accomplished through illegal access, goes beyond established fair use boundaries&rdquo; (107).</p>
+
+<figure class="exhibit reveal">
+  <span class="etag"><b>Exhibit 06-D</b> &middot; the conclusion, in the record</span>
+  <img src="assets/evidence/usco-conclusion-zoom.png" alt="Scan from page 107 of the Copyright Office report: making commercial use of vast troves of copyrighted works to produce expressive content that competes with them in existing markets, especially where this is accomplished through illegal access, goes beyond established fair use boundaries." loading="lazy">
+  <figcaption>The referee&rsquo;s final line: markets plus illegal access is where fair use ends. <span class="src">United States, Copyright Office, p. 107.</span></figcaption>
+</figure>
+  </section>
+
+  <!-- The referee's instrument: an interactive dial across the report's spectrum -->
+  <section class="wide dialband" id="dialband" aria-labelledby="dialh">
+    <h2 class="vh" id="dialh">The degree dial: the report&rsquo;s spectrum as one instrument</h2>
+    <div class="db-head reveal">
+      <div>
+        <p class="kicker">The referee&rsquo;s instrument</p>
+        <p class="db-sub">Three readings from one report, on one axis. Drag the needle &mdash; or focus the slider and use the arrow keys &mdash; to move between the record&rsquo;s stops.</p>
+      </div>
+      <button type="button" class="replay" id="replay" hidden>Run the sweep again</button>
+    </div>
+    <div class="db-grid">
+      <div class="db-gauge">
+        <svg id="gauge" viewBox="0 0 640 356" role="img"
+             aria-label="Semicircular gauge labeled 'degree of transformativeness,' sweeping from 'research model, locked outputs' on the left to 'verbatim competitor in the same market' on the right, with stops at pages 45, 46, and 65 of the report.">
+          <line class="g-base" x1="58" y1="330" x2="582" y2="330"/>
+          <path class="g-arc"  d="M 70 330 A 250 250 0 0 1 570 330"/>
+          <path class="g-prog" id="prog" d="M 70 330 A 250 250 0 0 1 570 330"
+                stroke-dasharray="785.4" stroke-dashoffset="392.7"/>
+          <line class="g-tick" x1="76.5" y1="250.9" x2="65.1" y2="247.2"/>
+          <line class="g-tick" x1="112.9" y1="179.5" x2="103.2" y2="172.5"/>
+          <line class="g-tick" x1="169.5" y1="122.9" x2="162.5" y2="113.2"/>
+          <line class="g-tick" x1="240.9" y1="86.5" x2="237.2" y2="75.1"/>
+          <line class="g-tick" x1="399.1" y1="86.5" x2="402.8" y2="75.1"/>
+          <line class="g-tick" x1="470.5" y1="122.9" x2="477.5" y2="113.2"/>
+          <line class="g-tick" x1="527.1" y1="179.5" x2="536.8" y2="172.5"/>
+          <line class="g-tick" x1="563.5" y1="250.9" x2="574.9" y2="247.2"/>
+          <circle class="g-det" id="det0" cx="103.5" cy="205" r="5.5"/>
+          <circle class="g-det" id="det1" cx="320" cy="80" r="5.5"/>
+          <circle class="g-det harm" id="det2" cx="536.5" cy="205" r="5.5"/>
+          <text class="g-lab" x="70.6" y="186" text-anchor="end">P. 45</text>
+          <text class="g-lab" x="320" y="42" text-anchor="middle">P. 46</text>
+          <text class="g-lab harm" x="569.4" y="186" text-anchor="start">P. 65</text>
+          <g class="g-needle" id="needleG" transform="rotate(90 320 330)">
+            <line x1="320" y1="330" x2="94" y2="330"/>
+            <circle cx="94" cy="330" r="4.5"/>
+          </g>
+          <rect class="g-pivot" x="310" y="320" width="20" height="20"/>
+          <text class="g-axis" x="320" y="350" text-anchor="middle">DEGREE OF TRANSFORMATIVENESS</text>
+        </svg>
+        <label class="vh" for="degree">Degree of transformativeness, from research model to verbatim competitor</label>
+        <input type="range" id="degree" min="0" max="100" step="1" value="50">
+        <div class="poles" aria-hidden="true">
+          <span class="pole">Research model,<br>locked outputs</span>
+          <span class="pole harm">Verbatim competitor<br>in the same market</span>
+        </div>
+      </div>
+      <div class="db-stops" id="stops">
+        <div class="stopcard">
+          <span class="sc-tag">Stop 01 &middot; p. 45 &middot; the blessing</span>
+          <p>&ldquo;In the Office&rsquo;s view, training a generative AI foundation model on a large and diverse dataset will often be transformative.&rdquo;</p>
+        </div>
+        <div class="stopcard">
+          <span class="sc-tag">Stop 02 &middot; p. 46 &middot; the caveat</span>
+          <p>&ldquo;But transformativeness is a matter of degree, and how transformative or justified a use is will depend on the functionality of the model and how it is deployed.&rdquo;</p>
+        </div>
+        <div class="stopcard harm">
+          <span class="sc-tag">Stop 03 &middot; p. 65 &middot; the fear</span>
+          <p>&ldquo;If thousands of AI-generated romance novels are put on the market, fewer of the human-authored romance novels that the AI was trained on are likely to be sold.&rdquo;</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The bridge to the thesis -->
+  <section class="col essay bridge">
+    <p>&ldquo;Labs may, copycats may not&rdquo; is not a sustainable or long-term answer to the fair use argument. Degree gets measured by conduct at both ends: what was taken and how, what gets reproduced and into whose market. Those are the two things a court can actually audit.</p>
+
+<figure class="exhibit reveal">
+  <span class="etag"><b>Exhibit 06-E</b> &middot; the stamp, mid-press</span>
+  <img src="assets/art/oro_seal.jpg" alt="Woodcut-style engraving of a hand pressing a heavy brass stamp into spreading red sealing wax on a document." loading="lazy">
+  <figcaption>Every verdict in this fight is a stamp somebody chose to press. <span class="src">Site illustration &mdash; the ouroboros series.</span></figcaption>
+</figure>
+  </section>
+
+</main>
+
+<footer class="site">
+  <span>Neel Anshu &mdash; Critical Thinking &amp; Writing</span>
+  <span>Prev &mdash; <a href="argument-1.html">05 Argument I</a> &nbsp;&middot;&nbsp; Next &mdash; <a href="argument-3.html">07 Argument III</a></span>
+</footer>
+
+<script>window.SITE_PAGES = [{"href": "index.html", "num": "01", "label": "Home"}, {"href": "dilemma.html", "num": "02", "label": "The Dilemma"}, {"href": "thesis.html", "num": "03", "label": "Thesis"}, {"href": "frameworks.html", "num": "04", "label": "Frameworks"}, {"href": "argument-1.html", "num": "05", "label": "Argument I"}, {"href": "argument-2.html", "num": "06", "label": "Argument II"}, {"href": "argument-3.html", "num": "07", "label": "Argument III"}, {"href": "argument-4.html", "num": "08", "label": "Argument IV"}, {"href": "rebuttal.html", "num": "09", "label": "Rebuttal"}, {"href": "conclusion.html", "num": "10", "label": "Conclusion"}, {"href": "works-cited.html", "num": "11", "label": "Works Cited"}];</script>
+<script src="snake.js"></script>
+<script src="site.js"></script>
+<script src="quest.js"></script>
+<script>buildMini(document.getElementById('minimap'), window.SITE_PAGES, 5);</script>
+<script>
+/* Degree dial — signature interaction for page 06.
+   Sweeps once on scroll-into-view, then hands control to the reader.
+   Under prefers-reduced-motion: no sweep, all three stops stay lit. */
+(function () {
+  var gauge  = document.getElementById('gauge');
+  var range  = document.getElementById('degree');
+  var needle = document.getElementById('needleG');
+  var prog   = document.getElementById('prog');
+  var replay = document.getElementById('replay');
+  var band   = document.getElementById('dialband');
+  if (!gauge || !range || !needle || !prog || !band) return;
+
+  var cards = Array.prototype.slice.call(band.querySelectorAll('.stopcard'));
+  var dets  = [document.getElementById('det0'), document.getElementById('det1'), document.getElementById('det2')];
+  var ARC = 785.4;
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ZTEXT = [
+    'Toward the research end — p. 45: training will often be transformative',
+    'The middle — p. 46: transformativeness is a matter of degree',
+    'Toward market harm — p. 65: fewer of the human-authored novels are likely to be sold'
+  ];
+  var raf = null, userHasControl = false;
+
+  function zoneOf(v) { return v < 100 / 3 ? 0 : v < 200 / 3 ? 1 : 2; }
+
+  function paint(v) {
+    if (parseFloat(range.value) !== v) range.value = v;
+    needle.setAttribute('transform', 'rotate(' + (v * 1.8).toFixed(2) + ' 320 330)');
+    prog.style.strokeDashoffset = (ARC * (1 - v / 100)).toFixed(1);
+    var z = zoneOf(v);
+    prog.classList.toggle('hot', z === 2);
+    for (var i = 0; i < 3; i++) {
+      if (dets[i]) dets[i].classList.toggle('on', i === z);
+      cards[i].classList.toggle('hot', i === z);
+      if (!reduced) cards[i].classList.toggle('dim', i !== z);
+    }
+    range.setAttribute('aria-valuetext', ZTEXT[z]);
+  }
+
+  function stopSweep() { if (raf) { cancelAnimationFrame(raf); raf = null; } }
+
+  function sweep() {
+    if (reduced) return;
+    stopSweep();
+    var t0 = null, DUR = 2100;
+    function step(ts) {
+      if (t0 === null) t0 = ts;
+      var t = Math.min(1, (ts - t0) / DUR);
+      var e = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      var v = e * 100;
+      range.value = v;
+      paint(v);
+      if (t < 1) { raf = requestAnimationFrame(step); }
+      else { raf = null; if (replay) replay.hidden = false; }
+    }
+    raf = requestAnimationFrame(step);
+  }
+
+  function takeControl() {
+    userHasControl = true;
+    stopSweep();
+    if (replay && !reduced) replay.hidden = false;
+  }
+
+  range.addEventListener('input', function () { paint(parseFloat(range.value)); });
+  range.addEventListener('pointerdown', takeControl);
+  range.addEventListener('keydown', takeControl);
+
+  function svgVal(ev) {
+    var r = gauge.getBoundingClientRect();
+    var x = (ev.clientX - r.left) * (640 / r.width) - 320;
+    var y = 330 - (ev.clientY - r.top) * (356 / r.height);
+    if (y < 0) { return x < 0 ? 0 : 100; }
+    var ang = Math.atan2(y, x); /* 0..pi over the top */
+    return Math.min(100, Math.max(0, (Math.PI - ang) / Math.PI * 100));
+  }
+  var dragging = false;
+  gauge.addEventListener('pointerdown', function (ev) {
+    takeControl();
+    dragging = true;
+    try { gauge.setPointerCapture(ev.pointerId); } catch (e) {}
+    var v = svgVal(ev); range.value = v; paint(v);
+    ev.preventDefault();
+  });
+  gauge.addEventListener('pointermove', function (ev) {
+    if (!dragging) return;
+    var v = svgVal(ev); range.value = v; paint(v);
+  });
+  gauge.addEventListener('pointerup', function () { dragging = false; });
+  gauge.addEventListener('pointercancel', function () { dragging = false; });
+
+  if (replay) {
+    replay.addEventListener('click', function () {
+      userHasControl = false;
+      range.value = 0;
+      paint(0);
+      sweep();
+    });
+  }
+
+  if (reduced || !('IntersectionObserver' in window)) {
+    /* Static degrade: needle rests mid-arc, all three stops fully readable. */
+    paint(50);
+  } else {
+    paint(0);
+    var seen = false;
+    function fire() {
+      if (seen) return;
+      seen = true;
+      io.disconnect();
+      if (!userHasControl) sweep();
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) fire(); });
+    }, { threshold: 0.35 });
+    io.observe(gauge);
+    /* Fallback: if the gauge is already substantially in view at load,
+       run the sweep without waiting on the observer. */
+    setTimeout(function () {
+      var r = gauge.getBoundingClientRect();
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      if (r.top < vh * 0.75 && r.bottom > vh * 0.1) fire();
+    }, 500);
+  }
+})();
+</script>
+
+</body>
+</html>

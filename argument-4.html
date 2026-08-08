@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Argument IV &mdash; Generation Loss &mdash; The Ouroboros Problem</title>
+<meta name="description" content="A project on AI, fair use, and the loop that feeds itself.">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ═══ Page 08 · Argument IV — dusk. Echo ridges, each print fainter.
+       Scoped under body.p-arg4. ═══ */
+
+body.p-arg4 main { padding-bottom: 4.2rem; }
+
+/* — Hero vista: dusk sky, one ridge re-printed into nothing — */
+.p-arg4 .vista { min-height: clamp(400px, 62vh, 640px); }
+.p-arg4 .vista-content {
+  width: min(78rem, 88vw);
+  padding-top: clamp(2rem, 5vh, 3.2rem);
+  padding-bottom: clamp(7.5rem, 19vh, 11rem);
+}
+.p-arg4 .vista .pagehead { align-items: flex-start; }
+.p-arg4 .vista .headings { max-width: 36rem; }
+.p-arg4 .vista .quest-strip {
+  max-width: 46rem;
+  margin: 2rem 0 0;
+  padding: 0.75rem 0 0;
+  border-top-color: rgba(29, 27, 22, 0.32);
+  color: var(--ink);
+}
+.p-arg4 .vista .quest-strip .q-chap,
+.p-arg4 .vista .quest-strip .q-prog b { color: var(--ink); }
+.p-arg4 .vista .mnode.cur circle { fill: var(--ground); }
+
+/* — Prose pairs: a paragraph and its quote pull alongside ≥900px — */
+.p-arg4 .pair { max-width: var(--col); margin-top: 3.4rem; }
+.p-arg4 .pair-b { margin-top: 0; }
+@media (min-width: 900px) {
+  .p-arg4 .pair {
+    max-width: 64rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: 0 3.2rem;
+    align-items: center;
+  }
+  .p-arg4 .pair > p { margin-bottom: 0; }
+  .p-arg4 .pair > blockquote.qs { margin: 0; }
+}
+
+/* — Section rhythm around the ridgeline dividers — */
+.p-arg4 .ridge-divider { margin-top: 3.8rem; }
+.p-arg4 .essay-b { margin-top: 3.2rem; }
+.p-arg4 .essay-close { margin-top: 3.4rem; }
+
+/* — The decay plate: the woodcut reframed as a trail placard — */
+.p-arg4 .plateband .exhibit { max-width: 56rem; margin: 2.8rem auto; }
+.p-arg4 .printrow {
+  display: flex; justify-content: space-between;
+  padding: 0.6rem 3.2% 0; margin: 0;
+  font-family: var(--font-mono); font-size: 0.64rem; font-weight: 600;
+  letter-spacing: 0.06em; color: var(--ink);
+}
+.p-arg4 .printrow li { list-style: none; opacity: 0; transition: opacity 0.5s var(--ease-stamp); transition-delay: calc(var(--i) * 70ms + 150ms); }
+.p-arg4 .printrow.on li { opacity: var(--o); }
+.p-arg4 .plateband figcaption .capline {
+  display: block;
+  font-family: var(--font-display); text-transform: uppercase;
+  font-size: 1.08rem; letter-spacing: 0.02em; line-height: 1.1;
+  color: var(--ink); margin: 0.15rem 0 0.4rem;
+}
+.p-arg4 .plateband figcaption .capquote {
+  display: block; margin-top: 0.6rem; padding-top: 0.6rem;
+  border-top: 1px solid var(--hairline);
+}
+
+/* — Wide evidence bands — */
+.p-arg4 .scanband .exhibit { max-width: 56rem; margin: 2.7rem auto; }
+.p-arg4 .scanband img { aspect-ratio: 1495 / 525; object-fit: cover; object-position: right center; }
+
+/* — The stepper: generation loss run on this page's own sentence — */
+.p-arg4 .stepband .exhibit { max-width: 66rem; margin: 3.2rem auto 0; padding: 1.35rem 1.5rem 1.25rem; }
+.p-arg4 .stepper { display: grid; grid-template-columns: minmax(12rem, 14.5rem) 1fr; border: 1px solid var(--hairline); }
+.p-arg4 .steprail { padding: 1.5rem 1.6rem 1.6rem; border-right: 1px solid var(--hairline); }
+.p-arg4 .genword { display: block; font-family: var(--font-mono); font-size: 0.66rem; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; color: var(--ink-soft); }
+.p-arg4 .gennum { display: block; margin-top: 0.3rem; font-family: var(--font-mono); font-weight: 600; font-size: clamp(3.2rem, 6.5vw, 4.8rem); line-height: 1; font-variant-numeric: tabular-nums; color: var(--ink); }
+.p-arg4 .genread { margin: 0; }
+.p-arg4 .genread.dead .gennum { color: var(--red); }
+.p-arg4 .genticks { display: flex; gap: 0.3rem; margin: 1.05rem 0 1.3rem; }
+.p-arg4 .genticks .t { width: 0.66rem; height: 0.66rem; border: 1px solid var(--ink-soft); opacity: 0.45; transition: background 0.25s var(--ease-stamp), border-color 0.25s var(--ease-stamp), opacity 0.25s var(--ease-stamp); }
+.p-arg4 .genticks .t.on { background: var(--ink); border-color: var(--ink); opacity: 1; }
+.p-arg4 .genticks .t:last-child.on { background: var(--red); border-color: var(--red); }
+.p-arg4 .stepctl { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.p-arg4 .stepctl button { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); background: transparent; border: 1px solid var(--ink); padding: 0.55em 0.8em; min-width: 2.4rem; min-height: 2.4rem; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 0.45em; transition: background 0.15s ease, color 0.15s ease, opacity 0.15s ease; }
+.p-arg4 .stepctl button:hover:not(:disabled) { background: var(--ink); color: var(--paper); }
+.p-arg4 .stepctl button:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+.p-arg4 .stepctl button:disabled { opacity: 0.3; cursor: default; }
+.p-arg4 .steppane { background: var(--paper); padding: 1.5rem 1.8rem 1.9rem; }
+.p-arg4 .panehead { display: flex; justify-content: space-between; align-items: baseline; gap: 0.8rem 1.4rem; flex-wrap: wrap; font-family: var(--font-mono); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 1.2rem; }
+.p-arg4 .panehead .warn { border: 1px solid var(--hairline); padding: 0.35em 0.55em; white-space: nowrap; }
+.p-arg4 .decaytext { font-size: clamp(1.05rem, 1.8vw, 1.38rem); line-height: 1.8; font-weight: 500; min-height: 7.8rem; color: var(--ink); }
+.p-arg4 .decaytext .w { display: inline-block; transition: margin 0.55s var(--ease-stamp); }
+.p-arg4 .decaytext .c { display: inline-block; transition: opacity 0.55s var(--ease-stamp), transform 0.55s var(--ease-stamp), letter-spacing 0.55s var(--ease-stamp); }
+@keyframes p8gpop { from { transform: scale(1.16); } to { transform: none; } }
+.p-arg4 .gennum.pop { animation: p8gpop 0.26s var(--ease-stamp); }
+
+/* — Statband: the two numbers left standing, as elevation posts — */
+.p-arg4 .statwrap { max-width: 66rem; margin: 3.6rem auto 0; }
+.p-arg4 .statwrap .rule { border: 0; border-top: 1px solid var(--ink); margin: 0 0 2.5rem; }
+.p-arg4 .statgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.6rem; }
+.p-arg4 .statgrid .cell2 { border-left: 1px solid var(--hairline); padding-left: 2.6rem; }
+
+/* — Screen-reader helper — */
+.p-arg4 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* — Breakpoints — */
+@media (max-width: 920px) {
+  .p-arg4 .stepper { grid-template-columns: 1fr; }
+  .p-arg4 .steprail { border-right: 0; border-bottom: 1px solid var(--hairline); display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.6rem; padding: 1.2rem 1.4rem; }
+  .p-arg4 .gennum { font-size: 2.7rem; margin-top: 0.2rem; }
+  .p-arg4 .genticks { margin: 0; }
+  .p-arg4 .stepctl { width: 100%; }
+  .p-arg4 .stepctl button { min-width: 2.75rem; min-height: 2.75rem; }
+  .p-arg4 .statgrid { grid-template-columns: 1fr; gap: 2.1rem; }
+  .p-arg4 .statgrid .cell2 { border-left: 0; padding-left: 0; border-top: 1px solid var(--hairline); padding-top: 2.1rem; }
+}
+@media (max-width: 560px) {
+  .p-arg4 .printrow { font-size: 0.52rem; letter-spacing: 0.02em; }
+  .p-arg4 .decaytext { min-height: 11rem; }
+  .p-arg4 .steppane { padding: 1.2rem 1.1rem 1.5rem; }
+  .p-arg4 .stepband .exhibit { padding: 1rem; }
+  .p-arg4 .scanband .exhibit, .p-arg4 .plateband .exhibit { margin: 2.2rem auto; }
+  .p-arg4 .vista-content { padding-bottom: 13rem; }
+}
+
+/* — Reduced motion: everything lands in its final, readable state — */
+@media (prefers-reduced-motion: reduce) {
+  .p-arg4 .printrow li { transition: none; opacity: var(--o); }
+  .p-arg4 .decaytext .c, .p-arg4 .decaytext .w, .p-arg4 .genticks .t { transition: none; }
+  .p-arg4 .gennum.pop { animation: none; }
+  .p-arg4 .stepctl button { transition: none; }
+}
+</style>
+</head>
+<body class="p-arg4">
+
+<header class="site">
+  <div class="masthead">
+    <a class="mark" href="index.html">The Ouroboros <em>Problem</em></a>
+    <span class="tag">Neel Anshu &middot; ENGL C1001</span>
+  </div>
+  <nav class="toolbar" aria-label="Pages">
+    <a href="index.html"><span class="num">01</span>Home</a>
+    <a href="dilemma.html"><span class="num">02</span>The Dilemma</a>
+    <a href="thesis.html"><span class="num">03</span>Thesis</a>
+    <a href="frameworks.html"><span class="num">04</span>Frameworks</a>
+    <a href="argument-1.html"><span class="num">05</span>Argument I</a>
+    <a href="argument-2.html"><span class="num">06</span>Argument II</a>
+    <a href="argument-3.html"><span class="num">07</span>Argument III</a>
+    <a href="argument-4.html" aria-current="page"><span class="num">08</span>Argument IV</a>
+    <a href="rebuttal.html"><span class="num">09</span>Rebuttal</a>
+    <a href="conclusion.html"><span class="num">10</span>Conclusion</a>
+    <a href="works-cited.html"><span class="num">11</span>Works Cited</a>
+  </nav>
+</header>
+
+<main>
+  <section class="vista" id="vista" aria-label="Dusk over a range of echoing ridges: the same ridge repeated toward the horizon, each copy smaller and fainter until the last is almost gone">
+    <svg viewBox="0 0 1440 560" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+      <defs>
+        <path id="p8ridge" d="M0,0 L70,-155 L112,-102 L175,-235 L236,-112 L288,-158 L360,0 Z"/>
+      </defs>
+      <g class="vista-band plx-far">
+        <!-- first stars of dusk -->
+        <circle cx="1092" cy="70" r="3" fill="var(--paper)" opacity="0.72"/>
+        <circle cx="1246" cy="128" r="2.4" fill="var(--paper)" opacity="0.5"/>
+        <circle cx="1368" cy="180" r="2" fill="var(--paper)" opacity="0.55"/>
+        <!-- distant plain -->
+        <path fill="var(--far)" d="M0,436 L96,410 L150,392 L1440,392 L1440,560 L0,560 Z"/>
+        <!-- the focal ridge, re-printed toward nothing: generation loss -->
+        <g fill="var(--mid)">
+          <use href="#p8ridge" transform="translate(222,392) scale(0.1)" fill-opacity="0.05"/>
+          <use href="#p8ridge" transform="translate(268,392) scale(0.155)" fill-opacity="0.08"/>
+          <use href="#p8ridge" transform="translate(338,392) scale(0.235)" fill-opacity="0.13"/>
+          <use href="#p8ridge" transform="translate(438,392) scale(0.35)" fill-opacity="0.21"/>
+          <use href="#p8ridge" transform="translate(577,393) scale(0.52)" fill-opacity="0.34"/>
+          <use href="#p8ridge" transform="translate(770,393) scale(0.78)" fill-opacity="0.55"/>
+          <use href="#p8ridge" transform="translate(985,394) scale(1.15)"/>
+        </g>
+      </g>
+      <g class="vista-band plx-mid">
+        <path fill="var(--mid)" d="M0,464 C130,450 240,460 350,446 C470,432 560,454 670,448 C800,441 910,430 1020,446 C1150,462 1300,438 1440,450 L1440,560 L0,560 Z"/>
+      </g>
+      <g class="vista-band plx-near">
+        <path fill="var(--near)" d="M0,514 C180,504 340,518 520,509 C710,500 900,516 1090,507 C1250,500 1360,511 1440,506 L1440,560 L0,560 Z"/>
+        <path fill="var(--ground)" d="M0,540 C240,531 480,543 760,536 C1040,530 1240,541 1440,534 L1440,560 L0,560 Z"/>
+      </g>
+    </svg>
+    <div class="scene-motif scene-motif--disc vista-band plx-far" style="--motif-size: 52px; top: 10%; right: 26%; background: var(--paper); opacity: 0.92;" aria-hidden="true"></div>
+    <div class="vista-content">
+      <div class="pagehead">
+        <div class="headings">
+          <p class="kicker">Page 08 of 11 &mdash; supporting argument IV</p>
+          <h1 class="display">The Snake Reaches Its Own Tail</h1>
+        </div>
+        <svg class="minimap" id="minimap" viewBox="0 0 120 120" role="navigation"
+             aria-label="Site map: the ouroboros with this page highlighted"></svg>
+      </div>
+    </div>
+  </section>
+
+  <div class="wide essay pair pair-a">
+    <p>Set aside every copyright argument on this site for a second and focus on the machines. The loop still fails. In <em>Nature</em>, Shumailov and his team documented what happens when models train on the outputs of earlier models:</p>
+
+    <blockquote class="qs reveal">
+      <span class="qtag">Exhibit 08-A &middot; Shumailov et al., Nature, p. 755</span>
+      <p>&ldquo;We find that indiscriminate use of model-generated content in training causes irreversible defects in the resulting models, in which tails of the original content distribution disappear.&rdquo;</p>
+      <footer>(755)</footer>
+    </blockquote>
+  </div>
+
+  <section class="wide scanband" aria-label="Exhibit 08-D: scan of the Nature abstract">
+    <figure class="exhibit reveal">
+      <span class="etag"><b>Exhibit 08-D</b> &middot; the paper of record</span>
+      <img src="assets/evidence/nature-collapse-zoom.png" width="2136" height="525"
+           alt="Scan of the abstract of the Nature paper. The visible text reads, in part: 'We find that indiscriminate use of model-generated content in training causes irreversible defects in the resulting models, in which tails of the original content distribution disappear. We refer to this effect as model collapse and show that it can occur in LLMs as well as in variational autoencoders (VAEs) and Gaussian mixture models (GMMs).'">
+      <figcaption>The finding, and the naming of the disease, in the journal&rsquo;s own type. <span class="src">Shumailov et al., Nature, p. 755.</span></figcaption>
+    </figure>
+  </section>
+
+  <div class="ridge-divider" role="presentation"></div>
+
+  <div class="col essay essay-b">
+    <p>They named the disease &ldquo;model collapse.&rdquo; Generated data pollutes the next generation&rsquo;s training set, the rare and specific information vanishing first, and eventually the model &ldquo;converges to a distribution that carries little resemblance to the original one&rdquo; (755). And it&rsquo;s not one architecture&rsquo;s bug. It shows up in language models, VAEs, and Gaussian mixture models. Anything that learns from its own reflection degrades.</p>
+  </div>
+
+  <section class="wide plateband" aria-label="Site illustration: generation loss, printed">
+    <figure class="exhibit reveal">
+      <span class="etag"><b>Generation loss, printed</b></span>
+      <img src="assets/art/oro_decay.jpg" width="1600" height="1066"
+           alt="Woodcut-style image of nine prints of the same serpent pinned in a row, each successive print fainter and more broken until the last is almost gone.">
+      <ol class="printrow reveal" aria-hidden="true">
+        <li style="--i:0; --o:1">01</li>
+        <li style="--i:1; --o:0.91">02</li>
+        <li style="--i:2; --o:0.83">03</li>
+        <li style="--i:3; --o:0.74">04</li>
+        <li style="--i:4; --o:0.66">05</li>
+        <li style="--i:5; --o:0.58">06</li>
+        <li style="--i:6; --o:0.5">07</li>
+        <li style="--i:7; --o:0.4">08</li>
+        <li style="--i:8; --o:0.3">09</li>
+      </ol>
+      <figcaption>
+        <span class="capline">Nine prints, one serpent.</span>
+        <span class="captext">Each print is pulled from the print before it, never from the original plate; by the ninth impression the serpent survives only as noise. Site illustration &mdash; the mechanism of model collapse, drawn.</span>
+        <span class="capquote">&ldquo;one needs access to real human-produced data&rdquo; <span class="cite">(Shumailov et al. 755)</span></span>
+      </figcaption>
+    </figure>
+  </section>
+
+  <div class="col essay">
+<p>The paper is careful about its limits. The headline result is about &ldquo;indiscriminate&rdquo; use of generated data (755), and the authors admit keeping 10% of original human data every generation still left &ldquo;only minor degradation of performance&rdquo; (758). The authors also flag what this makes valuable:</p>
+
+    <blockquote class="qs reveal">
+      <span class="qtag">Exhibit 08-B &middot; Shumailov et al., p. 755</span>
+      <p>&ldquo;[T]he value of data collected about genuine human interactions with systems will be increasingly valuable in the presence of LLM-generated content in data crawled from the Internet.&rdquo;</p>
+      <footer>(Shumailov et al. 755)</footer>
+    </blockquote>
+  </div>
+
+  <div class="wide essay pair pair-b">
+    <p>At ICML 2024, Villalobos and the Epoch AI team projected when the industry collides with the supply of human words:</p>
+
+    <blockquote class="qs reveal">
+      <span class="qtag">Exhibit 08-C &middot; Villalobos et al., ICML 2024</span>
+      <p>&ldquo;[I]f current LLM development trends continue, models will be trained on datasets roughly equal in size to the available stock of public human text data between 2026 and 2032.&rdquo;</p>
+      <footer>(Villalobos et al. 49523)</footer>
+    </blockquote>
+  </div>
+
+  <div class="col essay">
+<figure class="exhibit reveal">
+  <span class="etag"><b>Exhibit 08-F</b> &middot; the window, in print</span>
+  <img src="assets/evidence/villalobos-window-zoom.png" alt="Scan from the ICML 2024 paper abstract: models will be trained on datasets roughly equal in size to the available stock of public human text data between 2026 and 2032." loading="lazy">
+  <figcaption>The supply projection, peer-reviewed. <span class="src">Villalobos et al., ICML 2024, abstract.</span></figcaption>
+</figure>
+
+    <p>Their median exhaustion year is 2028. Two years from the day this site went up. Now hold that against the previous page. The market is paying humans less and less for the exact work these scientists are calling &ldquo;increasingly valuable&rdquo; and finite. Human work feeds the model, the model floods the internet, and the flood degrades the next model&rsquo;s food.</p>
+  </div>
+
+  <section class="wide stepband" aria-label="Exhibit 08-E: interactive illustration of generation loss">
+    <figure class="exhibit reveal">
+      <span class="etag"><b>Exhibit 08-E</b> &middot; generation loss, run on one sentence of this page</span>
+      <div class="stepper" id="stepper">
+        <div class="steprail">
+          <p class="genread" id="genread" aria-live="polite" aria-atomic="true"><span class="genword">Generation</span><span class="gennum" id="gennum">0</span></p>
+          <div class="genticks" id="genticks" aria-hidden="true"></div>
+          <div class="stepctl">
+            <button type="button" id="prevgen" aria-label="Previous generation"><svg viewBox="0 0 8 10" width="8" height="10" aria-hidden="true" focusable="false"><path d="M8 0 0 5l8 5z" fill="currentColor"/></svg></button>
+            <button type="button" id="nextgen" aria-label="Next generation"><svg viewBox="0 0 8 10" width="8" height="10" aria-hidden="true" focusable="false"><path d="M0 0l8 5-8 5z" fill="currentColor"/></svg></button>
+            <button type="button" id="rungen">Run 0&rarr;9</button>
+          </div>
+        </div>
+        <div class="steppane">
+          <p class="panehead"><span>Sample &mdash; a sentence from this page, re-printed each generation</span> <span class="warn">Illustration, not data</span></p>
+          <p class="sr-only">A sentence from this page is re-rendered at each generation and visually degrades as the counter rises: letters drop out, spacing decays, and the remaining glyphs fade. The sentence reads: &ldquo;Human work feeds the model, the model floods the internet, the flood degrades the next model&rsquo;s food.&rdquo;</p>
+          <div class="decaytext" id="decaytext" aria-hidden="true">Human work feeds the model, the model floods the internet, the flood degrades the next model&rsquo;s food.</div>
+        </div>
+      </div>
+      <figcaption>A qualitative illustration only: the decay rule above is cosmetic and written for this page, not the paper&rsquo;s data. In the measured version, the rare and the specific vanish first, and the distribution &ldquo;carries little resemblance to the original one.&rdquo; <span class="src">(Shumailov et al. 755)</span></figcaption>
+    </figure>
+  </section>
+
+  <div class="ridge-divider ridge-divider--flip" role="presentation"></div>
+
+  <section class="wide" aria-label="The two numbers left standing">
+    <div class="statwrap">
+      <hr class="rule rule-draw">
+      <div class="statgrid">
+        <div class="reveal">
+          <div class="statline">
+            <span class="n red">2028</span>
+            <span class="u">median exhaustion year for the stock of public human text <span class="cite">(Villalobos et al.)</span></span>
+          </div>
+        </div>
+        <div class="cell2 reveal d1">
+          <div class="statline">
+            <span class="n">10%</span>
+            <span class="u">of the original human data, kept each generation, left &ldquo;only minor degradation of performance&rdquo; <span class="cite">(Shumailov et al. 758)</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="col essay essay-close">
+    <p>Model collapse, while not a serious problem yet, will only grow as a check on the power of AI companies.</p>
+  </div>
+</main>
+
+<footer class="site">
+  <span>Neel Anshu &mdash; Critical Thinking &amp; Writing</span>
+  <span>Prev &mdash; <a href="argument-3.html">07 Argument III</a>&nbsp;&middot;&nbsp;Next &mdash; <a href="rebuttal.html">09 Rebuttal</a></span>
+</footer>
+
+<script>window.SITE_PAGES = [{"href": "index.html", "num": "01", "label": "Home"}, {"href": "dilemma.html", "num": "02", "label": "The Dilemma"}, {"href": "thesis.html", "num": "03", "label": "Thesis"}, {"href": "frameworks.html", "num": "04", "label": "Frameworks"}, {"href": "argument-1.html", "num": "05", "label": "Argument I"}, {"href": "argument-2.html", "num": "06", "label": "Argument II"}, {"href": "argument-3.html", "num": "07", "label": "Argument III"}, {"href": "argument-4.html", "num": "08", "label": "Argument IV"}, {"href": "rebuttal.html", "num": "09", "label": "Rebuttal"}, {"href": "conclusion.html", "num": "10", "label": "Conclusion"}, {"href": "works-cited.html", "num": "11", "label": "Works Cited"}];</script>
+<script src="snake.js"></script>
+<script src="site.js"></script>
+<script src="quest.js"></script>
+<script>buildMini(document.getElementById('minimap'), window.SITE_PAGES, 7);</script>
+<script>
+/* Page 08 signature motion: dusk-band parallax. On scroll the vista's
+   flat bands drift apart at the rates styles.css defines (.plx-far/.plx-mid/
+   .plx-near read --plx off .vista). Gated on prefers-reduced-motion:
+   no-preference here AND killed globally in styles.css. */
+(function () {
+  if (!window.matchMedia("(prefers-reduced-motion: no-preference)").matches) return;
+  var vista = document.getElementById("vista");
+  if (!vista) return;
+  var raf = null;
+  function set() {
+    raf = null;
+    var y = window.scrollY || window.pageYOffset || 0;
+    var h = vista.offsetHeight || 0;
+    vista.style.setProperty("--plx", Math.max(0, Math.min(y, h)) + "px");
+  }
+  window.addEventListener("scroll", function () {
+    if (raf === null) raf = requestAnimationFrame(set);
+  }, { passive: true });
+  set();
+})();
+</script>
+<script>
+/* Page 08 exhibit: the generation-loss stepper.
+   Deterministic (seeded) cosmetic decay of one sentence of this page's own
+   text. Auto-advances once when scrolled into view; fully driven by the
+   prev/next/run buttons. Under prefers-reduced-motion there is no autoplay
+   and no transition — each generation is a static, readable state. */
+(function () {
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var host = document.getElementById("decaytext");
+  var numEl = document.getElementById("gennum");
+  var readEl = document.getElementById("genread");
+  var ticksEl = document.getElementById("genticks");
+  var prevBtn = document.getElementById("prevgen");
+  var nextBtn = document.getElementById("nextgen");
+  var runBtn = document.getElementById("rungen");
+  var box = document.getElementById("stepper");
+  if (!host || !numEl || !ticksEl) return;
+
+  var SENT = "Human work feeds the model, the model floods the internet, the flood degrades the next model’s food.";
+  var MAX = 9;
+  var DROP = [0, 0.05, 0.10, 0.17, 0.26, 0.37, 0.50, 0.64, 0.78, 0.90];
+
+  function mulberry32(a) {
+    return function () {
+      a |= 0; a = a + 0x6D2B79F5 | 0;
+      var t = Math.imul(a ^ a >>> 15, 1 | a);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+  var rnd = mulberry32(80808);
+
+  var chars = [], words = [];
+  host.textContent = "";
+  SENT.split(" ").forEach(function (word, wi, arr) {
+    var w = document.createElement("span");
+    w.className = "w";
+    for (var i = 0; i < word.length; i++) {
+      var c = document.createElement("span");
+      c.className = "c";
+      c.textContent = word.charAt(i);
+      chars.push({ el: c, u: rnd(), v: rnd(), s: rnd(), y: rnd() });
+      w.appendChild(c);
+    }
+    words.push({ el: w, m: rnd() });
+    host.appendChild(w);
+    if (wi < arr.length - 1) host.appendChild(document.createTextNode(" "));
+  });
+
+  var ticks = [];
+  for (var i = 0; i <= MAX; i++) {
+    var t = document.createElement("span");
+    t.className = "t";
+    ticksEl.appendChild(t);
+    ticks.push(t);
+  }
+
+  var gen = 0, timer = null, touched = false, played = false;
+
+  function render(pop) {
+    var t = gen / MAX;
+    chars.forEach(function (ch) {
+      var dead = ch.u < DROP[gen];
+      ch.el.style.opacity = dead ? "0" : Math.max(0.13, 1 - t * 0.78 * (0.25 + 0.75 * ch.v)).toFixed(3);
+      ch.el.style.letterSpacing = ((ch.s - 0.38) * t * 0.34).toFixed(3) + "em";
+      ch.el.style.transform = t === 0 ? "none" : "translateY(" + ((ch.y - 0.5) * t * 0.52).toFixed(3) + "em)";
+    });
+    words.forEach(function (w) {
+      w.el.style.marginRight = ((w.m - 0.3) * t * 0.5).toFixed(3) + "em";
+    });
+    numEl.textContent = gen;
+    readEl.classList.toggle("dead", gen === MAX);
+    ticks.forEach(function (tk, k) { tk.classList.toggle("on", k <= gen); });
+    prevBtn.disabled = gen === 0;
+    nextBtn.disabled = gen === MAX;
+    if (pop && !reduced) {
+      numEl.classList.remove("pop");
+      void numEl.offsetWidth;
+      numEl.classList.add("pop");
+    }
+  }
+
+  function stop() { if (timer) { clearInterval(timer); timer = null; } }
+  function play() {
+    stop();
+    if (reduced) { gen = MAX; render(false); return; }
+    gen = 0; render(false);
+    timer = setInterval(function () {
+      if (gen >= MAX) { stop(); return; }
+      gen++; render(true);
+    }, 640);
+  }
+
+  prevBtn.addEventListener("click", function () { touched = true; stop(); if (gen > 0) { gen--; render(true); } });
+  nextBtn.addEventListener("click", function () { touched = true; stop(); if (gen < MAX) { gen++; render(true); } });
+  runBtn.addEventListener("click", function () { touched = true; play(); });
+
+  render(false);
+
+  if (!reduced && "IntersectionObserver" in window && box) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting && !played && !touched) {
+          played = true;
+          setTimeout(function () { if (!touched) play(); }, 450);
+          io.disconnect();
+        }
+      });
+    }, { threshold: 0.5 });
+    io.observe(box);
+  }
+})();
+</script>
+
+</body>
+</html>

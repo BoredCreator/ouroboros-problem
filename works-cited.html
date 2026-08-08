@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Works Cited &mdash; The Ouroboros Problem</title>
+<meta name="description" content="A project on AI, fair use, and the loop that feeds itself.">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ═══ Page 11 · Works Cited — starlight. Scoped under body.p-works. ═══
+   Last moment of the day. The ridgeline the site has followed for ten
+   pages finally closes: a ring of hills seals around a lake that
+   mirrors the sky, and the seventeen sources sit in the register like
+   stars on a chart. Flat solid fills only — poster-flat bands, no
+   frameworks, radius 0. */
+
+/* ---- Hero vista: headline on the left third, the closed ring at right ---- */
+.p-works .vista { min-height: clamp(420px, 62vh, 660px); }
+.p-works .vista .vista-content { padding-bottom: clamp(2.6rem, 7vh, 4.2rem); }
+.p-works .vista .kicker { margin-bottom: 1rem; }
+.p-works h1.display { max-width: 14ch; }
+
+/* Signature animation: the stars blink on a slow, stepped beat. */
+@media (prefers-reduced-motion: no-preference) {
+  .p-works .tw { animation: p11-twinkle 5.2s steps(2, jump-none) infinite; }
+  .p-works .tw-b { animation-delay: 1.3s; }
+  .p-works .tw-c { animation-delay: 2.7s; }
+  .p-works .tw-d { animation-delay: 3.9s; }
+  @keyframes p11-twinkle { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+}
+
+/* ---- Ledger bar: lede + you-are-here on paper, under the vista ---- */
+.p-works .ledger { margin-top: 2.4rem; }
+.p-works .ledger .quest-strip { padding-left: 0; padding-right: 0; }
+.p-works .pagehead .headings { max-width: 44rem; }
+.p-works .inkrule { width: 5.5rem; height: 3px; background: var(--ink); margin: 0.35rem 0 1.3rem; }
+.p-works .lede { max-width: 56ch; font-size: 0.97rem; line-height: 1.75; color: var(--ink-soft); text-wrap: pretty; }
+.p-works .youarehere { display: flex; flex-direction: column; align-items: flex-start; gap: 0.9rem; flex: 0 0 auto; }
+.p-works .minimap { width: 148px; height: 148px; }
+.p-works .yah-cap { display: flex; align-items: flex-start; gap: 0.6rem; max-width: 172px; font-family: var(--font-mono); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-soft); line-height: 1.8; }
+.p-works .yah-cap .inmouth { color: var(--red); }
+.p-works .yah-mark { flex: 0 0 auto; width: 0.5rem; height: 0.5rem; margin-top: 0.28em; background: var(--red); }
+
+/* ---- Exhibit 11-A: the four primary documents, one placard ---- */
+.p-works .wallband { max-width: 66rem; margin: 0 auto; padding: 0 1.5rem; }
+.p-works .wallband .exhibit { margin: 3rem 0 0; }
+.p-works .wall { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.9rem; }
+.p-works .wall a { display: block; text-decoration: none; }
+.p-works .wall img { height: clamp(150px, 16.5vw, 224px); object-fit: cover; object-position: top center; transition: border-color 0.15s ease; }
+.p-works .wall .wtag { display: block; margin-top: 0.5rem; font-family: var(--font-mono); font-size: 0.56rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-soft); transition: color 0.15s ease; }
+.p-works .wall a:hover img, .p-works .wall a:focus-visible img { border-color: var(--ink); }
+.p-works .wall a:hover .wtag, .p-works .wall a:focus-visible .wtag { color: var(--red); }
+.p-works .wall a:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+
+/* ---- The register: seventeen entries, each marked with a star ---- */
+.p-works .archive { max-width: 66rem; margin: 0 auto; padding: 3.2rem 1.5rem 0; }
+.p-works .listrule { height: 2px; background: var(--ink); }
+.p-works .listmeta { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: 0.65rem 0 0.6rem; border-bottom: 1px solid var(--hairline); font-family: var(--font-mono); font-size: 0.62rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft); }
+.p-works .entry { display: grid; grid-template-columns: 1.6rem 8.6rem minmax(0, 1fr); column-gap: 1.4rem; padding: 1.15rem 0; border-bottom: 1px solid var(--hairline); scroll-margin-top: 7.5rem; }
+.p-works .entry:target { background: var(--paper-dim); }
+.p-works .tick { grid-column: 1; grid-row: 1; justify-self: center; align-self: start; margin-top: 0.42em; width: 0.62rem; height: 0.62rem; overflow: visible; }
+.p-works .tick path { fill: var(--accent); }
+.p-works .chip { grid-column: 2; justify-self: end; text-align: right; margin-top: 0.3em; font-family: var(--font-mono); font-size: 0.58rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft); white-space: nowrap; }
+.p-works .mla { grid-column: 3; max-width: 46rem; font-size: 0.96rem; line-height: 1.7; padding-left: 2.6rem; text-indent: -2.6rem; text-wrap: pretty; }
+.p-works .mla a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--hairline); overflow-wrap: anywhere; transition: color 0.15s ease, border-color 0.15s ease; }
+.p-works .mla a:hover { color: var(--red); border-bottom-color: var(--red); }
+.p-works .mla a:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+.p-works .tailend { display: grid; grid-template-columns: 1.6rem auto; column-gap: 1.4rem; align-items: center; padding: 1.2rem 0 0.2rem; font-family: var(--font-mono); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; color: var(--red); }
+.p-works .tipdot { display: block; justify-self: center; width: 0.62rem; height: 0.62rem; overflow: visible; }
+.p-works .tipdot path { fill: var(--red); }
+
+/* ---- One document pulled from the file: the order, readable in place ---- */
+.p-works .docwell { max-width: 46rem; margin: 3.4rem auto 0.4rem; }
+.p-works .docwell summary { list-style: none; cursor: pointer; display: flex; align-items: baseline; gap: 0.7em; font-family: var(--font-mono); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); padding: 0.55em 0.1em; }
+.p-works .docwell summary::-webkit-details-marker { display: none; }
+.p-works .docwell summary::before { content: "+"; color: var(--red); font-weight: 600; }
+.p-works .docwell details[open] summary::before { content: "\2212"; }
+.p-works .docwell summary:hover { color: var(--red); }
+.p-works .docwell summary:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+.p-works .docwell iframe { height: 540px; margin-top: 0.55rem; }
+.p-works .docwell .pdfopen { display: inline-block; margin-top: 0.8rem; font-family: var(--font-mono); font-size: 0.64rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--hairline); padding-bottom: 0.15em; }
+.p-works .docwell .pdfopen:hover { border-bottom-color: var(--red); }
+.p-works .docwell .pdfopen:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+
+/* ---- The loop closes ---- */
+.p-works .ridge-divider { margin-top: 3.8rem; }
+.p-works .loopband { padding: 3rem 1.5rem 1rem; }
+.p-works .loopgrid { max-width: 66rem; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 26rem) minmax(0, 1fr); gap: 2.8rem; align-items: end; }
+.p-works .loopfig { margin: 0; }
+.p-works .loopfig img { height: clamp(150px, 15vw, 205px); object-fit: cover; object-position: 50% 34%; }
+.p-works .lb-kick { font-family: var(--font-mono); font-size: 0.62rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 0.95rem; }
+.p-works .lb-display { font-family: var(--font-display); font-weight: 400; text-transform: uppercase; font-size: clamp(1.9rem, 3.6vw, 2.7rem); line-height: 1; letter-spacing: 0.01em; }
+.p-works .lb-link { display: inline-block; margin-top: 1.3rem; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--red); text-decoration: none; border: 1px solid var(--red); padding: 0.75em 1.05em; transition: background-color 0.15s ease, color 0.15s ease; }
+.p-works .lb-link:hover { background: var(--red); color: var(--paper); }
+.p-works .lb-link:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+
+/* ---- Screen-reader helper ---- */
+.p-works .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* ---- Breakpoints ---- */
+@media (max-width: 920px) {
+  .p-works .minimap { width: 128px; height: 128px; }
+  .p-works .loopgrid { grid-template-columns: 1fr; gap: 2.2rem; align-items: start; }
+  .p-works .loopfig { max-width: 30rem; }
+}
+@media (max-width: 760px) {
+  .p-works .wall { grid-template-columns: 1fr 1fr; }
+  .p-works .wall img { height: clamp(150px, 26vw, 210px); }
+  .p-works .entry { grid-template-columns: 1.2rem minmax(0, 1fr); column-gap: 1rem; }
+  .p-works .tick { grid-row: 1 / span 2; }
+  .p-works .chip { grid-column: 2; grid-row: 1; justify-self: start; text-align: left; margin: 0 0 0.4rem; }
+  .p-works .mla { grid-column: 2; grid-row: 2; padding-left: 1.6rem; text-indent: -1.6rem; }
+  .p-works .tailend { grid-template-columns: 1.2rem auto; column-gap: 1rem; }
+}
+@media (max-width: 600px) {
+  /* Seat the headline at the top of the sky; the ring keeps the floor. */
+  .p-works .vista { align-items: flex-start; min-height: 480px; }
+  .p-works .vista .vista-content { padding-top: 2.1rem; padding-bottom: 13rem; }
+}
+@media (max-width: 560px) {
+  .p-works .youarehere { flex-direction: row; align-items: center; gap: 1.1rem; }
+  .p-works .minimap { width: 104px; height: 104px; }
+  .p-works .yah-cap { max-width: 13rem; }
+  .p-works .listmeta { font-size: 0.56rem; letter-spacing: 0.12em; }
+  .p-works .wallband, .p-works .archive { padding-left: 1.25rem; padding-right: 1.25rem; }
+  .p-works .loopband { padding-left: 1.25rem; padding-right: 1.25rem; }
+  .p-works .docwell iframe { height: 380px; }
+}
+
+/* ---- Reduced motion: hover transitions rest too ---- */
+@media (prefers-reduced-motion: reduce) {
+  .p-works .mla a, .p-works .wall img, .p-works .wall .wtag, .p-works .lb-link { transition: none; }
+}
+</style>
+</head>
+<body class="p-works">
+
+<header class="site">
+  <div class="masthead">
+    <a class="mark" href="index.html">The Ouroboros <em>Problem</em></a>
+    <span class="tag">Neel Anshu &middot; ENGL C1001</span>
+  </div>
+  <nav class="toolbar" aria-label="Pages">
+    <a href="index.html"><span class="num">01</span>Home</a>
+    <a href="dilemma.html"><span class="num">02</span>The Dilemma</a>
+    <a href="thesis.html"><span class="num">03</span>Thesis</a>
+    <a href="frameworks.html"><span class="num">04</span>Frameworks</a>
+    <a href="argument-1.html"><span class="num">05</span>Argument I</a>
+    <a href="argument-2.html"><span class="num">06</span>Argument II</a>
+    <a href="argument-3.html"><span class="num">07</span>Argument III</a>
+    <a href="argument-4.html"><span class="num">08</span>Argument IV</a>
+    <a href="rebuttal.html"><span class="num">09</span>Rebuttal</a>
+    <a href="conclusion.html"><span class="num">10</span>Conclusion</a>
+    <a href="works-cited.html" aria-current="page"><span class="num">11</span>Works Cited</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="vista hero">
+    <!-- Starlight vista: five flat bands, hand-authored. The ridgeline the
+         site has followed all day closes here into a ring of hills around
+         a lake that mirrors the sky — the loop, sealed. Sparse stars only;
+         their stepped twinkle is this page's one animation. -->
+    <svg viewBox="0 0 1440 640" preserveAspectRatio="xMaxYMax slice" aria-hidden="true" focusable="false">
+      <!-- sparse stars -->
+      <g fill="var(--paper)">
+        <path class="tw"      d="M150,87 L154,92 L150,97 L146,92 Z"/>
+        <path class="tw tw-b" d="M352,164 L355,168 L352,172 L349,168 Z"/>
+        <path                 d="M566,79.5 L569.5,84 L566,88.5 L562.5,84 Z"/>
+        <path class="tw tw-c" d="M776,154 L779,158 L776,162 L773,158 Z"/>
+        <path class="tw tw-d" d="M1120,105 L1124,110 L1120,115 L1116,110 Z"/>
+        <path class="tw tw-b" d="M1258,172 L1261,176 L1258,180 L1255,176 Z"/>
+      </g>
+      <!-- the pole star, seated over the ring -->
+      <path class="tw tw-c" fill="var(--accent)" d="M985,222 L987.5,229.5 L995,232 L987.5,234.5 L985,242 L982.5,234.5 L975,232 L982.5,229.5 Z"/>
+      <!-- far ridge -->
+      <path fill="var(--far)" d="M0,392 Q160,362 330,378 Q520,398 700,368 Q880,340 1060,368 Q1240,396 1440,372 L1440,640 L0,640 Z"/>
+      <!-- mid ridge — the last open coil -->
+      <path fill="var(--mid)" d="M0,462 Q200,428 400,448 Q600,468 800,440 Q1000,414 1200,446 Q1330,466 1440,452 L1440,640 L0,640 Z"/>
+      <!-- near band, rising into the far rim of the ring -->
+      <path fill="var(--near)" d="M0,536 Q120,522 260,530 Q420,542 560,530 Q660,520 740,520 Q772,468 820,458 Q846,470 872,452 Q900,436 936,444 Q962,432 996,440 Q1030,432 1062,446 Q1094,440 1122,458 Q1150,452 1176,478 Q1204,498 1224,524 Q1310,540 1440,530 L1440,640 L0,640 Z"/>
+      <!-- the lake: a disc of sky held inside the hills -->
+      <ellipse fill="var(--sky)" cx="982" cy="516" rx="186" ry="30"/>
+      <!-- the sky, answered: stars in the water -->
+      <g fill="var(--paper)" opacity="0.8">
+        <path                 d="M940,510 L942.5,513 L940,516 L937.5,513 Z"/>
+        <path class="tw tw-d" d="M1006,518 L1008.5,521 L1006,524 L1003.5,521 Z"/>
+        <path                 d="M1060,512 L1062,514.5 L1060,517 L1058,514.5 Z"/>
+      </g>
+      <!-- ground, rising into the near rim — the jaw that closes the loop -->
+      <path fill="var(--ground)" d="M0,584 Q180,568 360,578 Q540,590 700,576 Q748,570 776,546 Q806,520 842,532 Q876,542 912,526 Q948,514 986,528 Q1022,540 1058,524 Q1094,514 1130,532 Q1160,544 1192,526 Q1214,518 1232,540 Q1268,566 1330,572 Q1390,578 1440,574 L1440,640 L0,640 Z"/>
+    </svg>
+    <div class="vista-content">
+      <p class="kicker">Page 11 of 11 &mdash; the tail being swallowed</p>
+      <h1 class="display">Works Cited</h1>
+    </div>
+  </section>
+
+  <section class="wide ledger">
+    <div class="pagehead">
+      <div class="headings">
+        <div class="inkrule rule-draw" aria-hidden="true"></div>
+        <p class="lede reveal">Seventeen sources feed this site &mdash; nine peer-reviewed or law-review studies, a federal court order, the Copyright Office&rsquo;s report, and the industry&rsquo;s own words &mdash; indexed here at the tail of the snake, where everything the argument ate ends up.</p>
+      </div>
+      <div class="youarehere">
+        <svg class="minimap" id="minimap" viewBox="0 0 120 120" role="navigation"
+             aria-label="Site map: the ouroboros with this page highlighted"></svg>
+        <p class="yah-cap"><span class="yah-mark" aria-hidden="true"></span><span>You are here: <span class="inmouth">inside the&nbsp;mouth.</span></span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wallband" aria-label="Exhibit 11-A: four of the primary documents cited">
+    <figure class="exhibit reveal">
+      <span class="etag"><b>Exhibit 11-A</b> &middot; the primary documents, as filed</span>
+      <div class="wall">
+        <a href="#bartz" aria-label="Jump to the Bartz v. Anthropic entry below">
+          <img src="assets/evidence/bartz-transformative-page.png" width="1224" height="1584"
+               alt="Thumbnail scan of a page of the Bartz v. Anthropic court order.">
+          <span class="wtag">Bartz order</span>
+        </a>
+        <a href="#usco" aria-label="Jump to the Copyright Office report entry below">
+          <img src="assets/evidence/usco-often-page.png" width="1224" height="1584"
+               alt="Thumbnail scan of a page of the Copyright Office report on generative AI training.">
+          <span class="wtag">USCO report</span>
+        </a>
+        <a href="#shumailov" aria-label="Jump to the Nature model-collapse paper entry below">
+          <img src="assets/evidence/nature-collapse-page.png" width="1191" height="1582"
+               alt="Thumbnail scan of a page of the Nature paper on model collapse.">
+          <span class="wtag">Nature paper</span>
+        </a>
+        <a href="#lemley" aria-label="Jump to the Fair Learning article entry below">
+          <img src="assets/evidence/lemley-stopsigns-page.png" width="1224" height="1584"
+               alt="Thumbnail scan of a page of the Fair Learning article in the Texas Law Review.">
+          <span class="wtag">Fair Learning</span>
+        </a>
+      </div>
+      <figcaption>Thumbnails of four of the primary documents cited: the Bartz order, the Copyright Office report, the Nature model-collapse paper, and the Fair Learning article. Select a scan to jump to its entry. <span class="src">Scans: CourtListener &middot; copyright.gov &middot; nature.com &middot; texaslawreview.org</span></figcaption>
+    </figure>
+  </section>
+
+  <section class="archive" aria-label="Works cited: seventeen entries, alphabetical, MLA 9">
+    <div class="listrule rule-draw" aria-hidden="true"></div>
+    <div class="listmeta">
+      <span>Alphabetical by author &middot; MLA&nbsp;9</span>
+      <span>17 sources on file</span>
+    </div>
+
+    <div class="entries" id="entries">
+
+      <div class="entry" id="authorsguild">
+        <svg class="tick" viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M5,0 L6.2,3.8 L10,5 L6.2,6.2 L5,10 L3.8,6.2 L0,5 L3.8,3.8 Z"/></svg>
+        <span class="chip"><span class="sr-only">Source type: </span>News</span>
+        <p class="mla">Authors Guild. &ldquo;Key Updates on the $1.5 Billion Anthropic Settlement.&rdquo; <em>The Authors Guild</em>, <a href="https://authorsguild.org/news/anthropic-settlement-key-updates/">authorsguild.org/news/anthropic-settlement-key-updates/</a>.</p>
+      </div>
+
+      <div class="entry" id="bartz">
+        <svg class="tick" viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M5,0 L6.2,3.8 L10,5 L6.2,6.2 L5,10 L3.8,6.2 L0,5 L3.8,3.8 Z"/></svg>
+        <span class="chip"><span class="sr-only">Source type: </span>Court order</span>
+        <p class="mla">Bartz v. Anthropic PBC. No. 3:24-cv-05417-WHA, U.S. District Court for the Northern District of California, 23 June 2025. <em>CourtListener</em>, <a href="https://www.courtlistener.com/docket/69058235/bartz-v-anthropic-pbc/">www.courtlistener.com/docket/69058235/bartz-v-anthropic-pbc/</a>.</p>
+      </div>
+
+      <div class="entry" id="carlini">
+        <svg class="tick" viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M5,0 L6.2,3.8 L10,5 L6.2,6.2 L5,10 L3.8,6.2 L0,5 L3.8,3.8 Z"/></svg>
+        <span class="chip"><span class="sr-only">Source type: </span>Proceedings</span>
+        <p class="mla">Carlini, Nicholas, et al. &ldquo;Extracting Training Data from Large Language Models.&rdquo; <em>Proceedings of the 30th USENIX Security Symposium (USENIX Security 21)</em>, USENIX Association, 2021, pp. 2633&ndash;50, <a href="https://www.usenix.org/system/files/sec21-carlini-extracting.pdf">www.usenix.org/system/files/sec21-carlini-extracting.pdf</a>.</p>
+      </div>
+
+      <div class="entry" id="anthropic">
+        <svg class="tick" viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M5,0 L6.2,3.8 L10,5 L6.2,6.2 L5,10 L3.8,6.2 L0,5 L3.8,3.8 Z"/></svg>
+        <span class="chip"><span class="sr-only">Source type: </span>Blog</span>
+        <p class="mla">&ldquo;Detecting and Preventing Distillation Attacks.&rdquo; <em>Anthropic</em>, 23 Feb. 2026, <a href="https://www.anthropic.com/news/detecting-and-preventing-distillation-attacks">www.anthropic.com/news/detecting-and-preventing-distillation-attacks</a>.</p>
+      </div>
+
+      <div class="entry" id="henderson">
+        <svg class="tick" viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M5,0 L6.2,3.8 L10,5 L6.2,6.2 L5,10 L3.8,6.2 L0,5 L3.8,3.8 Z"/></svg>
+        <span class="chip"><span class="sr-only">Source type: </span>Peer-reviewed</span>
+        <p class="mla">Henderson, Peter, et al. &ldquo;Foundation Models and Fair Use.&rdquo; <em>Journal of Machine Learning Research</em>, vol. 24, no. 400, 2023, pp. 1&ndash;79, <a href="https://www.jmlr.org/papers/v24/23-0569.html">www.jmlr.org/papers/v24/23-0569.html</a>.</p>
+      </div>
+
+      <div class="entry" id="hui">
+        <svg class="tick" viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M5,0 L6.2,3.8 L10,5 L6.2,6.2 L5,10 L3.8,6.2 L0,5 L3.8,3.8 Z"/></svg>
+        <span class="chip"><span class="sr-only">Source type: </span>Working paper</span>
+        <p class="mla">Hui, Xiang, et al. &ldquo;The Short-Term Effects of Generative Artificial Intelligence on Employment: Evidence from an Online Labor Market.&rdquo; Working paper, <em>SSRN</em>, 31 July 2023, <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4527336">papers.ssrn.com/sol3/papers.cfm?abstract_id=4527336</a>.</p>
+      </div>
+
+      <div class="entry" id="kant">
+        <svg class="tick" viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M5,0 L6.2,3.8 L10,5 L6.2,6.2 L5,10 L3.8,6.2 L0,5 L3.8,3.8 Z"/></svg>
+        <span class="chip"><span class="sr-only">Source type: </span>Book</span>
+        <p class="mla">Kant, Immanuel. <em>Groundwork of the Metaphysics of Morals</em>. Translated and edited by Mary Gregor, Cambridge UP, 1998.</p>
+      </div>
+
+      <div class="entry" id="lee">
+        <svg class="tick" viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M5,0 L6.2,3.8 L10,5 L6.2,6.2 L5,10 L3.8,6.2 L0,5 L3.8,3.8 Z"/></svg>
+        <span class="chip"><span class="sr-only">Source type: </span>Law review</span>
+        <p class="mla">Lee, Katherine, et al. &ldquo;Talkin&rsquo; &rsquo;Bout AI Generation: Copyright and the Generative-AI Supply Chain.&rdquo; <em>Journal of the Copyright Society</em>, vol. 72, no. 2, 2025, pp. 251+, <a href="https://james.grimmelmann.net/files/articles/talkin-bout-ai-generation.pdf">james.grimmelmann.net/files/articles/talkin-bout-ai-generation.pdf</a>.</p>
+      </div>
+
+      <div class="entry" id="lemley">
+        <svg class="tick" viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M5,0 L6.2,3.8 L10,5 L6.2,6.2 L5,10 L3.8,6.2 L0,5 L3.8,3.8 Z"/></svg>
+        <span class="chip"><span class="sr-only">Source type: </span>Law review</span>
+        <p class="mla">Lemley, Mark A., and Bryan Casey. &ldquo;Fair Learning.&rdquo; <em>Texas Law Review</em>, vol. 99, no. 4, 2021, pp. 743+, <a href="https://texaslawreview.org/fair-learning/">texaslawreview.org/fair-learning/</a>.</p>
+      </div>
+
+      <div class="entry" id="sag">
+        <svg class="tick" viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M5,0 L6.2,3.8 L10,5 L6.2,6.2 L5,10 L3.8,6.2 L0,5 L3.8,3.8 Z"/></svg>
+        <span class="chip"><span class="sr-only">Source type: </span>Law review</span>
+        <p class="mla">Sag, Matthew. &ldquo;Copyright Safety for Generative AI.&rdquo; <em>Houston Law Review</em>, vol. 61, no. 2, 2023, pp. 295+, <a href="https://houstonlawreview.org/article/92126-copyright-safety-for-generative-ai">houstonlawreview.org/article/92126-copyright-safety-for-generative-ai</a>.</p>
+      </div>
+
+      <div class="entry" id="samuelson">
+        <svg class="tick" viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M5,0 L6.2,3.8 L10,5 L6.2,6.2 L5,10 L3.8,6.2 L0,5 L3.8,3.8 Z"/></svg>
+        <span class="chip"><span class="sr-only">Source type: </span>Peer-reviewed</span>
+        <p class="mla">Samuelson, Pamela. &ldquo;Generative AI Meets Copyright.&rdquo; <em>Science</em>, vol. 381, no. 6654, 14 July 2023, pp. 158&ndash;61, <a href="https://doi.org/10.1126/science.adi0656">https://doi.org/10.1126/science.adi0656</a>.</p>
+      </div>
+
+      <div class="entry" id="schur">
+        <svg class="tick" viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M5,0 L6.2,3.8 L10,5 L6.2,6.2 L5,10 L3.8,6.2 L0,5 L3.8,3.8 Z"/></svg>
+        <span class="chip"><span class="sr-only">Source type: </span>Book</span>
+        <p class="mla">Schur, Michael. <em>How to Be Perfect: The Correct Answer to Every Moral Question</em>. Simon &amp; Schuster, 2022.</p>
+      </div>
+
+      <div class="entry" id="sharwood">
+        <svg class="tick" viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M5,0 L6.2,3.8 L10,5 L6.2,6.2 L5,10 L3.8,6.2 L0,5 L3.8,3.8 Z"/></svg>
+        <span class="chip"><span class="sr-only">Source type: </span>News</span>
+        <p class="mla">Sharwood, Simon. &ldquo;Senior White House Official Claims China&rsquo;s K3 Model Stolen from Anthropic.&rdquo; <em>The Register</em>, 23 July 2026, <a href="https://www.theregister.com/ai-and-ml/2026/07/23/senior-white-house-official-claims-chinas-k3-model-stolen-from-anthropic/5276804">www.theregister.com/ai-and-ml/2026/07/23/senior-white-house-official-claims-chinas-k3-model-stolen-from-anthropic/5276804</a>.</p>
+      </div>
+
+      <div class="entry" id="shumailov">
+        <svg class="tick" viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M5,0 L6.2,3.8 L10,5 L6.2,6.2 L5,10 L3.8,6.2 L0,5 L3.8,3.8 Z"/></svg>
+        <span class="chip"><span class="sr-only">Source type: </span>Peer-reviewed</span>
+        <p class="mla">Shumailov, Ilia, et al. &ldquo;AI Models Collapse When Trained on Recursively Generated Data.&rdquo; <em>Nature</em>, vol. 631, 24 July 2024, pp. 755&ndash;59, <a href="https://www.nature.com/articles/s41586-024-07566-y">www.nature.com/articles/s41586-024-07566-y</a>.</p>
+      </div>
+
+      <div class="entry" id="usco">
+        <svg class="tick" viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M5,0 L6.2,3.8 L10,5 L6.2,6.2 L5,10 L3.8,6.2 L0,5 L3.8,3.8 Z"/></svg>
+        <span class="chip"><span class="sr-only">Source type: </span>Gov report</span>
+        <p class="mla">United States, Copyright Office. <em>Copyright and Artificial Intelligence, Part 3: Generative AI Training</em>. Pre-publication version, May 2025, <a href="https://www.copyright.gov/ai/">www.copyright.gov/ai/</a>.</p>
+      </div>
+
+      <div class="entry" id="villalobos">
+        <svg class="tick" viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M5,0 L6.2,3.8 L10,5 L6.2,6.2 L5,10 L3.8,6.2 L0,5 L3.8,3.8 Z"/></svg>
+        <span class="chip"><span class="sr-only">Source type: </span>Proceedings</span>
+        <p class="mla">Villalobos, Pablo, et al. &ldquo;Position: Will We Run Out of Data? Limits of LLM Scaling Based on Human-Generated Data.&rdquo; <em>Proceedings of the 41st International Conference on Machine Learning</em>, edited by Ruslan Salakhutdinov et al., vol. 235, PMLR, 2024, pp. 49523&ndash;44, <a href="https://proceedings.mlr.press/v235/villalobos24a.html">proceedings.mlr.press/v235/villalobos24a.html</a>.</p>
+      </div>
+
+      <div class="entry" id="yildirim">
+        <svg class="tick" viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M5,0 L6.2,3.8 L10,5 L6.2,6.2 L5,10 L3.8,6.2 L0,5 L3.8,3.8 Z"/></svg>
+        <span class="chip"><span class="sr-only">Source type: </span>News</span>
+        <p class="mla">Yildirim, Ece. &ldquo;US Treasury Chief Threatens Sanctions on Chinese AI Labs Over &lsquo;IP Theft&rsquo; Concerns.&rdquo; <em>Gizmodo</em>, 21 July 2026, <a href="https://gizmodo.com/us-treasury-chief-threatens-sanctions-on-chinese-ai-labs-over-ip-theft-concerns-2000788553">gizmodo.com/us-treasury-chief-threatens-sanctions-on-chinese-ai-labs-over-ip-theft-concerns-2000788553</a>.</p>
+      </div>
+
+      <div class="tailend" aria-hidden="true">
+        <svg class="tipdot" viewBox="0 0 10 10" focusable="false"><path d="M5,0 L6.2,3.8 L10,5 L6.2,6.2 L5,10 L3.8,6.2 L0,5 L3.8,3.8 Z"/></svg>
+        <span>End of file &mdash; the tail ends here</span>
+      </div>
+
+    </div>
+
+    <figure class="exhibit docwell reveal">
+      <span class="etag"><b>Public record</b> &middot; one document pulled from the file &middot; PDF</span>
+      <details>
+        <summary>Bartz v. Anthropic PBC &mdash; order on fair use, full text</summary>
+        <iframe src="assets/evidence/bartz-order.pdf" title="Bartz v. Anthropic PBC, Order on Fair Use (N.D. Cal. 2025) — full PDF" loading="lazy"></iframe>
+        <a class="pdfopen" href="assets/evidence/bartz-order.pdf">Open the PDF</a>
+      </details>
+    </figure>
+  </section>
+
+  <div class="ridge-divider" aria-hidden="true"></div>
+
+  <section class="loopband" aria-label="The loop closes">
+    <div class="loopgrid">
+      <figure class="exhibit loopfig reveal">
+        <span class="etag"><b>Exhibit 11-B</b> &middot; the loop, closed</span>
+        <img src="assets/art/oro_banner.jpg" width="1600" height="1066"
+             alt="Woodcut-style engraving of an ouroboros serpent devouring its own tail, its tail tip inked in red.">
+        <figcaption>The engraving that opens this site, refiled at its end &mdash; the mouth these seventeen sources feed. <span class="src">Site illustration &middot; first filed on 01 Home.</span></figcaption>
+      </figure>
+      <div class="loopback reveal d1">
+        <p class="lb-kick">Archive complete &middot; seventeen of seventeen swallowed</p>
+        <p class="lb-display">The loop closes.</p>
+        <a class="lb-link" href="index.html">Back to 01 &middot; Home</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <span>Neel Anshu &mdash; Critical Thinking &amp; Writing</span>
+  <span>Prev &mdash; <a href="conclusion.html">10 Conclusion</a>&nbsp;&middot;&nbsp;The loop closes &mdash; back to <a href="index.html">01 Home</a></span>
+</footer>
+
+<script>window.SITE_PAGES = [{"href": "index.html", "num": "01", "label": "Home"}, {"href": "dilemma.html", "num": "02", "label": "The Dilemma"}, {"href": "thesis.html", "num": "03", "label": "Thesis"}, {"href": "frameworks.html", "num": "04", "label": "Frameworks"}, {"href": "argument-1.html", "num": "05", "label": "Argument I"}, {"href": "argument-2.html", "num": "06", "label": "Argument II"}, {"href": "argument-3.html", "num": "07", "label": "Argument III"}, {"href": "argument-4.html", "num": "08", "label": "Argument IV"}, {"href": "rebuttal.html", "num": "09", "label": "Rebuttal"}, {"href": "conclusion.html", "num": "10", "label": "Conclusion"}, {"href": "works-cited.html", "num": "11", "label": "Works Cited"}];</script>
+<script src="snake.js"></script>
+<script src="site.js"></script>
+<script src="quest.js"></script>
+<script>buildMini(document.getElementById('minimap'), window.SITE_PAGES, 10);</script>
+
+</body>
+</html>

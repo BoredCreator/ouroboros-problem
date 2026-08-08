@@ -1,0 +1,816 @@
+/* ═══════════════════════════════════════════════════════════════
+   The Ouroboros Problem — shared foundation
+   Firewatch / Olly Moss flat-poster system over the courtroom bones:
+   Anton (verdicts) · IBM Plex Mono (evidence) · Inter (explanation)
+   One day on a fire lookout: each page owns a moment of the day via
+   flat palette tokens (--sky --far --mid --near --ground --accent).
+   Flat ink on warm paper. NO gradients. No frameworks. Radius 0.
+   ═══════════════════════════════════════════════════════════════ */
+
+@font-face {
+  font-family: "Anton";
+  src: url("assets/fonts/anton-v27-latin-regular.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("assets/fonts/ibm-plex-mono-v20-latin-regular.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("assets/fonts/ibm-plex-mono-v20-latin-500.woff2") format("woff2");
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("assets/fonts/ibm-plex-mono-v20-latin-600.woff2") format("woff2");
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("assets/fonts/inter-v20-latin-regular.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("assets/fonts/inter-v20-latin-500.woff2") format("woff2");
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("assets/fonts/inter-v20-latin-600.woff2") format("woff2");
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+
+/* ---------- Base tokens: warm Firewatch paper ---------- */
+
+:root {
+  --paper: #f7f1e3;      /* warm cream — the poster stock */
+  --paper-dim: #efe6d2;  /* placard fill */
+  --ink: #1d1b16;        /* warm near-black */
+  --ink-soft: #5c5343;   /* warm secondary */
+  --hairline: #ddd0b6;   /* warm hairline */
+
+  /* Legacy alias: everything that used --red now reads the page's
+     text-safe accent, so the whole chrome auto-tints per page. */
+  --red: var(--accent-ink);
+
+  --font-display: "Anton", "Arial Narrow", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --font-body: "Inter", ui-sans-serif, -apple-system, "Helvetica Neue", Arial, sans-serif;
+
+  --ease-stamp: cubic-bezier(0.2, 0, 0, 1);
+  --col: 46rem;
+
+  /* Default scene palette (first light) so bare pages still render. */
+  --sky: #f4c95d; --far: #e8985a; --mid: #b95f30;
+  --near: #7a3020; --ground: #3d1c14;
+  --accent: #b95f30;      /* flat fills, rules, bands (graphic use) */
+  --accent-ink: #98481f;  /* accent for TEXT on paper — ≥4.5:1 */
+  --vista-ink: var(--ink);/* text color set over the vista sky */
+}
+
+/* ---------- The day arc: per-page scene palettes ----------
+   --accent is the poster accent (fills, left rules, sign bands).
+   --accent-ink is the same hue pushed dark enough for small text
+   on --paper (contrast ≥ 4.5:1 verified). --vista-ink is the text
+   color that sits directly on --sky in the hero vista. */
+
+body.p-home {        /* first light */
+  --sky: #f4c95d; --far: #e8985a; --mid: #b95f30;
+  --near: #7a3020; --ground: #3d1c14;
+  --accent: #b95f30; --accent-ink: #98481f; --vista-ink: var(--ink);
+}
+body.p-dilemma {     /* sunrise */
+  --sky: #f6b352; --far: #e07b39; --mid: #a94b28;
+  --near: #6e2a1c; --ground: #381712;
+  --accent: #a94b28; --accent-ink: #a3441f; --vista-ink: var(--ink);
+}
+body.p-thesis {      /* morning */
+  --sky: #f2d8a0; --far: #d9a05b; --mid: #8f6a3d;
+  --near: #4f5537; --ground: #2c3325;
+  --accent: #8f6a3d; --accent-ink: #77552c; --vista-ink: var(--ink);
+}
+body.p-frameworks {  /* high noon */
+  --sky: #eadfc4; --far: #c9b98a; --mid: #7d8a5a;
+  --near: #45543a; --ground: #253023;
+  --accent: #5f7248; --accent-ink: #4d5e39; --vista-ink: var(--ink);
+}
+body.p-arg1 {        /* afternoon haze */
+  --sky: #ecc98f; --far: #d99a55; --mid: #9c6435;
+  --near: #5c3d24; --ground: #2e2015;
+  --accent: #9c6435; --accent-ink: #7d4f28; --vista-ink: var(--ink);
+}
+body.p-arg2 {        /* golden hour */
+  --sky: #f0b45e; --far: #dd8143; --mid: #ad5230;
+  --near: #6b2f20; --ground: #351812;
+  --accent: #ad5230; --accent-ink: #964325; --vista-ink: var(--ink);
+}
+body.p-arg3 {        /* sunset */
+  --sky: #ef9e58; --far: #d95f36; --mid: #9e3527;
+  --near: #5f1f1a; --ground: #2f1210;
+  --accent: #9e3527; --accent-ink: #9e3527; --vista-ink: var(--ink);
+}
+body.p-arg4 {        /* dusk */
+  --sky: #d97a4a; --far: #a84632; --mid: #6f2a26;
+  --near: #3f1b20; --ground: #201017;
+  --accent: #a84632; --accent-ink: #a04129; --vista-ink: var(--ink);
+}
+body.p-rebuttal {    /* blue hour — dark vista, prose stays on paper */
+  --sky: #7d8aa6; --far: #52618a; --mid: #35406b;
+  --near: #20284a; --ground: #111530;
+  --accent: #c46a3a; --accent-ink: #94481d; --vista-ink: var(--ink);
+}
+body.p-conclusion {  /* night, fire below — dark vista, paper prose */
+  --sky: #3c4668; --far: #2a3153; --mid: #1b2140;
+  --near: #10142c; --ground: #080a1c;
+  --accent: #e07b39; --accent-ink: #9c4c1a; --vista-ink: var(--paper);
+}
+body.p-works {       /* starlight — dark vista, paper prose */
+  --sky: #232948; --far: #181d38; --mid: #10142a;
+  --near: #0a0d1e; --ground: #050712;
+  --accent: #d9a05b; --accent-ink: #85561e; --vista-ink: var(--paper);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+html, body { height: 100%; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+  overflow-x: hidden;
+}
+
+::selection { background: var(--ink); color: var(--paper); }
+
+/* ---------- Header & navigation toolbar (shared contract) ----------
+   The lookout's sign: warm paper strip under a flat accent band that
+   tints to each page's moment of the day. */
+
+header.site {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(247, 241, 227, 0.94);
+  backdrop-filter: blur(8px);
+  border-top: 4px solid var(--accent);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.masthead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 1.15rem 2rem 0.85rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.masthead .mark {
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: none;
+}
+.masthead .mark em { font-style: normal; color: var(--accent-ink); }
+.masthead .tag { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+nav.toolbar {
+  display: flex;
+  gap: 1.1rem;
+  padding: 0 2rem 0.8rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+nav.toolbar::-webkit-scrollbar { display: none; }
+
+nav.toolbar a {
+  flex: 0 0 auto;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink-soft);
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+nav.toolbar a .num {
+  color: var(--accent-ink);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  margin-right: 0.45em;
+}
+nav.toolbar a:hover { color: var(--ink); }
+nav.toolbar a[aria-current="page"] {
+  color: var(--ink);
+  font-weight: 600;
+  border-bottom-color: var(--accent);
+}
+
+/* ---------- Page scaffold ---------- */
+
+main { flex: 1; }
+
+.col {
+  max-width: var(--col);
+  margin: 0 auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.wide {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+}
+
+h1.display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: clamp(2.6rem, 7.5vw, 5.2rem);
+  line-height: 0.98;
+  letter-spacing: 0.005em;
+  text-wrap: balance;
+}
+
+.essay h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: clamp(1.35rem, 3vw, 1.8rem);
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+  margin: 3rem 0 1.1rem;
+}
+
+.essay p {
+  font-size: 1.03rem;
+  line-height: 1.78;
+  margin-bottom: 1.4rem;
+  text-wrap: pretty;
+}
+.essay p em { font-style: italic; }
+.essay a { color: var(--accent-ink); text-decoration: none; border-bottom: 1px solid var(--hairline); }
+.essay a:hover { border-bottom-color: var(--accent-ink); }
+
+/* Mono citation chip used inline after quotes: (Bartz v. Anthropic 13) */
+.cite {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+/* ---------- Page head w/ minimap (shared contract) ---------- */
+
+.pagehead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1.5rem;
+}
+.pagehead .headings { min-width: 0; }
+.pagehead .kicker { display: block; margin-bottom: 0.9rem; }
+
+.minimap {
+  width: 112px;
+  height: 112px;
+  flex: 0 0 auto;
+  overflow: visible;
+}
+
+/* ---------- The vista kit (Firewatch hero) ----------
+   .vista        full-bleed flat-sky stage; pages drop 3–6 solid SVG
+                 bands inside (sky→ground), no gradients ever.
+   .vista-content off-center overlay (rule of thirds, left by default;
+                 add .vista--right to seat it on the right third).
+   .vista-band   parallax-ready layer: transform-only, driven by the
+                 --plx custom prop a tiny page script sets on .vista.
+                 Rate modifiers: .plx-far / .plx-mid / .plx-near. */
+
+.vista {
+  position: relative;
+  overflow: hidden;
+  background: var(--sky);          /* flat fill, never a gradient */
+  color: var(--vista-ink);
+  min-height: clamp(340px, 54vh, 580px);
+  display: flex;
+  align-items: flex-end;
+}
+.vista > svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+}
+.vista .vista-content {
+  position: relative;
+  z-index: 3;
+  width: min(46rem, 82vw);
+  margin: 0 auto 0 max(1.5rem, 8vw);   /* left third */
+  padding: clamp(2.2rem, 6vh, 4rem) 0 clamp(2.4rem, 7vh, 4.5rem);
+}
+.vista.vista--right .vista-content {
+  margin: 0 max(1.5rem, 8vw) 0 auto;   /* right third */
+}
+.vista .vista-content .kicker { color: var(--vista-ink); opacity: 0.82; }
+
+/* Parallax-ready band: transform only, JS-free contract.
+   A page script may set --plx (scroll offset, e.g. "120px") on .vista;
+   each band drifts at its own rate. Zero motion by default and under
+   prefers-reduced-motion. */
+.vista-band {
+  transform: translateY(calc(var(--plx, 0px) * var(--plx-rate, 0)));
+  will-change: transform;
+}
+.plx-far  { --plx-rate: 0.05; }
+.plx-mid  { --plx-rate: 0.12; }
+.plx-near { --plx-rate: 0.22; }
+
+/* Ridgeline divider — one thin silhouette strip between major
+   sections. Flat color from the scene (defaults to --near); override
+   with a scene var inline if a page needs a different band. */
+.ridge-divider {
+  height: clamp(2.4rem, 6vw, 4rem);
+  background-color: var(--near);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 80' preserveAspectRatio='none'%3E%3Cpath d='M0,80L0,50L64,38L142,48L228,20L318,46L402,32L492,54L578,24L664,44L738,36L826,52L918,22L1006,44L1096,34L1200,48L1200,80Z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 80' preserveAspectRatio='none'%3E%3Cpath d='M0,80L0,50L64,38L142,48L228,20L318,46L402,32L492,54L578,24L664,44L738,36L826,52L918,22L1006,44L1096,34L1200,48L1200,80Z'/%3E%3C/svg%3E");
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+.ridge-divider--flip { transform: scaleX(-1); }
+
+/* Small flat scene motif (sun disc, ember, bird cluster).
+   Absolutely positioned by the page inside a relative parent;
+   inline SVGs inherit currentColor. Budget: one per page. */
+.scene-motif {
+  position: absolute;
+  z-index: 2;
+  width: var(--motif-size, 64px);
+  height: auto;
+  color: var(--accent);
+  pointer-events: none;
+}
+.scene-motif svg { display: block; width: 100%; height: auto; fill: currentColor; }
+.scene-motif--disc {
+  height: var(--motif-size, 64px);
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+/* ---------- Evidence components: trail placards ----------
+   Park-service sign language: warm paper card, thin ink frame, flat
+   accent band along the top, small mono label. */
+
+figure.exhibit {
+  border: 1px solid var(--ink);
+  border-top: 5px solid var(--accent);
+  background: var(--paper-dim);
+  padding: 1rem;
+  margin: 2.2rem 0;
+}
+figure.exhibit .etag {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 0.75rem;
+}
+figure.exhibit .etag b { color: var(--accent-ink); font-weight: 600; }
+figure.exhibit img, figure.exhibit svg, figure.exhibit iframe, figure.exhibit embed {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--hairline);
+  background: var(--paper);
+}
+figure.exhibit iframe, figure.exhibit embed { height: 460px; }
+figure.exhibit figcaption {
+  margin-top: 0.8rem;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+figure.exhibit figcaption .src { font-family: var(--font-mono); font-size: 0.72rem; }
+
+/* Quote placard: paper card, page accent as the left rule,
+   hanging mono tag, cite chip after. */
+blockquote.qs {
+  margin: 2.4rem 0;
+  padding: 1.5rem 1.6rem 1.4rem;
+  background: var(--paper-dim);
+  border-left: 4px solid var(--accent);
+  position: relative;
+}
+blockquote.qs .qtag {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  margin-bottom: 0.8rem;
+}
+blockquote.qs p {
+  font-size: 1.28rem;
+  line-height: 1.5;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  margin: 0;
+  text-wrap: pretty;
+}
+blockquote.qs footer {
+  margin-top: 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+  border: 0; padding: 0;
+  display: block; text-transform: none; letter-spacing: 0.04em;
+}
+
+/* Trail-sign marker: oversized load-bearing number with an accent
+   tick, like an elevation post. */
+.statline {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  border-left: 4px solid var(--accent);
+  padding-left: 1rem;
+}
+.statline .n {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 8vw, 5rem);
+  line-height: 1;
+  letter-spacing: 0.01em;
+  font-variant-numeric: tabular-nums;
+}
+.statline .n.red { color: var(--accent-ink); }
+.statline .u {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  max-width: 16em;
+  line-height: 1.5;
+}
+
+/* Verdict stamps */
+.stampbox {
+  display: inline-block;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: clamp(1.3rem, 3.4vw, 2.1rem);
+  line-height: 1;
+  padding: 0.42em 0.65em;
+  border: 3px solid var(--ink);
+  color: var(--ink);
+  transform: rotate(-2deg);
+  filter: url(#stamp-rough);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+.stampbox.red { border-color: var(--accent-ink); color: var(--accent-ink); transform: rotate(1.5deg); }
+
+/* ---------- Motion utilities (site.js toggles .on) ---------- */
+
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.6s var(--ease-stamp), transform 0.6s var(--ease-stamp); }
+.reveal.on { opacity: 1; transform: none; }
+
+.stamp { opacity: 0; transform: scale(1.6) rotate(-2deg); }
+.stamp.on { opacity: 1; transform: scale(1) rotate(-2deg); transition: opacity 0.28s var(--ease-stamp), transform 0.28s var(--ease-stamp); }
+.stampbox.red.stamp.on { transform: scale(1) rotate(1.5deg); }
+
+.rule-draw { transform: scaleX(0); transform-origin: left center; transition: transform 0.7s var(--ease-stamp); }
+.rule-draw.on { transform: scaleX(1); }
+
+.d1 { transition-delay: 0.12s; }
+.d2 { transition-delay: 0.24s; }
+.d3 { transition-delay: 0.36s; }
+
+/* ---------- Ouroboros hub + minimap (snake.js hooks) ---------- */
+
+.ring { transform-origin: 400px 400px; animation: spin 140s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.seg {
+  fill: var(--ink);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: swell 5.2s ease-in-out infinite;
+}
+@keyframes swell {
+  0%, 100% { transform: scale(1);    opacity: 1; }
+  12%      { transform: scale(1.28); opacity: 0.92; }
+  28%      { transform: scale(1);    opacity: 1; }
+}
+
+.eye { fill: var(--paper); }
+.pupil { fill: var(--accent-ink); }
+.tailtip { fill: var(--accent-ink); }
+.head { fill: var(--ink); }
+.traveler { fill: var(--accent-ink); }
+
+a.node { cursor: pointer; outline: none; }
+.node circle { fill: var(--ink); transition: fill 0.18s ease; }
+.node .nnum {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  fill: var(--paper);
+  pointer-events: none;
+}
+.node .nlabel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  fill: var(--ink-soft);
+  opacity: 0.55;
+  transition: opacity 0.18s ease, fill 0.18s ease;
+}
+.node:hover circle, .node:focus-visible circle { fill: var(--accent-ink); }
+.node:hover .nlabel, .node:focus-visible .nlabel { opacity: 1; fill: var(--accent-ink); }
+.node.cur circle { fill: var(--accent-ink); }
+.node.cur .nlabel { fill: var(--accent-ink); opacity: 0.8; }
+
+.minimap .seg { animation: none; }
+a.mnode { cursor: pointer; }
+.mnode circle { fill: var(--ink); transition: fill 0.15s ease; }
+.mnode:hover circle { fill: var(--accent-ink); }
+.mnode.cur circle {
+  fill: var(--accent-ink);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: mpulse 2.4s ease-in-out infinite;
+}
+@keyframes mpulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.35); }
+}
+
+/* ---------- Draft flag (removed per-section as Neel approves wording) ---------- */
+
+.draft-flag {
+  display: inline-block;
+  margin: 0 0 1.4rem;
+  padding: 0.45em 0.9em;
+  border: 1px dashed var(--ink-soft);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.rev-note {
+  margin: 2rem 0 2.4rem;
+  padding: 0.9rem 1.1rem;
+  border: 1px dashed var(--ink-soft);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+.rev-note b { color: var(--accent-ink); font-weight: 600; }
+
+/* ---------- Quest layer: chapters, progress, filed stamps ---------- */
+
+.quest-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 1.6rem;
+  max-width: 72rem;
+  margin: 1.6rem auto 0;
+  padding: 0.7rem 1.5rem 0;
+  border-top: 1px solid var(--hairline);
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.quest-strip .q-chap { color: var(--accent-ink); font-weight: 600; }
+.quest-strip .q-beat { font-style: normal; }
+.quest-strip .q-prog { margin-left: auto; font-variant-numeric: tabular-nums; }
+.quest-strip .q-prog b { color: var(--accent-ink); font-weight: 600; }
+
+.q-filed {
+  display: inline-block;
+  margin-left: 0.9em;
+  padding: 0.15em 0.5em;
+  border: 1px solid var(--accent-ink);
+  color: var(--accent-ink);
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transform: rotate(-1.5deg) scale(1.5);
+  opacity: 0;
+  animation: q-file 0.3s var(--ease-stamp) 0.1s forwards;
+}
+@keyframes q-file {
+  to { opacity: 1; transform: rotate(-1.5deg) scale(1); }
+}
+
+/* Trailhead card to the next chapter — placard language. */
+.quest-next {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  max-width: var(--col);
+  margin: 4rem auto 4.5rem;
+  padding: 1.4rem 1.5rem;
+  background: var(--paper-dim);
+  border: 1px solid var(--ink);
+  border-left: 5px solid var(--accent);
+}
+.quest-next .qn-kick {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  margin-bottom: 0.5rem;
+}
+.quest-next .qn-title {
+  display: block;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: clamp(1.15rem, 3vw, 1.7rem);
+  line-height: 1.05;
+  color: var(--ink);
+}
+.quest-next .qn-go {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7em;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--paper);
+  background: var(--ink);
+  text-decoration: none;
+  padding: 0.95em 1.4em;
+  transition: background 0.18s var(--ease-stamp);
+}
+.quest-next .qn-go:hover, .quest-next .qn-go:focus-visible { background: var(--accent-ink); }
+.quest-next .qn-arrow { display: inline-block; transition: transform 0.25s var(--ease-stamp); }
+.quest-next .qn-go:hover .qn-arrow, .quest-next .qn-go:focus-visible .qn-arrow { transform: translateX(0.45em); }
+
+.mnode.visited circle, .node.visited circle { fill: var(--accent-ink); opacity: 0.45; }
+.mnode.visited:hover circle, .node.visited:hover circle { opacity: 1; }
+.mnode.cur circle { opacity: 1 !important; }
+.node.cur circle { opacity: 1 !important; }
+
+@media (max-width: 560px) {
+  .quest-strip { padding-left: 1.25rem; padding-right: 1.25rem; }
+  .quest-strip .q-prog { margin-left: 0; }
+  .quest-next { flex-direction: column; align-items: flex-start; margin-left: 1.25rem; margin-right: 1.25rem; }
+}
+
+/* ---------- Footer (shared contract) — closing placard band ---------- */
+
+footer.site {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 1.4rem 2rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  border-top: 4px solid var(--accent);
+}
+footer.site a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--hairline);
+  padding-bottom: 0.15em;
+}
+footer.site a:hover { border-bottom-color: var(--accent-ink); }
+
+/* ---------- Cross-page transitions (View Transitions API, progressive) ----------
+   Same-origin navigations animate: the leaving page lifts away, the arriving
+   page rises in on the site's stamp ease; the header and footer hold still;
+   the ouroboros morphs between the big home hub and each page's corner minimap.
+   Browsers without cross-document view transitions simply navigate normally. */
+
+@view-transition { navigation: auto; }
+
+header.site { view-transition-name: site-header; }
+footer.site { view-transition-name: site-footer; }
+#hub { view-transition-name: oroboros; }
+.minimap { view-transition-name: oroboros; }
+
+::view-transition-old(root) { animation: vt-lift-out 0.22s var(--ease-stamp) both; }
+::view-transition-new(root) { animation: vt-lift-in 0.36s var(--ease-stamp) both; }
+
+@keyframes vt-lift-out {
+  to { opacity: 0; transform: translateY(-12px); }
+}
+@keyframes vt-lift-in {
+  from { opacity: 0; transform: translateY(16px); }
+}
+
+/* The chrome holds still while the page changes underneath it */
+::view-transition-old(site-header), ::view-transition-new(site-header),
+::view-transition-old(site-footer), ::view-transition-new(site-footer) { animation: none; }
+::view-transition-group(site-header), ::view-transition-group(site-footer) { animation-duration: 0.01s; }
+
+/* The snake takes the scenic route between hub and minimap */
+::view-transition-group(oroboros) {
+  animation-duration: 0.5s;
+  animation-timing-function: var(--ease-stamp);
+}
+::view-transition-old(oroboros) { animation-duration: 0.5s; }
+::view-transition-new(oroboros) { animation-duration: 0.5s; }
+
+/* ---------- Small screens ---------- */
+
+@media (max-width: 760px) {
+  .node .nlabel { display: none; }
+}
+
+@media (max-width: 560px) {
+  .masthead, nav.toolbar, footer.site { padding-left: 1.25rem; padding-right: 1.25rem; }
+  .masthead .tag { display: none; }
+  .pagehead { flex-direction: column-reverse; align-items: flex-start; }
+  .minimap { width: 80px; height: 80px; }
+  figure.exhibit iframe, figure.exhibit embed { height: 340px; }
+  .vista .vista-content,
+  .vista.vista--right .vista-content { margin-left: 1.25rem; margin-right: 1.25rem; width: auto; }
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  ::view-transition-group(*),
+  ::view-transition-image-pair(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) { animation: none !important; }
+  .ring, .seg, .mnode.cur circle { animation: none; }
+  .traveler { display: none; }
+  .reveal, .stamp, .rule-draw {
+    opacity: 1; transform: none; transition: none;
+  }
+  .q-filed { animation: none; opacity: 1; transform: rotate(-1.5deg); }
+  .quest-next .qn-arrow { transition: none; }
+  .stamp { transform: rotate(-2deg); }
+  .stampbox.red.stamp { transform: rotate(1.5deg); }
+  .vista-band { transform: none !important; transition: none !important; }
+}

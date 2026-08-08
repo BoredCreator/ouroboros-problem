@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Structural Dilemma, Context &amp; Why It Matters &mdash; The Ouroboros Problem</title>
+<meta name="description" content="A project on AI, fair use, and the loop that feeds itself.">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* Page 02 — sunrise over the courthouse trailhead.
+   Scoped to body.p-dilemma. Flat solid fills only —
+   no frameworks, no radius, no shadows. */
+
+/* ---- Hero vista: sunrise, headline seated on the left third ---- */
+.p-dilemma .vista {
+  align-items: flex-start;                 /* headline rides the sky */
+  min-height: clamp(380px, 62vh, 620px);
+}
+.p-dilemma .vista .vista-content {
+  padding-top: clamp(2.6rem, 8vh, 4.6rem);
+  padding-bottom: clamp(11rem, 30vh, 17rem); /* keep text off the ridges */
+}
+.p-dilemma .vista .kicker { margin-bottom: 0.9rem; }
+.p-dilemma h1.display { max-width: 21ch; }
+.p-dilemma .vista svg text {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  fill: var(--ink);
+  text-anchor: middle;
+  text-transform: uppercase;
+}
+
+/* Signature animation: the sun clears the far ridge on arrival. */
+@media (prefers-reduced-motion: no-preference) {
+  .p-dilemma .sun-rise { animation: p2-sunrise 2.8s var(--ease-stamp) both; }
+  @keyframes p2-sunrise {
+    from { transform: translateY(72px); }
+    to   { transform: translateY(0); }
+  }
+}
+
+/* ---- Case bar: docket line + minimap on paper, under the vista ---- */
+.p-dilemma .casebar { margin-top: 2.2rem; }
+.p-dilemma .pagehead .headings { flex: 1 1 auto; }
+.p-dilemma .docketrule { height: 2px; background: var(--ink); }
+.p-dilemma .docket {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.45rem 2rem;
+  padding-top: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.p-dilemma .docket b { color: var(--ink); font-weight: 600; }
+.p-dilemma .casebar .quest-strip { padding-left: 0; padding-right: 0; }
+
+.p-dilemma main { padding-bottom: 0; }
+.p-dilemma .essay { padding-top: 3rem; }
+
+/* ---- $1.5B statline: elevation marker ---- */
+.p-dilemma .statline { margin: 1.7rem 0 2rem; padding-top: 0.2rem; padding-bottom: 0.3rem; }
+
+/* ---- Evidence packets: placard pairs on the trail ---- */
+.p-dilemma .packet { position: relative; margin-top: 3.6rem; }
+.p-dilemma .packet .stampbox {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 -0.7rem 0.35rem;
+}
+.p-dilemma .packet blockquote.qs { margin: 0 0 1.4rem; }
+.p-dilemma .packet figure.exhibit {
+  margin: 0 0 1.5rem;
+  padding: 0.55rem 0.55rem 0.75rem;
+}
+.p-dilemma .packet figure.exhibit .etag { margin: 0.35rem 0.2rem 0.7rem; }
+.p-dilemma .packet figure.exhibit figcaption {
+  margin-top: 0.55rem;
+  font-size: 0.74rem;
+  line-height: 1.55;
+}
+.p-dilemma .packet figure.exhibit .src { display: block; margin-top: 0.2rem; font-size: 0.68rem; }
+
+/* ≥900px: each beat pairs its transcript with its artifact —
+   the FAIR USE packet reads left-to-right, the THEFT packet mirrors it,
+   like the two sign boards pointing opposite ways. */
+@media (min-width: 900px) {
+  .p-dilemma .packet {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 1.5rem;
+    align-items: start;
+  }
+  .p-dilemma .packet > * { grid-column: 1 / -1; }
+  .p-dilemma .packet blockquote.qs,
+  .p-dilemma .packet figure.exhibit { margin-bottom: 1.5rem; }
+
+  .p-dilemma .packet-fair .stampbox { justify-self: start; }
+  .p-dilemma .packet-fair blockquote.qs { grid-column: 1; }
+  .p-dilemma .packet-fair blockquote.qs + figure.exhibit { grid-column: 2; }
+
+  .p-dilemma .packet-theft .stampbox { justify-self: end; margin-right: 0.35rem; }
+  .p-dilemma .packet-theft blockquote.qs { grid-column: 2; }
+  .p-dilemma .packet-theft blockquote.qs + figure.exhibit { grid-column: 1; grid-row: 2; }
+  .p-dilemma .packet-theft > p.reveal { grid-column: 1; }
+  .p-dilemma .packet-theft > p.reveal + figure.exhibit { grid-column: 2; grid-row: 3; }
+
+  .p-dilemma .packet-plain blockquote.qs { grid-column: 1; }
+  .p-dilemma .packet-plain blockquote.qs + figure.exhibit { grid-column: 2; }
+  .p-dilemma .packet-plain > p.reveal { grid-column: 1; }
+  .p-dilemma .packet-plain > p.reveal + figure.exhibit { grid-column: 2; grid-row: 3; }
+}
+
+/* ---- The order itself: embedded PDF + page-jump controls ---- */
+.p-dilemma figure.order { margin-top: 3.6rem; margin-bottom: 4rem; }
+.p-dilemma .pdfnav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
+}
+.p-dilemma .pgbtn {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  padding: 0.6em 0.95em;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.p-dilemma .pgbtn:hover { background: var(--paper-dim); }
+.p-dilemma .pgbtn[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.p-dilemma .pgbtn:focus-visible,
+.p-dilemma .pdfopen:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+.p-dilemma .pdfopen {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--hairline);
+  padding-bottom: 0.15em;
+}
+.p-dilemma .pdfopen:hover { border-bottom-color: var(--red); }
+.p-dilemma figure.order iframe { height: 560px; transition: opacity 0.18s var(--ease-stamp); }
+.p-dilemma figure.order.swapping iframe { opacity: 0; }
+
+/* ---- Closing exhibit: the poster, left-set with side caption ---- */
+.p-dilemma .appendix { padding-top: 3rem; padding-bottom: 4.5rem; }
+.p-dilemma .appendix a {
+  color: var(--accent-ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--hairline);
+}
+.p-dilemma .appendix a:hover { border-bottom-color: var(--accent-ink); }
+.p-dilemma figure.poster {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  column-gap: 1.6rem;
+  align-items: end;
+  max-width: 58rem;
+  margin: 0 auto 0 0;
+}
+.p-dilemma figure.poster .etag { grid-column: 1 / -1; }
+.p-dilemma figure.poster img { grid-column: 1; grid-row: 2; }
+.p-dilemma figure.poster figcaption {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: end;
+  margin: 0;
+  font-size: 0.86rem;
+  line-height: 1.65;
+}
+.p-dilemma figure.poster figcaption .src { display: block; margin-top: 0.9rem; }
+
+/* ---- Small screens ---- */
+@media (max-width: 760px) {
+  .p-dilemma figure.poster { grid-template-columns: 1fr; }
+  .p-dilemma figure.poster figcaption { grid-column: 1; grid-row: 3; margin-top: 0.9rem; }
+}
+@media (max-width: 560px) {
+  .p-dilemma .vista { min-height: 440px; }
+  .p-dilemma .vista .vista-content { padding-bottom: 12rem; }
+  .p-dilemma .docket { font-size: 0.6rem; gap: 0.4rem 1.1rem; justify-content: flex-start; }
+  .p-dilemma figure.order iframe { height: 380px; }
+  .p-dilemma .pdfopen { margin-left: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .p-dilemma figure.order iframe { transition: none; }
+}
+</style>
+</head>
+<body class="p-dilemma">
+
+<header class="site">
+  <div class="masthead">
+    <a class="mark" href="index.html">The Ouroboros <em>Problem</em></a>
+    <span class="tag">Neel Anshu &middot; ENGL C1001</span>
+  </div>
+  <nav class="toolbar" aria-label="Pages">
+    <a href="index.html"><span class="num">01</span>Home</a>
+    <a href="dilemma.html" aria-current="page"><span class="num">02</span>The Dilemma</a>
+    <a href="thesis.html"><span class="num">03</span>Thesis</a>
+    <a href="frameworks.html"><span class="num">04</span>Frameworks</a>
+    <a href="argument-1.html"><span class="num">05</span>Argument I</a>
+    <a href="argument-2.html"><span class="num">06</span>Argument II</a>
+    <a href="argument-3.html"><span class="num">07</span>Argument III</a>
+    <a href="argument-4.html"><span class="num">08</span>Argument IV</a>
+    <a href="rebuttal.html"><span class="num">09</span>Rebuttal</a>
+    <a href="conclusion.html"><span class="num">10</span>Conclusion</a>
+    <a href="works-cited.html"><span class="num">11</span>Works Cited</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="vista hero">
+    <!-- Sunrise vista: five flat bands, courthouse-as-ranger-station on the
+         right third, two trail signs pointing opposite ways under a rising
+         sun. Hand-authored, poster-flat, solid bands only. -->
+    <svg viewBox="0 0 1440 620" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">
+      <!-- the sun, rising from behind the far ridge, over the fork -->
+      <g class="sun-rise">
+        <circle cx="800" cy="262" r="58" fill="var(--paper)"/>
+      </g>
+      <!-- birds, sparse, circling above the sun -->
+      <g fill="var(--ground)" transform="translate(34,-30)">
+        <path d="M726,112 q11,-12 22,0 q-11,-6 -22,0 Z"/>
+        <path d="M780,94 q9,-10 18,0 q-9,-5 -18,0 Z"/>
+        <path d="M830,124 q8,-9 16,0 q-8,-4 -16,0 Z"/>
+      </g>
+      <!-- far ridge -->
+      <path fill="var(--far)" d="M0,352 Q140,318 280,336 Q420,354 560,310 Q700,266 840,304 Q980,342 1120,308 Q1260,274 1440,310 L1440,620 L0,620 Z"/>
+      <!-- mid ridge — one coil of the snake in the land -->
+      <path fill="var(--mid)" d="M0,436 Q170,388 340,418 Q500,446 660,406 Q820,366 990,410 Q1150,448 1300,408 Q1380,388 1440,404 L1440,620 L0,620 Z"/>
+      <!-- near ridge -->
+      <path fill="var(--near)" d="M0,514 Q200,472 420,502 Q640,530 880,490 Q1100,454 1300,496 Q1380,512 1440,504 L1440,620 L0,620 Z"/>
+      <!-- pines on the near ridge -->
+      <g fill="var(--ground)">
+        <path d="M223,448 L206,488 L214,488 L200,516 L246,516 L232,488 L240,488 Z"/>
+        <path d="M270,466 L256,498 L262,498 L252,520 L288,520 L278,498 L284,498 Z"/>
+        <path d="M310,476 L298,504 L303,504 L294,524 L326,524 L317,504 L322,504 Z"/>
+      </g>
+      <!-- the courthouse that reads as a ranger station -->
+      <g fill="var(--ground)">
+        <rect x="900" y="488" width="272" height="14"/>
+        <rect x="914" y="478" width="244" height="10"/>
+        <rect x="930"  y="414" width="16" height="64"/>
+        <rect x="982"  y="414" width="16" height="64"/>
+        <rect x="1034" y="414" width="16" height="64"/>
+        <rect x="1086" y="414" width="16" height="64"/>
+        <rect x="1138" y="414" width="16" height="64"/>
+        <rect x="914" y="398" width="244" height="16"/>
+        <path d="M1036,336 L906,398 L1166,398 Z"/>
+        <rect x="1000" y="298" width="72" height="8"/>
+        <rect x="1008" y="306" width="56" height="30"/>
+        <rect x="1034" y="252" width="4" height="46"/>
+      </g>
+      <circle cx="1036" cy="380" r="11" fill="var(--paper)"/>
+      <path fill="var(--accent)" d="M1038,252 L1066,260 L1038,268 Z"/>
+      <!-- the fork: two trail signs, opposite ways -->
+      <g>
+        <rect x="812" y="396" width="10" height="104" fill="var(--ground)"/>
+        <path fill="var(--paper)" d="M728,402 L834,402 L834,428 L728,428 L710,415 Z"/>
+        <text x="778" y="420" font-size="14">Fair Use</text>
+        <path fill="var(--paper)" d="M802,440 L900,440 L918,453 L900,466 L802,466 Z"/>
+        <text x="854" y="458" font-size="14">Theft</text>
+      </g>
+      <!-- ground -->
+      <path fill="var(--ground)" d="M0,586 Q240,556 520,576 Q800,594 1080,564 Q1280,544 1440,566 L1440,620 L0,620 Z"/>
+    </svg>
+    <div class="vista-content">
+      <p class="kicker">Page 02 of 11 &mdash; the case file</p>
+      <h1 class="display">Structural Dilemma, Context &amp; Why It Matters</h1>
+    </div>
+  </section>
+
+  <section class="wide casebar">
+    <div class="pagehead">
+      <div class="headings docketbar">
+        <div class="docketrule rule-draw"></div>
+        <p class="docket">
+          <span><b>Bartz v. Anthropic PBC</b></span>
+          <span>No. 3:24-cv-05417</span>
+          <span>N.D. Cal.</span>
+          <span>Order on Fair Use</span>
+          <span>June 23, 2025</span>
+        </p>
+      </div>
+      <svg class="minimap" id="minimap" viewBox="0 0 120 120" role="navigation"
+           aria-label="Site map: the ouroboros with this page highlighted"></svg>
+    </div>
+  </section>
+
+  <div class="col essay">
+
+    <h2 class="reveal">The Structural Dilemma</h2>
+    <p class="reveal">Frontier AI labs built their models by scraping the internet&rsquo;s trove of human intelligence &mdash; books, art, code, and forums &mdash; without asking, and without care for silly things like intellectual property rights or terms of service. They argued their actions constituted transformative fair use. Then Chinese labs began distilling those same models&rsquo; outputs to train cheaper competitors, and the frontier labs, without any appreciation for the irony of the situation, began fighting a war to stop the &ldquo;thievery&rdquo; of their models. This conflict is only going to keep becoming louder, as the labs are attempting to hold two incompatible ideologies at once. If learning from anything publicly reachable is fair, they have little ground to stand on against their imitators. If taking requires consent, the models we already depend on were built wrong from the start. The people inside the industry cannot simply choose the ethical option, because systemic pressures close it off: frontier training requires data at a scale only mass extraction makes viable, the law of the jungle punishes any lab that unilaterally pays for what rivals take freely, and the courts have so far drawn the line at how data was acquired rather than whether taking it was right (<em>Bartz v. Anthropic</em>). As a computer science major working in the AI industry, I am investigating the dilemma my own field is being built on.</p>
+
+    <h2 class="reveal">Why It Matters</h2>
+    <div class="statline reveal d1">
+      <span class="n red">$1.5B</span>
+      <span class="u">the largest publicly reported copyright recovery in American history</span>
+    </div>
+    <p class="reveal">The <em>Bartz v. Anthropic</em> litigation ended in a $1.5 billion settlement &mdash; the largest publicly reported copyright recovery in history (Authors Guild) &mdash; but it was the court&rsquo;s summary-judgment order that established that training on copyrighted work is fair use as long as the copies were acquired legally (<em>Bartz v. Anthropic</em> 13&ndash;14). That precedent governs how every future model gets built, whose work feeds it, and whether anyone is paid. Meanwhile, the incentive to produce the human writing, art, and code these systems depend on erodes over time, as the market rewards extracting that work over creating it &mdash; and the models built from it now flood the internet with low-quality content that degrades it both as training data and as a place for people to be. The reflexive take, that the labs are thieves complaining about thievery, is satisfying, and it frustratingly stops thought exactly where it should start. Schur&rsquo;s version of Kant&rsquo;s test asks, &ldquo;Would it be okay if everyone did this?&rdquo; (256). The harder question I want visitors asking is what rule about mining data they would actually accept, and whether any such rule could realistically be enforced.</p>
+
+    <h2 class="reveal">The Ruling at the Center of It</h2>
+
+    <p class="reveal">The easiest place to watch the drama is the court order itself:</p>
+
+    <div class="packet packet-fair">
+      <p class="stampbox stamp d1">Fair Use</p>
+      <blockquote class="qs">
+        <span class="qtag">Exhibit 02-A &middot; Bartz v. Anthropic, order p. 13</span>
+        <p>&ldquo;In short, the purpose and character of using copyrighted works to train LLMs to generate new text was quintessentially transformative.&rdquo;</p>
+        <footer>(<em>Bartz v. Anthropic</em> 13)</footer>
+      </blockquote>
+      <figure class="exhibit reveal">
+        <img src="assets/evidence/bartz-transformative-zoom.png"
+             alt="Scan from page 13 of the court order. Typewritten lines 26 to 27 read: In short, the purpose and character of using copyrighted works to train LLMs to generate new text was quintessentially transformative.">
+        <figcaption>The blessing, as filed &mdash; page 13, lines 26&ndash;27 of the order. <span class="src">Bartz v. Anthropic PBC, No. 3:24-cv-05417 (N.D. Cal. June 23, 2025)</span></figcaption>
+      </figure>
+      <p class="reveal">The learning side was blessed by fair use laws, setting a new precedent.</p>
+    </div>
+
+    <p class="reveal">The same order, five pages later, turns to how the books were obtained:</p>
+
+    <div class="packet packet-theft">
+      <p class="stampbox red stamp d2">Theft</p>
+      <blockquote class="qs">
+        <span class="qtag">Exhibit 02-B &middot; Bartz v. Anthropic, order p. 18</span>
+        <p>&ldquo;Before buying books for its central library, Anthropic downloaded over seven million pirated copies of books, paid nothing, and kept these pirated copies in its library even after deciding it would not use them to train its AI (at all or ever again).&rdquo;</p>
+        <footer>(<em>Bartz v. Anthropic</em> 18)</footer>
+      </blockquote>
+      <figure class="exhibit reveal">
+        <img src="assets/evidence/bartz-sevenmillion-zoom.png"
+             alt="Scan from page 18 of the court order. Typewritten lines read: Before buying books for its central library, Anthropic downloaded over seven million pirated copies of books, paid nothing, and kept these pirated copies in its library.">
+        <figcaption>The count of what was taken, preserved in the record. <span class="src">Bartz v. Anthropic PBC, No. 3:24-cv-05417 (N.D. Cal. June 23, 2025)</span></figcaption>
+      </figure>
+      <p class="reveal">However, the judge found Anthropic&rsquo;s use of massive libraries of pirated materials illegal. It&rsquo;s important to note that this ruling doesn&rsquo;t stop Anthropic from buying the books, digitizing them, and uploading them to their models. In fact, Anthropic had &ldquo;many places from which&rdquo; to buy books, but its CEO preferred to skip the &ldquo;legal/practice/business slog&rdquo; of paying (<em>Bartz v. Anthropic</em> 2).</p>
+
+<figure class="exhibit reveal">
+  <span class="etag"><b>Exhibit 02-E</b> &middot; the CEO&rsquo;s reason, in the record</span>
+  <img src="assets/evidence/bartz-slog-zoom.png" alt="Scan from page 2 of the court order quoting Anthropic's CEO preferring to avoid the legal/practice/business slog of buying books." loading="lazy">
+  <figcaption>Why the books were pirated instead of bought, in the CEO&rsquo;s own words, preserved by the court. <span class="src">Bartz v. Anthropic PBC, order p. 2.</span></figcaption>
+</figure>
+    </div>
+
+    <p class="reveal">Judge Alsup then closed the loophole Anthropic had asked for:</p>
+
+    <div class="packet packet-plain">
+      <blockquote class="qs">
+        <span class="qtag">Exhibit 02-C &middot; Bartz v. Anthropic, order p. 14</span>
+        <p>&ldquo;There is no carveout, however, from the Copyright Act for AI companies.&rdquo;</p>
+        <footer>(<em>Bartz v. Anthropic</em> 14)</footer>
+      </blockquote>
+      <figure class="exhibit reveal">
+        <img src="assets/evidence/bartz-carveout-zoom.png"
+             alt="Scan from the court order. Typewritten lines read: There is no carveout, however, from the Copyright Act for AI companies.">
+        <figcaption>The sentence that refuses the carveout, as filed &mdash; order p. 14. <span class="src">Bartz v. Anthropic PBC, No. 3:24-cv-05417 (N.D. Cal. June 23, 2025)</span></figcaption>
+      </figure>
+      <p class="reveal">If you look at the three different lines, a clear picture forms. The law drew its line at the methods of obtaining the copies of the books, and never questioned whether using the books&rsquo; knowledge in AI models was right.</p>
+
+<figure class="exhibit reveal">
+  <span class="etag"><b>Exhibit 02-F</b> &middot; the acquisition, drawn</span>
+  <img src="assets/art/oro_vault.jpg" alt="Woodcut-style engraving of a massive vault door pried ajar in darkness, a thin red gap of light, lockpicks scattered on the floor." loading="lazy">
+  <figcaption>The order&rsquo;s line runs here: how you got in, before what you did inside. <span class="src">Site illustration &mdash; the ouroboros series.</span></figcaption>
+</figure>
+    </div>
+
+    <figure class="exhibit order reveal">
+      <span class="etag"><b>Public record</b> &middot; the full order, PDF</span>
+      <div class="pdfnav" role="group" aria-label="Jump the order to a cited page">
+        <button type="button" class="pgbtn" data-page="13" aria-pressed="true">p. 13 &middot; fair use</button>
+        <button type="button" class="pgbtn" data-page="18" aria-pressed="false">p. 18 &middot; seven million</button>
+        <button type="button" class="pgbtn" data-page="14" aria-pressed="false">p. 14 &middot; no carveout</button>
+        <a class="pdfopen" href="assets/evidence/bartz-order.pdf">Open the PDF</a>
+      </div>
+      <iframe id="orderframe" src="assets/evidence/bartz-order.pdf#page=13"
+              title="Bartz v. Anthropic, Order on Fair Use (N.D. Cal. 2025)" loading="lazy"></iframe>
+      <figcaption>The order itself. Public record: <em>Bartz v. Anthropic PBC</em>, No. 3:24-cv-05417 (N.D. Cal. June 23, 2025). Scroll it.</figcaption>
+    </figure>
+
+  </div>
+
+  <div class="ridge-divider" aria-hidden="true"></div>
+
+  <section class="wide appendix">
+    <figure class="exhibit poster reveal">
+      <span class="etag"><b>Exhibit 02-D</b> &middot; the poster &middot; two verdicts, one act</span>
+      <img src="assets/infographic.png"
+           alt="Poster titled ‘It’s Fair Use When We Do It.’ A snake drawn as a circular pipeline eats its own tail. Its black half — human work copied into an AI model — is stamped ‘quintessentially transformative: FAIR USE.’ Its red half — the AI’s answers copied again into a cheaper copycat — is thicker (16 million exchanges by about 24,000 fake accounts vs. 7 million pirated books, drawn to scale) and stamped ‘free-ride: THEFT.’ Around the loop, four groups each win under one rule and lose under the other; at center sit the value collisions and the $1.5 billion paid to authors.">
+      <figcaption>&ldquo;It&rsquo;s Fair Use When We Do It.&rdquo; &mdash; the same act of copying, stamped fair use on one side of the loop and theft on the other. <span class="src"><a href="assets/infographic-fullres.png">View at full resolution</a></span></figcaption>
+    </figure>
+  </section>
+
+</main>
+
+<footer class="site">
+  <span>Neel Anshu &mdash; Critical Thinking &amp; Writing</span>
+  <span>Prev &mdash; <a href="index.html">01 Home</a>&nbsp;&middot;&nbsp;Next &mdash; <a href="thesis.html">03 Thesis</a></span>
+</footer>
+
+<script>window.SITE_PAGES = [{"href": "index.html", "num": "01", "label": "Home"}, {"href": "dilemma.html", "num": "02", "label": "The Dilemma"}, {"href": "thesis.html", "num": "03", "label": "Thesis"}, {"href": "frameworks.html", "num": "04", "label": "Frameworks"}, {"href": "argument-1.html", "num": "05", "label": "Argument I"}, {"href": "argument-2.html", "num": "06", "label": "Argument II"}, {"href": "argument-3.html", "num": "07", "label": "Argument III"}, {"href": "argument-4.html", "num": "08", "label": "Argument IV"}, {"href": "rebuttal.html", "num": "09", "label": "Rebuttal"}, {"href": "conclusion.html", "num": "10", "label": "Conclusion"}, {"href": "works-cited.html", "num": "11", "label": "Works Cited"}];</script>
+<script src="snake.js"></script>
+<script src="site.js"></script>
+<script src="quest.js"></script>
+<script>buildMini(document.getElementById('minimap'), window.SITE_PAGES, 1);</script>
+<script>
+/* Page 02 only: page-jump controls for the embedded order.
+   Swapping src reloads the PDF viewer, so the frame is rebuilt;
+   a short opacity dip masks the reload flash — skipped entirely
+   under prefers-reduced-motion. */
+(function () {
+  var frame = document.getElementById("orderframe");
+  if (!frame) return;
+  var fig = frame.closest("figure");
+  var btns = Array.prototype.slice.call(document.querySelectorAll(".pgbtn"));
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  btns.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      if (btn.getAttribute("aria-pressed") === "true") return;
+      btns.forEach(function (b) { b.setAttribute("aria-pressed", "false"); });
+      btn.setAttribute("aria-pressed", "true");
+
+      var target = "assets/evidence/bartz-order.pdf#page=" + btn.getAttribute("data-page");
+      function swap() {
+        var next = frame.cloneNode(false);
+        next.src = target;
+        frame.replaceWith(next);
+        frame = next;
+        requestAnimationFrame(function () { fig.classList.remove("swapping"); });
+      }
+      if (reduced.matches) { swap(); }
+      else { fig.classList.add("swapping"); window.setTimeout(swap, 180); }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

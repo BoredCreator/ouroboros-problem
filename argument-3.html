@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Market Already Pays Less &mdash; The Ouroboros Problem</title>
+<meta name="description" content="A project on AI, fair use, and the loop that feeds itself.">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ═══════════════════════════════════════════════════════
+   Page 07 — Argument III · sunset
+   The valley with one lit cabin window: the paycheck.
+   Scoped under body.p-arg3. Flat fills only — poster bands,
+   no new hues, radius 0, no shadows.
+   ═══════════════════════════════════════════════════════ */
+
+/* ---- Hero vista: headline top-left, cabin low right ---- */
+
+body.p-arg3 .vista {
+  align-items: flex-start;
+  min-height: clamp(460px, 66vh, 640px);
+}
+body.p-arg3 .vista .vista-content {
+  padding-top: clamp(2.2rem, 5vh, 3.4rem);
+  padding-bottom: 0;
+}
+body.p-arg3 .vista .pagehead { align-items: flex-start; }
+
+/* The quest strip lands inside the vista — give its labels full ink
+   so they hold ≥4.5:1 on the sunset sky. */
+body.p-arg3 .vista .quest-strip { color: var(--ink); border-top-color: rgba(29, 27, 22, 0.3); }
+body.p-arg3 .vista .quest-strip .q-chap,
+body.p-arg3 .vista .quest-strip .q-prog b { color: var(--ink); }
+
+/* Signature animation: the one lit window — the paycheck — gutters
+   like a lamp at dusk. Stepped, not faded: poster-flat. */
+@media (prefers-reduced-motion: no-preference) {
+  body.p-arg3 .cabin-window { animation: p7-lamp 7s steps(1, end) infinite; }
+  @keyframes p7-lamp {
+    0%, 100% { opacity: 1; }
+    43%      { opacity: 0.5; }
+    47%      { opacity: 1; }
+    72%      { opacity: 0.65; }
+    78%      { opacity: 1; }
+  }
+}
+
+/* ---- Ledger band: lede + source quote beside the demonstrative ---- */
+
+body.p-arg3 .heroband {
+  display: grid;
+  grid-template-columns: minmax(0, 11fr) minmax(0, 9fr);
+  column-gap: 4rem;
+  align-items: start;
+  padding-top: 3.2rem;
+  padding-bottom: 3.6rem;
+}
+body.p-arg3 .lede {
+  font-size: 1.13rem;
+  line-height: 1.75;
+  max-width: 34em;
+  text-wrap: pretty;
+}
+body.p-arg3 .heroleft blockquote.qs { margin-bottom: 0; }
+body.p-arg3 .heroband figure.exhibit { margin: 0; }
+
+/* ---- The demonstrative, as a trail placard ---- */
+
+body.p-arg3 .demonstrative .dtitle {
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.45;
+  margin: 0 0 1rem;
+  max-width: 28em;
+  text-wrap: pretty;
+}
+
+body.p-arg3 .chartwrap { position: relative; }
+
+/* Chart text wears ink, never the series color. */
+body.p-arg3 .demonstrative text { font-family: var(--font-mono); }
+body.p-arg3 .demonstrative .collab {
+  fill: var(--ink-soft);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+}
+body.p-arg3 .demonstrative .ztag {
+  fill: var(--ink-soft);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+body.p-arg3 .demonstrative .zline { stroke: var(--ink); stroke-width: 2; }
+body.p-arg3 .demonstrative .bar { fill: var(--accent); }
+body.p-arg3 .demonstrative .val {
+  font-family: var(--font-display);
+  fill: var(--ink);
+  font-size: 52px;
+  letter-spacing: 0.01em;
+}
+
+/* Spotlight: inspecting one entry recedes the other. */
+@media (prefers-reduced-motion: no-preference) {
+  body.p-arg3 .demonstrative g.set { transition: opacity 0.3s var(--ease-stamp); }
+}
+body.p-arg3 .demonstrative.hot-jobs g.s-earn,
+body.p-arg3 .demonstrative.hot-earn g.s-jobs { opacity: 0.3; }
+
+/* Invisible hit zones over the bars — real buttons, keyboard reachable. */
+body.p-arg3 .zone {
+  position: absolute;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+}
+body.p-arg3 .zone:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 3px; }
+body.p-arg3 .zone.z-jobs { left: 10.7%; top: 15.5%; width: 25%; height: 42.5%; }
+body.p-arg3 .zone.z-earn { left: 55.4%; top: 15.5%; width: 25%; height: 84.5%; }
+
+/* Readout line: the sentence behind the hovered / focused entry. */
+body.p-arg3 .readout {
+  min-height: 3.6rem;
+  margin-top: 0.5rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--hairline);
+}
+body.p-arg3 .readout .r-hint {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0;
+}
+body.p-arg3 .readout .r-tip {
+  display: none;
+  font-family: var(--font-mono);
+  font-size: 0.79rem;
+  line-height: 1.6;
+  color: var(--ink);
+  margin: 0;
+}
+body.p-arg3 .demonstrative.hot-jobs .r-hint,
+body.p-arg3 .demonstrative.hot-earn .r-hint { display: none; }
+body.p-arg3 .demonstrative.hot-jobs #tip-jobs { display: block; }
+body.p-arg3 .demonstrative.hot-earn #tip-earn { display: block; }
+
+body.p-arg3 .demonstrative figcaption { margin-top: 1rem; }
+
+/* ---- Trail beats: a paragraph and its evidence walk side by side ---- */
+
+body.p-arg3 .duo {
+  display: grid;
+  grid-template-columns: minmax(0, 11fr) minmax(0, 9fr);
+  column-gap: 4rem;
+  align-items: start;
+  margin-top: 3.6rem;
+}
+body.p-arg3 .duo blockquote.qs,
+body.p-arg3 .duo figure.exhibit { margin: 0; }
+body.p-arg3 .duo p { margin-bottom: 0; }
+
+body.p-arg3 .col.essay { margin-top: 3.4rem; margin-bottom: 5.5rem; }
+
+/* ---- The turn: from the ledger to the rule ---- */
+
+body.p-arg3 hr.turnrule {
+  border: 0;
+  border-top: 3px solid var(--accent);
+  margin: 3.2rem 0 2.8rem;
+}
+
+/* ---- Small screens ---- */
+
+@media (max-width: 899px) {
+  body.p-arg3 .heroband,
+  body.p-arg3 .duo { display: block; }
+  body.p-arg3 .heroband > *,
+  body.p-arg3 .duo > * {
+    max-width: calc(var(--col) - 3rem);
+    margin-left: auto;
+    margin-right: auto;
+  }
+  body.p-arg3 .heroleft { margin-bottom: 2.6rem; }
+  body.p-arg3 .duo > * + * { margin-top: 2.2rem; }
+}
+
+@media (max-width: 560px) {
+  body.p-arg3 .vista { min-height: 540px; }
+}
+</style>
+</head>
+<body class="p-arg3">
+
+<header class="site">
+  <div class="masthead">
+    <a class="mark" href="index.html">The Ouroboros <em>Problem</em></a>
+    <span class="tag">Neel Anshu &middot; ENGL C1001</span>
+  </div>
+  <nav class="toolbar" aria-label="Pages">
+    <a href="index.html"><span class="num">01</span>Home</a>
+    <a href="dilemma.html"><span class="num">02</span>The Dilemma</a>
+    <a href="thesis.html"><span class="num">03</span>Thesis</a>
+    <a href="frameworks.html"><span class="num">04</span>Frameworks</a>
+    <a href="argument-1.html"><span class="num">05</span>Argument I</a>
+    <a href="argument-2.html"><span class="num">06</span>Argument II</a>
+    <a href="argument-3.html" aria-current="page"><span class="num">07</span>Argument III</a>
+    <a href="argument-4.html"><span class="num">08</span>Argument IV</a>
+    <a href="rebuttal.html"><span class="num">09</span>Rebuttal</a>
+    <a href="conclusion.html"><span class="num">10</span>Conclusion</a>
+    <a href="works-cited.html"><span class="num">11</span>Works Cited</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- Sunset vista: the valley with one lit cabin window — the paycheck. -->
+  <section class="vista">
+    <svg viewBox="0 0 1440 560" preserveAspectRatio="xMaxYMax slice" aria-hidden="true" focusable="false">
+      <!-- setting sun -->
+      <circle cx="1010" cy="285" r="95" fill="var(--paper)"></circle>
+      <!-- last birds out -->
+      <g fill="var(--ground)">
+        <path d="M1170,95 Q1182,81 1194,95 Q1182,88 1170,95 Z"></path>
+        <path d="M1240,123 Q1250,111 1260,123 Q1250,117 1240,123 Z"></path>
+        <path d="M1122,135 Q1131,125 1140,135 Q1131,130 1122,135 Z"></path>
+      </g>
+      <!-- far ridge -->
+      <path fill="var(--far)" d="M0,400 L110,364 L235,388 L360,346 L480,380 L610,354 L735,384 L860,350 L985,378 L1105,344 L1230,376 L1345,356 L1440,374 L1440,560 L0,560 Z"></path>
+      <!-- mid ridge — the coil -->
+      <path fill="var(--mid)" d="M0,442 C90,424 150,448 250,436 C350,424 420,452 520,442 C620,432 690,456 790,446 C880,437 950,456 1040,450 C1130,444 1220,430 1310,438 C1360,443 1400,440 1440,434 L1440,560 L0,560 Z"></path>
+      <!-- the cabin on the valley floor -->
+      <g>
+        <path fill="var(--ground)" d="M1040,404 H1128 V446 H1040 Z M1028,407 L1084,372 L1140,407 Z M1103,376 h12 v24 h-12 Z"></path>
+        <rect class="cabin-window" x="1073" y="414" width="16" height="20" fill="var(--paper)"></rect>
+      </g>
+      <!-- near wall, opening into the valley -->
+      <path fill="var(--near)" d="M0,470 L80,440 L170,462 L260,438 L350,466 L440,448 L530,472 L620,456 L700,478 L790,500 L880,530 L960,548 L1050,556 L1150,556 L1240,544 L1320,520 L1380,496 L1440,478 L1440,560 L0,560 Z"></path>
+      <!-- foreground meadow -->
+      <path fill="var(--ground)" d="M0,522 L140,512 L300,520 L470,508 L640,518 L820,510 L1000,520 L1180,508 L1330,518 L1440,512 L1440,560 L0,560 Z"></path>
+    </svg>
+    <div class="vista-content">
+      <div class="pagehead">
+        <div class="headings">
+          <p class="kicker">Page 07 of 11 &mdash; supporting argument III</p>
+          <h1 class="display">The Market Already Pays Less</h1>
+        </div>
+        <svg class="minimap" id="minimap" viewBox="0 0 120 120" role="navigation"
+             aria-label="Site map: the ouroboros with this page highlighted"></svg>
+      </div>
+    </div>
+  </section>
+
+  <div class="wide">
+    <section class="heroband">
+      <div class="heroleft">
+        <p class="lede">The dilemma stops being abstract at the first paycheck. In <em>Organization Science</em>, Hui, Reshef, and Zhou measured Upwork freelancers before and after ChatGPT, sorted by how exposed each occupation is to a text generator:</p>
+
+        <blockquote class="qs">
+          <span class="qtag">Exhibit 07-A &middot; Hui, Reshef &amp; Zhou</span>
+          <p>&ldquo;Freelancers in more affected occupations experienced a decrease of 2% in the number of monthly jobs and a decrease of 5.2% in monthly earnings on the platform, following the release of ChatGPT, compared to freelancers in less-affected occupations.&rdquo;</p>
+          <footer>(Hui et al. 2&ndash;3)</footer>
+        </blockquote>
+      </div>
+
+      <figure class="exhibit demonstrative" id="ledger">
+        <span class="etag"><b>Demonstrative 07-1</b> &middot; drawn from Exhibit 07-A</span>
+        <p class="dtitle">After ChatGPT: change in monthly outcomes for writing-exposed freelancers vs less-exposed</p>
+        <div class="chartwrap">
+          <svg viewBox="0 0 560 452" role="img"
+               aria-label="Bar chart. After ChatGPT&rsquo;s release, writing-exposed freelancers&rsquo; monthly jobs fell 2.0 percent and monthly earnings fell 5.2 percent, compared with less-affected freelancers on the platform.">
+            <text class="ztag" x="2" y="56">0%</text>
+            <line class="zline" x1="0" y1="70" x2="560" y2="70"></line>
+            <g class="set s-jobs">
+              <text class="collab" x="130" y="54" text-anchor="middle">MONTHLY JOBS</text>
+              <rect class="bar b-jobs" x="70" y="74" width="120" height="120"></rect>
+              <text class="val" x="130" y="246" text-anchor="middle">&#8722;2.0%</text>
+            </g>
+            <g class="set s-earn">
+              <text class="collab" x="380" y="54" text-anchor="middle">MONTHLY EARNINGS</text>
+              <rect class="bar b-earn" x="320" y="74" width="120" height="312"></rect>
+              <text class="val" x="380" y="438" text-anchor="middle">&#8722;5.2%</text>
+            </g>
+          </svg>
+          <button type="button" class="zone z-jobs" id="zone-jobs" aria-expanded="false"
+                  aria-label="Monthly jobs entry: minus 2.0 percent. Read the sentence behind it."></button>
+          <button type="button" class="zone z-earn" id="zone-earn" aria-expanded="false"
+                  aria-label="Monthly earnings entry: minus 5.2 percent. Read the sentence behind it."></button>
+        </div>
+        <div class="readout" aria-live="polite">
+          <p class="r-hint">Hover, tap, or tab to an entry to read it back</p>
+          <p class="r-tip" id="tip-jobs">&ldquo;&hellip;a decrease of 2% in the number of monthly jobs&hellip;&rdquo; <span class="cite">(Hui et al. 2&ndash;3)</span></p>
+          <p class="r-tip" id="tip-earn">&ldquo;&hellip;a decrease of 5.2% in monthly earnings on the platform&hellip;&rdquo; <span class="cite">(Hui et al. 2&ndash;3)</span></p>
+        </div>
+        <figcaption>Two entries, one direction: the ledger of the writing-exposed freelancer, drawn to scale from the study&rsquo;s own numbers. <span class="src">Data: Hui, Reshef &amp; Zhou (Hui et al.)</span></figcaption>
+      </figure>
+    </section>
+  </div>
+
+  <div class="ridge-divider" role="presentation"></div>
+
+  <div class="wide">
+
+    <section class="duo essay">
+      <p class="reveal">Writing, the exact category these models trained on, is the same profession whose market they&rsquo;re now destroying. The machine learned the job from the people it&rsquo;s undercutting. The data backs it up:</p>
+
+      <blockquote class="qs reveal d1">
+        <span class="qtag">Exhibit 07-B &middot; Hui, Reshef &amp; Zhou</span>
+        <p>&ldquo;[W]e do not find evidence that high-quality service, measured by their past performance and employment, moderates the adverse effects on employment. In fact, we find suggestive evidence that top freelancers are disproportionately affected by AI.&rdquo;</p>
+        <footer>(Hui et al. 1)</footer>
+      </blockquote>
+    </section>
+
+    <section class="duo essay">
+      <figure class="exhibit reveal">
+        <span class="etag"><b>Exhibit 07-D</b> &middot; quality was no shield, in the working paper</span>
+        <img src="assets/evidence/hui-top-zoom.png" alt="Scan from the study: suggestive evidence that top freelancers are disproportionately affected by AI." loading="lazy">
+        <figcaption>The quiet finding: the best-rated workers took the bigger hit. <span class="src">Hui, Reshef &amp; Zhou, working-paper text.</span></figcaption>
+      </figure>
+
+      <p class="reveal d1">Since the best human work is the most profitable work to imitate, it can have the effect of creating more of a target on it. The authors are honest about their limits. Upwork can&rsquo;t see off-platform jobs, so this is a limited view of the effect (Hui et al.).</p>
+    </section>
+
+    <div class="col essay">
+
+      <figure class="exhibit reveal">
+        <span class="etag"><b>Exhibit 07-C</b> &middot; the finding, in the working paper</span>
+        <img src="assets/evidence/hui-52-zoom.png" width="1816" height="524" loading="lazy"
+             alt="Scan of the passage in the working paper: freelancers in more affected occupations experienced a decrease of 2% in the number of monthly jobs and a decrease of 5.2% in monthly earnings on the platform, following the release of ChatGPT, compared to freelancers in less-affected occupations.">
+        <figcaption>The sentence the ledger is drawn from, as it appears in the publicly posted working paper. <span class="src">Hui, Reshef &amp; Zhou &middot; <a href="assets/evidence/hui-52-page.png">view the full page</a></span></figcaption>
+      </figure>
+
+      <hr class="turnrule rule-draw">
+
+      <p class="reveal">Falling wages matter for the shape of the rule, not just for sympathy. A rule based on identity leaves these writers with nothing, because they aren&rsquo;t a part of the labs vs. distillers war. A conduct rule gives them a way to make a claim against any system that takes their work by banned means or reproduces it into their market, no matter whose logo is on it.</p>
+
+      <figure class="exhibit reveal">
+        <span class="etag"><b>Exhibit 07-E</b> &middot; the well, drawn early</span>
+        <img src="assets/art/oro_well.jpg" alt="Woodcut-style engraving of a stone well in cracked dry earth, the raised bucket holding only a few red drops." loading="lazy">
+        <figcaption>The paycheck is the first thing the well loses. The next page is the rest. <span class="src">Site illustration &mdash; the ouroboros series.</span></figcaption>
+      </figure>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site">
+  <span>Neel Anshu &mdash; Critical Thinking &amp; Writing</span>
+  <span>Prev &mdash; <a href="argument-2.html">06 Argument II</a> &nbsp;&middot;&nbsp; Next &mdash; <a href="argument-4.html">08 Argument IV</a></span>
+</footer>
+
+<script>window.SITE_PAGES = [{"href": "index.html", "num": "01", "label": "Home"}, {"href": "dilemma.html", "num": "02", "label": "The Dilemma"}, {"href": "thesis.html", "num": "03", "label": "Thesis"}, {"href": "frameworks.html", "num": "04", "label": "Frameworks"}, {"href": "argument-1.html", "num": "05", "label": "Argument I"}, {"href": "argument-2.html", "num": "06", "label": "Argument II"}, {"href": "argument-3.html", "num": "07", "label": "Argument III"}, {"href": "argument-4.html", "num": "08", "label": "Argument IV"}, {"href": "rebuttal.html", "num": "09", "label": "Rebuttal"}, {"href": "conclusion.html", "num": "10", "label": "Conclusion"}, {"href": "works-cited.html", "num": "11", "label": "Works Cited"}];</script>
+<script src="snake.js"></script>
+<script src="site.js"></script>
+<script src="quest.js"></script>
+<script>buildMini(document.getElementById('minimap'), window.SITE_PAGES, 6);</script>
+<script>
+/* Page 07 readout: hover / focus / tap a ledger entry to read the
+   sentence behind it. The page's one signature animation is the cabin
+   window lamp in the vista (CSS, reduced-motion gated). */
+(function () {
+  var fig = document.getElementById('ledger');
+  if (!fig) return;
+
+  var keys = ['jobs', 'earn'];
+  var touchy = window.matchMedia('(hover: none)').matches;
+
+  function setHot(k) {
+    keys.forEach(function (o) {
+      fig.classList.toggle('hot-' + o, o === k);
+      var b = document.getElementById('zone-' + o);
+      if (b) b.setAttribute('aria-expanded', o === k ? 'true' : 'false');
+    });
+  }
+
+  keys.forEach(function (k) {
+    var btn = document.getElementById('zone-' + k);
+    if (!btn) return;
+    if (!touchy) {
+      btn.addEventListener('mouseenter', function () { setHot(k); });
+      btn.addEventListener('mouseleave', function () { setHot(null); });
+    }
+    btn.addEventListener('focus', function () { setHot(k); });
+    btn.addEventListener('blur', function () { setHot(null); });
+    btn.addEventListener('click', function () {
+      if (touchy) setHot(fig.classList.contains('hot-' + k) ? null : k);
+    });
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') setHot(null);
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Two Lenses, One Loop &mdash; The Ouroboros Problem</title>
+<meta name="description" content="A project on AI, fair use, and the loop that feeds itself.">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ── Page 04 · Frameworks — HIGH NOON — scoped under body.p-frameworks ──
+   Vista: two peaks (two lenses) on the right third, small bleached sun
+   in the saddle. Signature animation: the sun climbs to its noon mark
+   on load. Flat palette fills only, screen-print style. Radius 0. */
+
+.p-frameworks main { padding: 0 0 4.5rem; }
+.p-frameworks #lens-one, .p-frameworks #lens-two,
+.p-frameworks #bench { scroll-margin-top: 7.5rem; }
+
+/* ── The noon vista ── */
+.p-frameworks .vista { align-items: flex-start; }
+.p-frameworks .vista .pagehead { margin: 0; width: 100%; }
+.p-frameworks .vista .quest-strip {
+  border-top-color: var(--ink);
+  color: var(--ink);
+  padding-left: 0; padding-right: 0;
+  margin-top: 2rem;
+}
+.p-frameworks .vista .quest-strip .q-chap,
+.p-frameworks .vista .quest-strip .q-prog b { color: inherit; }
+
+/* The sun at its noon mark: small, high, bleached paper-white. */
+.p-frameworks .noon-sun {
+  top: 8%; left: 74%;
+  --motif-size: 52px;
+  background: var(--paper);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .p-frameworks .noon-sun { animation: noon-rise 1.6s var(--ease-stamp) both; }
+  @keyframes noon-rise {
+    from { transform: translateY(30px); opacity: 0; }
+    to   { transform: none; opacity: 1; }
+  }
+}
+
+/* ── Trailhead: index rail left, woodcut placard right (asymmetric) ── */
+.p-frameworks .trailhead {
+  display: grid;
+  grid-template-columns: minmax(16rem, 5fr) 7fr;
+  gap: 3rem;
+  align-items: stretch;
+  margin-top: 3.2rem;
+  margin-bottom: 4rem;
+}
+.p-frameworks .rail { display: flex; flex-direction: column; padding-top: 0.5rem; min-width: 0; }
+.p-frameworks .rail .tr { height: 3px; background: var(--accent); margin-bottom: 1rem; }
+.p-frameworks .rail-cap {
+  font-family: var(--font-mono);
+  font-size: 0.64rem; font-weight: 600;
+  letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 0.4rem;
+}
+.p-frameworks .lensrow {
+  display: flex; gap: 1.3rem; align-items: baseline;
+  padding: 1.55rem 0;
+  border-bottom: 1px solid var(--hairline);
+  text-decoration: none; color: inherit;
+}
+.p-frameworks .lensrow .ln {
+  font-family: var(--font-display);
+  font-size: 2.7rem; line-height: 1;
+  color: var(--ink); min-width: 3.1rem;
+  transition: color 0.15s ease;
+}
+.p-frameworks .lensrow .lt {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink);
+}
+.p-frameworks .lensrow .ls {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.66rem; letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  margin-top: 0.45rem;
+}
+.p-frameworks .lensrow:hover .ln,
+.p-frameworks .lensrow:focus-visible .ln { color: var(--accent-ink); }
+.p-frameworks .lensrow:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 3px; }
+.p-frameworks .runlink {
+  margin-top: auto; align-self: flex-start;
+  font-family: var(--font-mono);
+  font-size: 0.68rem; font-weight: 600;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--paper); background: var(--ink);
+  text-decoration: none;
+  padding: 0.85em 1.25em;
+  transition: background 0.18s var(--ease-stamp);
+}
+.p-frameworks .runlink:hover { background: var(--accent-ink); }
+.p-frameworks .runlink:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 3px; }
+.p-frameworks .hero-fig.exhibit { margin: 0; }
+
+/* ── Pull-alongside: the printed formula and its transcription pair up ── */
+.p-frameworks .pairband { max-width: 64rem; margin-top: 0.4rem; margin-bottom: 0.6rem; }
+.p-frameworks .pairband figure.exhibit { margin: 0; }
+.p-frameworks .pairband blockquote.qs { margin: 1.5rem 0 0; }
+@media (min-width: 900px) {
+  .p-frameworks .pairband {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: 1.5rem;
+    align-items: stretch;
+  }
+  .p-frameworks .pairband blockquote.qs {
+    margin: 0;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+}
+
+/* Short disclaimer quote hangs in the right margin beside its paragraph */
+@media (min-width: 1200px) {
+  .p-frameworks .pull-right {
+    float: right;
+    width: 21rem;
+    margin: 0.2rem -12.5rem 1.2rem 2rem;
+  }
+}
+.p-frameworks .essay::after { content: ""; display: table; clear: both; }
+
+/* ── Ridgeline divider rhythm ── */
+.p-frameworks .ridge-divider { margin-top: 4.5rem; }
+
+/* ── The universalizability bench (Exhibit 04-B, interactive placard) ── */
+.p-frameworks .bench {
+  border: 1px solid var(--ink);
+  border-top: 5px solid var(--accent);
+  background: var(--paper-dim);
+  padding: 1.5rem 1.5rem 1.6rem;
+  margin: 3.2rem 0;
+}
+.p-frameworks .btag {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.62rem; font-weight: 600;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.p-frameworks .btag b { color: var(--accent-ink); font-weight: 600; }
+.p-frameworks .bench-head {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  gap: 1rem 1.5rem; flex-wrap: wrap;
+  margin-bottom: 1.4rem;
+}
+.p-frameworks .bench-controls { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.p-frameworks .bbtn {
+  font-family: var(--font-mono);
+  font-size: 0.68rem; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 0.7em 1.05em;
+  background: var(--paper); color: var(--ink);
+  border: 1.5px solid var(--ink);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.p-frameworks .bbtn:hover { color: var(--accent-ink); border-color: var(--accent-ink); }
+.p-frameworks .bbtn[aria-pressed="true"] {
+  background: var(--ink); color: var(--paper); border-color: var(--ink);
+}
+.p-frameworks .bbtn[aria-pressed="true"]:hover { color: var(--paper); border-color: var(--ink); }
+.p-frameworks .bbtn:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
+
+.p-frameworks .stage {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.3rem;
+}
+.p-frameworks .acard {
+  background: var(--paper);
+  border: 1px solid var(--hairline);
+  border-top: 2px solid var(--ink);
+  padding: 1.15rem 1.2rem 1.25rem;
+  display: flex; flex-direction: column; gap: 0.8rem;
+  min-width: 0;
+}
+.p-frameworks .stage .acard {
+  transition: opacity 0.45s var(--ease-stamp), transform 0.45s var(--ease-stamp),
+              visibility 0s linear 0.45s;
+}
+.p-frameworks .stage .card-a { grid-column: 1; grid-row: 1; }
+.p-frameworks .stage .card-b { grid-column: 2; grid-row: 1; }
+.p-frameworks .stage .card-m { grid-column: 1 / -1; grid-row: 1; }
+
+/* thin = merged card visible; split cards slide to centre and dissolve */
+.p-frameworks .stage.is-thin .card-a {
+  opacity: 0; visibility: hidden;
+  transform: translateX(54%) scale(0.98);
+  transition-delay: 0s, 0s, 0.45s;
+}
+.p-frameworks .stage.is-thin .card-b {
+  opacity: 0; visibility: hidden;
+  transform: translateX(-54%) scale(0.98);
+  transition-delay: 0s, 0s, 0.45s;
+}
+.p-frameworks .stage.is-thin .card-m {
+  opacity: 1; visibility: visible; transform: none;
+  transition-delay: 0.1s, 0.1s, 0.1s;
+}
+/* thick = merged card tears apart; split cards fly outward from centre */
+.p-frameworks .stage.is-thick .card-m {
+  opacity: 0; visibility: hidden;
+  transform: scale(1.02, 1.05);
+  transition-delay: 0s, 0s, 0.45s;
+}
+.p-frameworks .stage.is-thick .card-a,
+.p-frameworks .stage.is-thick .card-b {
+  opacity: 1; visibility: visible; transform: none;
+  transition-delay: 0.1s, 0.1s, 0.1s;
+}
+
+.p-frameworks .ptag {
+  font-family: var(--font-mono);
+  font-size: 0.62rem; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.p-frameworks .act { font-size: 1.02rem; line-height: 1.62; margin: 0; }
+.p-frameworks .act em { font-style: italic; }
+.p-frameworks .vrow { margin-top: auto; display: flex; justify-content: flex-end; }
+.p-frameworks .card-m { justify-content: center; }
+.p-frameworks .card-m .duo,
+.p-frameworks .bench-static .duo {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1.3rem;
+  margin-top: 0.4rem;
+}
+.p-frameworks .duo > div { display: flex; flex-direction: column; gap: 0.65rem; }
+
+.p-frameworks .verdict {
+  display: inline-block; align-self: flex-start;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 1.05rem; line-height: 1;
+  letter-spacing: 0.05em;
+  padding: 0.32em 0.5em;
+  border: 2.5px solid var(--ink); color: var(--ink);
+  --vrot: -2deg;
+  transform: rotate(var(--vrot));
+  filter: url(#stamp-rough);
+}
+.p-frameworks .verdict.red { border-color: var(--red); color: var(--red); --vrot: 1.5deg; }
+.p-frameworks .verdict.pop { animation: vpop 0.32s var(--ease-stamp); }
+@keyframes vpop {
+  from { transform: scale(1.6) rotate(var(--vrot)); opacity: 0; }
+  to   { transform: scale(1)   rotate(var(--vrot)); opacity: 1; }
+}
+
+.p-frameworks .readout {
+  font-family: var(--font-mono);
+  font-size: 0.72rem; letter-spacing: 0.05em;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  border-top: 1px solid var(--hairline);
+  margin-top: 1.35rem; padding-top: 0.9rem;
+  min-height: 2.1em;
+}
+
+/* static fallback (reduced motion / no JS): both states stacked */
+.p-frameworks .bench-static { display: none; }
+.p-frameworks .sblock + .sblock { margin-top: 1.6rem; }
+.p-frameworks .slabel {
+  font-family: var(--font-mono);
+  font-size: 0.66rem; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 0.7rem;
+}
+.p-frameworks .srow { display: grid; grid-template-columns: 1fr 1fr; gap: 1.3rem; }
+.p-frameworks .snote {
+  font-family: var(--font-mono);
+  font-size: 0.7rem; letter-spacing: 0.05em; line-height: 1.6;
+  color: var(--ink-soft);
+  margin-top: 0.8rem;
+}
+
+/* ── Supply-chain map (Exhibit 04-C) ── */
+.p-frameworks .chainwrap { overflow-x: auto; }
+.p-frameworks .chainwrap svg { min-width: 880px; }
+.p-frameworks .cspine { stroke: var(--ink); stroke-width: 2; }
+.p-frameworks .cnode { fill: var(--ink); }
+.p-frameworks .cnode.redf { fill: var(--red); }
+.p-frameworks .cnum {
+  font-family: var(--font-mono); font-size: 13px; font-weight: 600;
+  fill: var(--ink); letter-spacing: 0.06em;
+}
+.p-frameworks .clab {
+  font-family: var(--font-mono); font-size: 11.5px; font-weight: 500;
+  fill: var(--ink-soft); letter-spacing: 0.05em;
+}
+.p-frameworks .chain-loop {
+  stroke: var(--red); stroke-width: 2; fill: none;
+  stroke-dasharray: 1; stroke-dashoffset: 1;
+  transition: stroke-dashoffset 1.2s var(--ease-stamp) 0.3s;
+}
+.p-frameworks .chain-head { fill: var(--red); }
+.p-frameworks .chain-label {
+  font-family: var(--font-mono); font-size: 12.5px; font-weight: 600;
+  fill: var(--red); letter-spacing: 0.04em;
+}
+.p-frameworks .chain-label .cpg { fill: var(--ink-soft); font-weight: 500; }
+.p-frameworks .chain-head, .p-frameworks .chain-label {
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-stamp) 1.4s;
+}
+.p-frameworks .reveal.on .chain-loop { stroke-dashoffset: 0; }
+.p-frameworks .reveal.on .chain-head,
+.p-frameworks .reveal.on .chain-label { opacity: 1; }
+
+/* Trail log — the chain as plain text (park-register details) */
+.p-frameworks .trail-log {
+  margin: 1.4rem 0 0;
+  border: 1px solid var(--hairline);
+  background: var(--paper-dim);
+}
+.p-frameworks .trail-log summary {
+  cursor: pointer;
+  padding: 0.85rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.66rem; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.p-frameworks .trail-log summary::marker { color: var(--accent-ink); }
+.p-frameworks .trail-log[open] summary { border-bottom: 1px solid var(--hairline); }
+.p-frameworks .trail-log ol {
+  margin: 0;
+  padding: 0.9rem 1.2rem 1.1rem 3rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem; letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 2.1;
+  color: var(--ink);
+}
+.p-frameworks .trail-log li::marker { color: var(--accent-ink); font-weight: 600; }
+
+/* ── Footer with prev + next ── */
+.p-frameworks footer.site { flex-wrap: wrap; }
+
+/* ── Small screens ── */
+@media (max-width: 860px) {
+  .p-frameworks .trailhead { grid-template-columns: 1fr; gap: 2.2rem; margin-bottom: 3rem; }
+  .p-frameworks .runlink { margin-top: 1.3rem; }
+}
+@media (max-width: 640px) {
+  /* Stack the bench vertically: cards collapse/expand in flow instead of
+     overlapping in a grid, so the merged card never stretches. */
+  .p-frameworks .stage { display: block; }
+  .p-frameworks .stage .acard {
+    max-height: 30rem; overflow: hidden;
+    transform: none;
+    transition: opacity 0.4s var(--ease-stamp),
+                max-height 0.45s var(--ease-stamp),
+                margin-bottom 0.45s var(--ease-stamp),
+                padding-top 0.45s var(--ease-stamp),
+                padding-bottom 0.45s var(--ease-stamp),
+                border-top-width 0.45s var(--ease-stamp),
+                border-bottom-width 0.45s var(--ease-stamp),
+                visibility 0s linear 0.45s;
+  }
+  .p-frameworks .stage .card-a,
+  .p-frameworks .stage .card-b { margin-bottom: 1.3rem; }
+  .p-frameworks .stage .card-m { margin-bottom: 0; }
+  .p-frameworks .stage.is-thin .card-a,
+  .p-frameworks .stage.is-thin .card-b,
+  .p-frameworks .stage.is-thick .card-m {
+    opacity: 0; visibility: hidden;
+    max-height: 0; margin-bottom: 0;
+    padding-top: 0; padding-bottom: 0;
+    border-top-width: 0; border-bottom-width: 0;
+    transform: none;
+    transition-delay: 0s;
+  }
+  .p-frameworks .stage.is-thin .card-m,
+  .p-frameworks .stage.is-thick .card-a,
+  .p-frameworks .stage.is-thick .card-b {
+    opacity: 1; visibility: visible;
+    max-height: 30rem;
+    transform: none;
+    transition-delay: 0.12s;
+  }
+  .p-frameworks .stage.is-thick .card-a,
+  .p-frameworks .stage.is-thick .card-b { margin-bottom: 1.3rem; }
+  .p-frameworks .srow { grid-template-columns: 1fr; }
+}
+
+/* ── Reduced motion: bench degrades to both states stacked ── */
+@media (prefers-reduced-motion: reduce) {
+  .p-frameworks .bench-live { display: none; }
+  .p-frameworks .bench-static { display: block; }
+  .p-frameworks .bench-controls { display: none; }
+  .p-frameworks .stage .acard { transition: none; }
+  .p-frameworks .verdict.pop { animation: none; }
+  .p-frameworks .chain-loop {
+    stroke-dasharray: none; stroke-dashoffset: 0; transition: none;
+  }
+  .p-frameworks .chain-head, .p-frameworks .chain-label { opacity: 1; transition: none; }
+}
+</style>
+</head>
+<body class="p-frameworks">
+
+<header class="site">
+  <div class="masthead">
+    <a class="mark" href="index.html">The Ouroboros <em>Problem</em></a>
+    <span class="tag">Neel Anshu &middot; ENGL C1001</span>
+  </div>
+  <nav class="toolbar" aria-label="Pages">
+    <a href="index.html"><span class="num">01</span>Home</a>
+    <a href="dilemma.html"><span class="num">02</span>The Dilemma</a>
+    <a href="thesis.html"><span class="num">03</span>Thesis</a>
+    <a href="frameworks.html" aria-current="page"><span class="num">04</span>Frameworks</a>
+    <a href="argument-1.html"><span class="num">05</span>Argument I</a>
+    <a href="argument-2.html"><span class="num">06</span>Argument II</a>
+    <a href="argument-3.html"><span class="num">07</span>Argument III</a>
+    <a href="argument-4.html"><span class="num">08</span>Argument IV</a>
+    <a href="rebuttal.html"><span class="num">09</span>Rebuttal</a>
+    <a href="conclusion.html"><span class="num">10</span>Conclusion</a>
+    <a href="works-cited.html"><span class="num">11</span>Works Cited</a>
+  </nav>
+</header>
+
+<main>
+  <section class="vista" aria-label="High noon at the lookout: two peaks, two lenses, one small white sun">
+    <svg viewBox="0 0 1440 620" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+      <!-- far ridge: low on the left, one coil-curve mid-line -->
+      <path fill="var(--far)" d="M0,408 L120,388 L250,400 L380,368 L500,386 L610,352 C680,332 730,352 800,344 L920,354 L1030,328 L1160,346 L1290,326 L1440,340 L1440,620 L0,620 Z"/>
+      <!-- mid ridge -->
+      <path fill="var(--mid)" d="M0,470 L140,452 L280,464 L430,438 L580,456 L720,428 L860,444 L1010,420 L1160,438 L1310,418 L1440,432 L1440,620 L0,620 Z"/>
+      <!-- near band with the focal twin peaks (the two lenses), right third -->
+      <path fill="var(--near)" d="M0,528 L150,514 L320,524 L480,506 L640,518 L740,498 L775,492 L950,206 L1085,448 L1110,448 L1195,258 L1335,490 L1390,496 L1440,490 L1440,620 L0,620 Z"/>
+      <!-- ground -->
+      <path fill="var(--ground)" d="M0,576 L200,564 L420,572 L640,560 L880,568 L1100,556 L1280,566 L1440,558 L1440,620 L0,620 Z"/>
+    </svg>
+    <div class="scene-motif scene-motif--disc noon-sun" aria-hidden="true"></div>
+    <div class="vista-content">
+      <div class="pagehead">
+        <div class="headings">
+          <p class="kicker">Page 04 of 11 &mdash; the ethics bench</p>
+          <h1 class="display">Two Lenses,<br>One Loop</h1>
+        </div>
+        <svg class="minimap" id="minimap" viewBox="0 0 120 120" role="navigation"
+             aria-label="Site map: the ouroboros with this page highlighted"></svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="trailhead wide">
+    <div class="rail reveal">
+      <div class="tr rule-draw"></div>
+      <p class="rail-cap">On the bench</p>
+      <a class="lensrow" href="#lens-one">
+        <span class="ln">01</span>
+        <span>
+          <span class="lt">Universalizability</span>
+          <span class="ls">Kant, Groundwork (1785)</span>
+        </span>
+      </a>
+      <a class="lensrow" href="#lens-two">
+        <span class="ln">02</span>
+        <span>
+          <span class="lt">The Supply Chain</span>
+          <span class="ls">Lee, Cooper &amp; Grimmelmann</span>
+        </span>
+      </a>
+      <a class="runlink" href="#bench">Run the test yourself &rarr;</a>
+    </div>
+
+    <figure class="exhibit hero-fig reveal d1">
+      <span class="etag"><b>Exhibit 04-A</b> &middot; Two lenses, one beam</span>
+      <img src="assets/art/oro_lenses.jpg" width="1600" height="1066"
+           alt="Woodcut engraving of two antique magnifying lenses bending the same beam of light differently.">
+      <figcaption>Two instruments trained on the same act of copying: one asks whether the
+        rule survives everyone adopting it; the other asks which stage of the chain the duty
+        attaches to. <span class="src">Project woodcut &mdash; the ouroboros series.</span></figcaption>
+    </figure>
+  </section>
+
+  <article>
+    <section id="lens-one">
+      <div class="col essay">
+
+        <h2>Lens One: Would It Be Okay If Everyone Did This?</h2>
+        <p>The first lens we use is Kant&rsquo;s categorical imperative:</p>
+      </div>
+
+      <div class="pairband wide">
+        <figure class="exhibit reveal">
+          <span class="etag"><b>Exhibit 04-D</b> &middot; the formula, as printed</span>
+          <img src="assets/evidence/kant-formula-zoom.png" alt="Scan of a commentary page quoting the Gregor translation of Kant&rsquo;s categorical imperative (AK 4:421)." loading="lazy">
+          <figcaption>The categorical imperative (AK 4:421) as quoted in the Gregor translation.</figcaption>
+        </figure>
+
+        <blockquote class="qs reveal d1">
+          <span class="qtag">Lens 01 &middot; Kant, Groundwork of the Metaphysics of Morals (1785)</span>
+          <p>&ldquo;[A]ct only in accordance with that maxim through which you can at the same
+          time will that it become a universal law.&rdquo;</p>
+          <footer>(Kant 31)</footer>
+        </blockquote>
+      </div>
+
+      <div class="col essay">
+        <p>In plain terms: could the rule behind your act hold for everyone at once?</p>
+
+        <p>Michael Schur is the author of <em>How to Be Perfect: The Correct Answer to Every Moral Question</em>. He has a plain-English way of explaining Kant:</p>
+
+        <blockquote class="qs reveal">
+          <span class="qtag">Lens 01 &middot; Schur, How to Be Perfect, p. 256</span>
+          <p>&ldquo;Would it be okay if everyone did this? What would the world be like if every
+          single person were allowed to do whatever I&rsquo;m about to do?&rdquo;</p>
+          <footer>(Schur 256)</footer>
+        </blockquote>
+
+        <p>The answer depends on how you describe the action being analyzed. A simple description of the action would be: I take work I did not make and did not pay for, to build something that competes with it. That&rsquo;s very obviously hypocritical, but that description also condemns a student for reading a library book (and is not how fair use law works).</p>
+
+<p>Once you start researching, the two acts stop looking like the same thing. One side collected what authors put on the open internet. The other made about twenty-four thousand fake accounts to get past a locked door.</p>
+
+<p>Using the second description costs the clean hypocrisy story. What&rsquo;s left is smaller but true: the pirated books and the fraudulent accounts fail Kant&rsquo;s test the same way. Training and distilling on their own pass or fail based on their conduct. Whoever controls the narrative picks the guilty verdict if the law doesn&rsquo;t step in and judge them.</p>
+      </div>
+
+      <div class="wide" id="bench">
+        <div class="bench reveal" role="group"
+             aria-label="The universalizability bench: choose a simple or a richer description of the act, then read the verdicts">
+          <div class="bench-head">
+            <span class="btag"><b>Exhibit 04-B</b> &middot; The universalizability bench &mdash; interactive</span>
+            <div class="bench-controls">
+              <button type="button" class="bbtn" id="btn-thin" aria-pressed="true">Use the simple description</button>
+              <button type="button" class="bbtn" id="btn-thick" aria-pressed="false">Use the richer description</button>
+            </div>
+          </div>
+
+          <div class="bench-live">
+            <div class="stage is-thin" id="stage">
+              <article class="acard card-a" aria-hidden="true">
+                <span class="ptag">The lab</span>
+                <p class="act">Collected what authors had placed on the open internet.</p>
+                <div class="vrow"><span class="verdict">Passes</span></div>
+              </article>
+              <article class="acard card-b" aria-hidden="true">
+                <span class="ptag">The distiller</span>
+                <p class="act">Created roughly twenty-four thousand fraudulent accounts to get
+                behind a door that was deliberately locked.</p>
+                <div class="vrow"><span class="verdict red">Fails</span></div>
+              </article>
+              <article class="acard card-m" aria-hidden="false">
+                <p class="act"><em>I take work I did not make and did not pay for, to build
+                something that competes with it.</em></p>
+                <div class="duo">
+                  <div><span class="ptag">The lab</span><span class="verdict red">Fails</span></div>
+                  <div><span class="ptag">The distiller</span><span class="verdict red">Fails</span></div>
+                </div>
+              </article>
+            </div>
+            <p class="readout" id="readout" aria-live="polite">Described simply, the two acts
+            render as the same sentence &mdash; and both fail the test.</p>
+          </div>
+
+          <div class="bench-static">
+            <div class="sblock">
+              <p class="slabel">The simple description</p>
+              <article class="acard">
+                <p class="act"><em>I take work I did not make and did not pay for, to build
+                something that competes with it.</em></p>
+                <div class="duo">
+                  <div><span class="ptag">The lab</span><span class="verdict red">Fails</span></div>
+                  <div><span class="ptag">The distiller</span><span class="verdict red">Fails</span></div>
+                </div>
+              </article>
+              <p class="snote">Described simply, the two acts render as the same sentence &mdash;
+              and both fail the test.</p>
+            </div>
+            <div class="sblock">
+              <p class="slabel">The richer description</p>
+              <div class="srow">
+                <article class="acard">
+                  <span class="ptag">The lab</span>
+                  <p class="act">Collected what authors had placed on the open internet.</p>
+                  <div class="vrow"><span class="verdict">Passes</span></div>
+                </article>
+                <article class="acard">
+                  <span class="ptag">The distiller</span>
+                  <p class="act">Created roughly twenty-four thousand fraudulent accounts to get
+                  behind a door that was deliberately locked.</p>
+                  <div class="vrow"><span class="verdict red">Fails</span></div>
+                </article>
+              </div>
+              <p class="snote">With the richer description, the acts split into different sentences &mdash;
+              only the fraudulent acquisition fails.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="ridge-divider" aria-hidden="true"></div>
+
+    <section id="lens-two">
+      <div class="col essay">
+        <h2>Lens Two: Walk the Supply Chain</h2>
+        <p>The second lens ignores the ownership argument and instead focuses on the complex mechanisms of modern artificial intelligence. In &ldquo;Talkin&rsquo; &rsquo;Bout AI Generation,&rdquo; Katherine Lee, A. Feder Cooper, and James Grimmelmann focus on this exact problem:</p>
+
+        <blockquote class="qs reveal">
+          <span class="qtag">Lens 02 &middot; Lee, Cooper &amp; Grimmelmann, p. 251</span>
+          <p>&ldquo;[G]enerative AI&rdquo; is not just one product from one company. It is a
+          catch-all name for a massive ecosystem of loosely related technologies.</p>
+          <footer>(Lee et al. 251)</footer>
+        </blockquote>
+      </div>
+
+      <div class="wide">
+        <figure class="exhibit reveal">
+          <span class="etag"><b>Exhibit 04-C</b> &middot; The supply chain, unrolled</span>
+          <div class="chainwrap">
+            <svg viewBox="0 0 1180 232" role="img"
+                 aria-label="Eight-stage generative-AI supply chain, left to right: creation of expressive works, data creation, dataset collection and curation, model pre-training, fine-tuning, release and deployment, generation, and alignment. A red arrow loops from stage seven, generation, back into stage two, data creation, showing the chain feeding back into itself.">
+              <!-- stage numbers -->
+              <text class="cnum" x="90" y="38" text-anchor="middle">01</text>
+              <text class="cnum" x="233" y="38" text-anchor="middle">02</text>
+              <text class="cnum" x="376" y="38" text-anchor="middle">03</text>
+              <text class="cnum" x="519" y="38" text-anchor="middle">04</text>
+              <text class="cnum" x="661" y="38" text-anchor="middle">05</text>
+              <text class="cnum" x="804" y="38" text-anchor="middle">06</text>
+              <text class="cnum" x="947" y="38" text-anchor="middle">07</text>
+              <text class="cnum" x="1090" y="38" text-anchor="middle">08</text>
+              <!-- stage labels (above the spine, keeping the underside clear for the loop) -->
+              <text class="clab" x="90" y="60" text-anchor="middle">CREATION OF
+                <tspan x="90" dy="14">EXPRESSIVE WORKS</tspan></text>
+              <text class="clab" x="233" y="60" text-anchor="middle">DATA
+                <tspan x="233" dy="14">CREATION</tspan></text>
+              <text class="clab" x="376" y="60" text-anchor="middle">DATASET COLLECTION
+                <tspan x="376" dy="14">&amp; CURATION</tspan></text>
+              <text class="clab" x="519" y="60" text-anchor="middle">MODEL
+                <tspan x="519" dy="14">(PRE-)TRAINING</tspan></text>
+              <text class="clab" x="661" y="74" text-anchor="middle">FINE-TUNING</text>
+              <text class="clab" x="804" y="60" text-anchor="middle">RELEASE /
+                <tspan x="804" dy="14">DEPLOYMENT</tspan></text>
+              <text class="clab" x="947" y="74" text-anchor="middle">GENERATION</text>
+              <text class="clab" x="1090" y="74" text-anchor="middle">ALIGNMENT</text>
+              <!-- spine -->
+              <line class="cspine" x1="70" y1="100" x2="1110" y2="100"></line>
+              <!-- nodes -->
+              <rect class="cnode" x="84" y="94" width="12" height="12"></rect>
+              <rect class="cnode redf" x="227" y="94" width="12" height="12"></rect>
+              <rect class="cnode" x="370" y="94" width="12" height="12"></rect>
+              <rect class="cnode" x="513" y="94" width="12" height="12"></rect>
+              <rect class="cnode" x="655" y="94" width="12" height="12"></rect>
+              <rect class="cnode" x="798" y="94" width="12" height="12"></rect>
+              <rect class="cnode redf" x="941" y="94" width="12" height="12"></rect>
+              <rect class="cnode" x="1084" y="94" width="12" height="12"></rect>
+              <!-- red return loop: 07 generation back into 02 data creation -->
+              <path class="chain-loop" pathLength="1"
+                    d="M 947 112 C 947 185, 850 200, 590 200 C 330 200, 233 190, 233 128">Their chain has eight stages, from creation all the way to alignment, and every stage can belong to a different company (287&ndash;88). So &ldquo;is AI theft?&rdquo; breaks up into smaller questions you have to chase down. What does the dataset collector owe? The trainer? The distiller? They&rsquo;re honest about the limits of their map:</p>
+
+        <blockquote class="qs reveal pull-right">
+          <span class="qtag">Lens 02 &middot; Lee, Cooper &amp; Grimmelmann, p. 252</span>
+          <p>&ldquo;We do not give definitive answers as to who should and should not be held
+          liable.&rdquo;</p>
+          <footer>(Lee et al. 252)</footer>
+        </blockquote>
+
+        <p>It&rsquo;s important to note their findings are very convenient for the AI companies that the authors disclose ties to: Microsoft, Google, and OpenAI. So I&rsquo;m taking the map from them instead of the verdict.</p>
+      </div>
+    </section>
+
+    <div class="ridge-divider ridge-divider--flip" aria-hidden="true"></div>
+
+    <section id="method">
+      <div class="col essay">
+        <h2>How the Two Lenses Divide the Labor</h2>
+        <p>One note on method. Kant&rsquo;s test checks if a rule can be stated without hypocrisy. The supply chain tells us where to attach the duty. The money and collapse data later on are consequences. I use them as evidence about which conduct matters, and they aren&rsquo;t a second moral standard.</p>
+      </div>
+    </section>
+  </article>
+</main>
+
+<footer class="site">
+  <span>Neel Anshu &mdash; Critical Thinking &amp; Writing</span>
+  <span>Prev &mdash; <a href="thesis.html">03 Thesis</a>&nbsp;&middot;&nbsp;Next &mdash; <a href="argument-1.html">05 Argument I</a></span>
+</footer>
+
+<script>window.SITE_PAGES = [{"href": "index.html", "num": "01", "label": "Home"}, {"href": "dilemma.html", "num": "02", "label": "The Dilemma"}, {"href": "thesis.html", "num": "03", "label": "Thesis"}, {"href": "frameworks.html", "num": "04", "label": "Frameworks"}, {"href": "argument-1.html", "num": "05", "label": "Argument I"}, {"href": "argument-2.html", "num": "06", "label": "Argument II"}, {"href": "argument-3.html", "num": "07", "label": "Argument III"}, {"href": "argument-4.html", "num": "08", "label": "Argument IV"}, {"href": "rebuttal.html", "num": "09", "label": "Rebuttal"}, {"href": "conclusion.html", "num": "10", "label": "Conclusion"}, {"href": "works-cited.html", "num": "11", "label": "Works Cited"}];</script>
+<script src="snake.js"></script>
+<script src="site.js"></script>
+<script src="quest.js"></script>
+<script>buildMini(document.getElementById('minimap'), window.SITE_PAGES, 3);</script>
+<noscript>
+<style>
+  .p-frameworks .bench-live { display: none; }
+  .p-frameworks .bench-static { display: block; }
+  .p-frameworks .bench-controls { display: none; }
+</style>
+</noscript>
+<script>
+/* Page 04 signature interaction: the thin/thick description bench.
+   Two act-cards merge into one under the thin description and split
+   apart under the thick one. Degrades to a static stacked view under
+   prefers-reduced-motion (see CSS) and under no-JS (see noscript). */
+(function () {
+  var stage = document.getElementById("stage");
+  var btnThin = document.getElementById("btn-thin");
+  var btnThick = document.getElementById("btn-thick");
+  var readout = document.getElementById("readout");
+  if (!stage || !btnThin || !btnThick) return;
+
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var MSG = {
+    thin: "Described simply, the two acts render as the same sentence — and both fail the test.",
+    thick: "With the richer description, the acts split into different sentences — only the fraudulent acquisition fails."
+  };
+
+  function setMode(thin) {
+    if (stage.classList.contains("is-thin") === thin) return;
+    stage.classList.toggle("is-thin", thin);
+    stage.classList.toggle("is-thick", !thin);
+    btnThin.setAttribute("aria-pressed", String(thin));
+    btnThick.setAttribute("aria-pressed", String(!thin));
+    stage.querySelector(".card-a").setAttribute("aria-hidden", String(thin));
+    stage.querySelector(".card-b").setAttribute("aria-hidden", String(thin));
+    stage.querySelector(".card-m").setAttribute("aria-hidden", String(!thin));
+    if (readout) readout.textContent = thin ? MSG.thin : MSG.thick;
+    if (!reduced.matches) {
+      window.setTimeout(function () {
+        var sel = thin ? ".card-m .verdict" : ".card-a .verdict, .card-b .verdict";
+        stage.querySelectorAll(sel).forEach(function (v) {
+          v.classList.remove("pop");
+          void v.offsetWidth;
+          v.classList.add("pop");
+        });
+      }, 260);
+    }
+  }
+
+  btnThin.addEventListener("click", function () { setMode(true); });
+  btnThick.addEventListener("click", function () { setMode(false); });
+})();
+</script>
+
+</body>
+</html>

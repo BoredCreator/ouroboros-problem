@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claim: Judge the Conduct, Not the Company &mdash; The Ouroboros Problem</title>
+<meta name="description" content="A project on AI, fair use, and the loop that feeds itself.">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ═══════════ Page 03 · Thesis — MORNING ═══════════
+   The claim is staked: a lone pine and a claim plaque on the
+   morning ridge. Scoped under body.p-thesis. Flat fills only —
+   discrete solid bands, no frameworks, radius 0. Signature:
+   the fork trail draws itself through (reduced-motion safe). */
+
+/* ---- hero vista: five morning bands, focal on the right third ---- */
+.p-thesis .vista { min-height: clamp(380px, 58vh, 600px); }
+.p-thesis .vista .vista-content {
+  /* reserve the right third for the pine + plaque at every width */
+  width: min(46rem, 100vw - clamp(150px, 23vw, 300px) - clamp(1rem, 13vw, 12rem) - max(1.5rem, 8vw) - 1rem);
+}
+.p-thesis .vista-focal {
+  position: absolute;
+  z-index: 2;
+  right: clamp(1rem, 13vw, 12rem);
+  bottom: -2px;
+  width: clamp(150px, 23vw, 300px);
+  pointer-events: none;
+}
+.p-thesis .vista-focal svg { display: block; width: 100%; height: auto; }
+.p-thesis .vista .pagehead { margin: 0; }
+/* trail register: the injected chapter strip sits on a flat
+   ground-color panel so it stays readable over the dark bands */
+.p-thesis .vista .quest-strip {
+  max-width: none;
+  margin: 1.7rem 0 0;
+  padding: 0.75rem 0.95rem 0.65rem;
+  border-top: 0;
+  background: var(--ground);
+  color: var(--paper-dim);
+}
+.p-thesis .vista .quest-strip .q-chap,
+.p-thesis .vista .quest-strip .q-prog b { color: var(--sky); }
+
+/* ---- the claim, staked: dark-pine plaque + trail-sign stats ---- */
+.p-thesis .claimband { margin-top: clamp(2.6rem, 6vh, 4rem); }
+.p-thesis .plaqgrid {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(1.6rem, 3vw, 3rem);
+  align-items: start;
+  margin-bottom: 4rem;
+}
+.p-thesis .plaque {
+  background: var(--ground);
+  color: var(--paper);
+  border-left: 8px solid var(--accent);
+  padding: clamp(1.5rem, 3.2vw, 2.6rem);
+}
+.p-thesis .plaque .ptag {
+  font-family: var(--font-mono);
+  font-size: 0.63rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--paper-dim);
+  padding-bottom: 0.85rem;
+  margin-bottom: 1.15rem;
+  border-bottom: 1px solid rgba(247, 241, 227, 0.28);
+}
+.p-thesis .plaque .lede {
+  font-size: clamp(1.16rem, 1.9vw, 1.38rem);
+  line-height: 1.52;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  margin-bottom: 1.05rem;
+  text-wrap: pretty;
+}
+.p-thesis .plaque .ptext {
+  font-size: 1.02rem;
+  line-height: 1.78;
+  text-wrap: pretty;
+}
+/* the plaque is staked: page-tuned stamp entrance, settles flat */
+body.p-thesis .plaque.stamp { transform: scale(1.08) rotate(-0.7deg); }
+body.p-thesis .plaque.stamp.on {
+  transform: none;
+  transition: opacity 0.34s var(--ease-stamp), transform 0.34s var(--ease-stamp);
+}
+
+.p-thesis .heroside { min-width: 0; }
+.p-thesis .heroside figure.exhibit { margin: 0 0 1.6rem; }
+.p-thesis .twin {
+  border-top: 1px solid var(--ink);
+  padding-top: 1.25rem;
+  display: grid;
+  gap: 1.15rem;
+}
+.p-thesis .twin .statline .n { font-size: clamp(2.1rem, 3vw, 2.7rem); }
+.p-thesis .twinnote {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+/* ---- Diagram 03: the fork, read as a trail map ---- */
+.p-thesis .forkband { margin-bottom: 1rem; }
+.p-thesis .forkfig { margin: 0; }
+.p-thesis .forkgrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(15rem, 1fr);
+  gap: 1.5rem;
+  align-items: center;
+}
+.p-thesis .rail { border-left: 1px solid var(--hairline); padding-left: 1.5rem; }
+.p-thesis .railhead {
+  font-family: var(--font-mono);
+  font-size: 0.63rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 1rem;
+}
+.p-thesis .rule + .rule { margin-top: 0.9rem; }
+.p-thesis .rulebtn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  padding: 0.85rem 1rem;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.p-thesis .rulebtn .rb-name {
+  display: block;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.p-thesis .rulebtn .rb-sub {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.68rem;
+  color: var(--ink-soft);
+}
+.p-thesis .rulebtn:hover { background: var(--paper-dim); }
+.p-thesis .rulebtn:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+.p-thesis .rulebtn[aria-expanded="true"] { border-color: var(--red); }
+.p-thesis .rulebtn[aria-expanded="true"] .rb-name { color: var(--red); }
+.p-thesis .why {
+  display: none;
+  font-family: var(--font-mono);
+  font-size: 0.73rem;
+  line-height: 1.55;
+  color: var(--red);
+  padding: 0.55rem 0 0.1rem;
+}
+.p-thesis .rule:hover .why,
+.p-thesis .rule:focus-within .why,
+.p-thesis .rulebtn[aria-expanded="true"] + .why { display: block; }
+.p-thesis .replay {
+  margin-top: 1.5rem;
+  background: var(--paper);
+  border: 1px solid var(--hairline);
+  border-radius: 0;
+  padding: 0.55rem 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.p-thesis .replay:hover { border-color: var(--ink); color: var(--ink); }
+.p-thesis .replay:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+
+/* map registers */
+.p-thesis .fork { border: 1px solid var(--hairline); background: var(--paper); }
+.p-thesis .fork text { font-family: var(--font-mono); }
+.p-thesis .fork .t-main { font-size: 19px; font-weight: 600; letter-spacing: 0.08em; fill: var(--ink); }
+.p-thesis .fork .t-sub  { font-size: 13px; letter-spacing: 0.02em; fill: var(--ink-soft); }
+.p-thesis .fork .t-fail { font-size: 16px; font-weight: 600; letter-spacing: 0.04em; fill: var(--red); }
+.p-thesis .fork .t-node { font-size: 13px; font-weight: 600; letter-spacing: 0.14em; fill: var(--ink-soft); }
+.p-thesis .fork .t-top  { font-size: 13px; font-weight: 600; letter-spacing: 0.12em; fill: var(--ink-soft); }
+.p-thesis .fork .t-clab { font-size: 20px; font-weight: 600; letter-spacing: 0.12em; fill: var(--red); }
+.p-thesis .fork .pTrunk { stroke: var(--ink); stroke-width: 2.25; }
+.p-thesis .fork .pOuter { fill: none; stroke: var(--ink); stroke-width: 2.25; }
+.p-thesis .fork .pCenter { fill: none; stroke: var(--red); stroke-width: 3.25; }
+.p-thesis .fork .stub { stroke: var(--ink); stroke-width: 2; stroke-dasharray: 3 7; opacity: 0.4; }
+.p-thesis .fork .edge { stroke: var(--red); stroke-width: 3.5; }
+.p-thesis .fork .debris { stroke: var(--ink-soft); stroke-width: 2; }
+.p-thesis .fork .node { fill: var(--ink); }
+.p-thesis .fork .arrow { fill: var(--red); }
+.p-thesis .fork .hit { fill: none; stroke: transparent; stroke-width: 44; pointer-events: stroke; cursor: pointer; }
+
+/* dead-end reveals (hover / focus / pinned) */
+.p-thesis .fork .fail { opacity: 0; transition: opacity 0.22s var(--ease-stamp); }
+.p-thesis .forkfig.sL .failL, .p-thesis .forkfig.oL .failL,
+.p-thesis .forkfig.sR .failR, .p-thesis .forkfig.oR .failR { opacity: 1; }
+.p-thesis .fork .pL, .p-thesis .fork .pR { transition: stroke 0.2s ease; }
+.p-thesis .forkfig.sL .pL, .p-thesis .forkfig.oL .pL,
+.p-thesis .forkfig.sR .pR, .p-thesis .forkfig.oR .pR { stroke: var(--red); }
+
+/* signature: the trail draws through (armed by JS so no-JS stays complete) */
+.p-thesis .forkfig.arm:not(.go) .pL,
+.p-thesis .forkfig.arm:not(.go) .pR,
+.p-thesis .forkfig.arm:not(.go) .pCenter { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.p-thesis .forkfig.arm:not(.go) .brk,
+.p-thesis .forkfig.arm:not(.go) .arrow,
+.p-thesis .forkfig.arm:not(.go) .t-top,
+.p-thesis .forkfig.arm:not(.go) .t-clab { opacity: 0; }
+.p-thesis .forkfig.arm.go .pL,
+.p-thesis .forkfig.arm.go .pR {
+  stroke-dasharray: 1; stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.65s var(--ease-stamp);
+}
+.p-thesis .forkfig.arm.go .pR { transition-delay: 0.12s; }
+.p-thesis .forkfig.arm.go .brk { opacity: 1; transition: opacity 0.3s var(--ease-stamp) 0.62s; }
+.p-thesis .forkfig.arm.go .pCenter {
+  stroke-dasharray: 1; stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1.25s var(--ease-stamp) 0.85s;
+}
+.p-thesis .forkfig.arm.go .arrow,
+.p-thesis .forkfig.arm.go .t-top,
+.p-thesis .forkfig.arm.go .t-clab { opacity: 1; transition: opacity 0.35s var(--ease-stamp) 2s; }
+
+/* ---- one ridgeline seam between the map and the prose ---- */
+.p-thesis .ridge-divider { margin: 3.6rem 0 0; }
+
+/* ---- essay furniture: trail blazes + pull-alongside pairs ---- */
+.p-thesis .essay { padding-top: 0.5rem; padding-bottom: 1rem; }
+.p-thesis .essay hr.hr {
+  border: 0;
+  width: 4.5rem;
+  height: 4px;
+  background: var(--accent);
+  margin: 3.4rem 0 1.2rem;
+}
+.p-thesis .essay hr.hr + h2 { margin-top: 0; }
+.p-thesis .pair { margin-bottom: 1.4rem; }
+@media (min-width: 900px) {
+  .p-thesis .pair {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(16rem, 21rem);
+    gap: 2.4rem;
+    align-items: start;
+    margin-inline: calc((100% - min(64rem, 100vw - 3rem)) / 2);
+  }
+  .p-thesis .pair--lead { grid-template-columns: minmax(16rem, 21rem) minmax(0, 1fr); }
+  .p-thesis .pair blockquote.qs { margin: 0.35rem 0 0; }
+  .p-thesis .pair > p { margin-bottom: 0; }
+}
+.p-thesis figure.exhibit figcaption a {
+  color: var(--red);
+  text-decoration: none;
+  border-bottom: 1px solid var(--hairline);
+}
+.p-thesis figure.exhibit figcaption a:hover { border-bottom-color: var(--red); }
+.p-thesis main { padding-bottom: 4rem; }
+
+/* ---- small screens ---- */
+@media (max-width: 900px) {
+  .p-thesis .plaqgrid { grid-template-columns: 1fr; }
+  .p-thesis .forkgrid { grid-template-columns: 1fr; }
+  .p-thesis .rail {
+    border-left: 0;
+    border-top: 1px solid var(--hairline);
+    padding-left: 0;
+    padding-top: 1.2rem;
+  }
+}
+@media (max-width: 560px) {
+  .p-thesis .fork .t-main { font-size: 22px; }
+  .p-thesis .fork .t-sub { font-size: 14px; }
+  .p-thesis .fork .t-fail { font-size: 19px; }
+  .p-thesis .fork .t-clab { font-size: 23px; }
+  .p-thesis .fork .t-top, .p-thesis .fork .t-node { font-size: 15px; }
+}
+
+/* ---- reduced motion: everything lands in its final, readable state ---- */
+@media (prefers-reduced-motion: reduce) {
+  body.p-thesis .plaque.stamp { opacity: 1; transform: none; transition: none; }
+  .p-thesis .fork .fail { opacity: 1; transition: none; }
+  .p-thesis .why { display: block; }
+  .p-thesis .replay { display: none; }
+}
+</style>
+<noscript><style>
+  .reveal, .stamp, .rule-draw { opacity: 1 !important; transform: none !important; }
+  .p-thesis .fork .fail { opacity: 1; }
+  .p-thesis .why { display: block; }
+  .p-thesis .replay { display: none; }
+</style></noscript>
+</head>
+<body class="p-thesis">
+
+<header class="site">
+  <div class="masthead">
+    <a class="mark" href="index.html">The Ouroboros <em>Problem</em></a>
+    <span class="tag">Neel Anshu &middot; ENGL C1001</span>
+  </div>
+  <nav class="toolbar" aria-label="Pages">
+    <a href="index.html"><span class="num">01</span>Home</a>
+    <a href="dilemma.html"><span class="num">02</span>The Dilemma</a>
+    <a href="thesis.html" aria-current="page"><span class="num">03</span>Thesis</a>
+    <a href="frameworks.html"><span class="num">04</span>Frameworks</a>
+    <a href="argument-1.html"><span class="num">05</span>Argument I</a>
+    <a href="argument-2.html"><span class="num">06</span>Argument II</a>
+    <a href="argument-3.html"><span class="num">07</span>Argument III</a>
+    <a href="argument-4.html"><span class="num">08</span>Argument IV</a>
+    <a href="rebuttal.html"><span class="num">09</span>Rebuttal</a>
+    <a href="conclusion.html"><span class="num">10</span>Conclusion</a>
+    <a href="works-cited.html"><span class="num">11</span>Works Cited</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- Morning vista: five flat bands, lone pine beside the staked claim plaque -->
+  <section class="vista" aria-label="Morning on the ridge: a lone pine stands beside a staked claim plaque">
+
+    <svg viewBox="0 0 1440 600" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+      <rect width="1440" height="600" fill="var(--sky)"></rect>
+      <path class="vista-band" fill="var(--far)"
+            d="M0 348 L96 322 L210 352 L330 306 L452 344 L560 316 L688 350 L804 310 L926 342 L1044 300 L1168 334 L1288 296 L1372 318 L1440 302 L1440 600 L0 600 Z"></path>
+      <path class="vista-band" fill="var(--mid)"
+            d="M0 448 L120 424 L248 452 L370 414 C420 400 448 400 486 418 C524 436 548 438 596 420 L700 446 L836 408 L968 444 L1096 416 L1236 448 L1352 424 L1440 440 L1440 600 L0 600 Z"></path>
+      <path class="vista-band" fill="var(--near)"
+            d="M0 512 C120 492 220 492 340 510 C470 528 560 522 690 500 C810 480 900 484 1010 506 C1130 528 1260 524 1440 496 L1440 600 L0 600 Z"></path>
+      <path class="vista-band" fill="var(--ground)"
+            d="M0 560 C180 548 340 552 520 558 C720 564 900 552 1080 546 C1220 542 1330 546 1440 540 L1440 600 L0 600 Z"></path>
+    </svg>
+
+    <span class="scene-motif scene-motif--disc" style="--motif-size: 78px; left: 57%; top: 15%; background: var(--far);" aria-hidden="true"></span>
+
+    <div class="vista-focal" aria-hidden="true">
+      <svg viewBox="0 0 360 400" focusable="false">
+        <path d="M28 46 c5 -7 11 -7 16 0 c5 -7 11 -7 16 0" fill="none" stroke="var(--ground)" stroke-width="3" stroke-linecap="round" opacity="0.7"></path>
+        <path d="M86 24 c4 -6 9 -6 13 0 c4 -6 9 -6 13 0" fill="none" stroke="var(--ground)" stroke-width="3" stroke-linecap="round" opacity="0.55"></path>
+        <path d="M126 58 c3.5 -5 8 -5 11.5 0 c3.5 -5 8 -5 11.5 0" fill="none" stroke="var(--ground)" stroke-width="3" stroke-linecap="round" opacity="0.45"></path>
+        <g fill="var(--ground)">
+          <rect x="108" y="290" width="22" height="110"></rect>
+          <path d="M119 56 L74 148 L94 142 L56 226 L82 219 L38 304 L200 304 L156 219 L182 226 L144 142 L164 148 Z"></path>
+          <rect x="258" y="242" width="16" height="158"></rect>
+          <rect x="204" y="168" width="132" height="78"></rect>
+        </g>
+        <rect x="214" y="178" width="112" height="58" fill="var(--near)"></rect>
+      </svg>
+    </div>
+
+    <div class="vista-content">
+      <div class="pagehead">
+        <div class="headings">
+          <p class="kicker">Page 03 of 11 &mdash; the claim</p>
+          <h1 class="display">Claim: Judge the Conduct, Not the Company</h1>
+        </div>
+        <svg class="minimap" id="minimap" viewBox="0 0 120 120" role="navigation"
+             aria-label="Site map: the ouroboros with this page highlighted"></svg>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- The claim, staked: dark-pine plaque left, plate + trail signs right -->
+  <section class="wide claimband" aria-label="The claim">
+    <div class="plaqgrid">
+
+      <div class="plaque stamp">
+        <p class="ptag">The Claim &mdash; read into the record</p>
+        <p class="lede">Neither side of the AI industry&rsquo;s copying war can exist under the rules each side states in public. If learning from the sum of the internet&rsquo;s publicly reachable data is considered fair use, labs have little legal ground to stand on against attacks from distillers. If taking their models&rsquo; knowledge counted as theft, their own models would violate copyright laws.</p>
+        <p class="ptext">This doesn&rsquo;t mean there isn&rsquo;t an answer. A hypocrite can still be right. What the hypocrisy proves is smaller: nobody in this argument is neutral. Both sides have it in their best interests to offer solutions that track their interests. This means we have to build the rule on the one thing outsiders can monitor &mdash; conduct: how the models acquire human work, and how much their output builds on the creative IP stored within their transformers.</p>
+      </div>
+
+      <aside class="heroside">
+        <figure class="exhibit reveal">
+          <span class="etag"><b>Plate 03</b> &middot; the fork in the road</span>
+          <img src="assets/art/oro_fork.jpg" width="1600" height="1066"
+               alt="Woodcut engraving of a forked road; the two outer paths end at broken bridges, a narrow center path continues.">
+          <figcaption>Both stated rules promise a way across and break off at the chasm; the road that survives is the narrow one cut straight through the middle. <span class="src">Plate: project engraving for The Ouroboros Problem.</span></figcaption>
+        </figure>
+
+        <div class="twin reveal d2">
+          <div class="statline">
+            <span class="n">7,000,000</span>
+            <span class="u">pirated books &mdash; the labs&rsquo; acquisition</span>
+          </div>
+          <div class="statline">
+            <span class="n">24,000</span>
+            <span class="u">fraudulent accounts &mdash; the distillers&rsquo; acquisition</span>
+          </div>
+          <p class="twinnote">Fail the same test, for the same reason</p>
+        </div>
+      </aside>
+
+    </div>
+  </section>
+
+  <!-- Diagram 03: two dead-end trails, one path drawn through -->
+  <section class="wide forkband" aria-label="The fork diagram">
+    <figure class="exhibit forkfig" id="forkfig">
+      <span class="etag"><b>Diagram 03</b> &middot; three candidate rules, walked to their ends</span>
+      <div class="forkgrid">
+
+        <svg class="fork" viewBox="0 0 800 612" role="img"
+             aria-label="Fork diagram. From a node labeled 'pick a rule', two outer paths — 'everything public is fair game' and 'nothing without consent' — each end at a broken bridge. Their failure notes read: 'then distillation is fair use too' and 'then the models were built on theft'. A center path labeled 'judge the conduct' continues through and exits at the top, marked 'same test, both sides'.">
+
+          <!-- standing labels -->
+          <g class="lab labL">
+            <text class="t-main" x="140" y="82" text-anchor="middle">EVERYTHING PUBLIC</text>
+            <text class="t-main" x="140" y="105" text-anchor="middle">IS FAIR GAME</text>
+            <text class="t-sub" x="140" y="129" text-anchor="middle">the rule you state when copying</text>
+          </g>
+          <g class="lab labR">
+            <text class="t-main" x="660" y="82" text-anchor="middle">NOTHING WITHOUT</text>
+            <text class="t-main" x="660" y="105" text-anchor="middle">CONSENT</text>
+            <text class="t-sub" x="660" y="129" text-anchor="middle">the rule you state when copied</text>
+          </g>
+
+          <!-- dead-end verdicts (revealed on hover / focus / press) -->
+          <g class="fail failL">
+            <text class="t-fail" x="140" y="157" text-anchor="middle">THEN DISTILLATION</text>
+            <text class="t-fail" x="140" y="177" text-anchor="middle">IS FAIR USE TOO</text>
+          </g>
+          <g class="fail failR">
+            <text class="t-fail" x="660" y="157" text-anchor="middle">THEN THE MODELS</text>
+            <text class="t-fail" x="660" y="177" text-anchor="middle">WERE BUILT ON THEFT</text>
+          </g>
+
+          <!-- trunk + junction -->
+          <circle class="node" cx="400" cy="556" r="4.5"></circle>
+          <text class="t-node" x="400" y="592" text-anchor="middle">PICK A RULE</text>
+          <line class="pTrunk" x1="400" y1="551" x2="400" y2="474"></line>
+          <circle class="node" cx="400" cy="470" r="4.5"></circle>
+
+          <!-- the two stated rules, dead-ending -->
+          <path class="pOuter pL" pathLength="1"
+                d="M 400 470 C 336 442, 232 408, 176 348 C 152 322, 140 300, 140 276"></path>
+          <path class="pOuter pR" pathLength="1"
+                d="M 400 470 C 464 442, 568 408, 624 348 C 648 322, 660 300, 660 276"></path>
+
+          <!-- broken bridges: edge, falling debris, far stub -->
+          <g class="brk brkL">
+            <line class="edge" x1="126" y1="272" x2="154" y2="272"></line>
+            <line class="debris" x1="133" y1="234" x2="141" y2="242" opacity="0.5"></line>
+            <line class="debris" x1="147" y1="246" x2="139" y2="253" opacity="0.4"></line>
+            <line class="debris" x1="137" y1="258" x2="144" y2="264" opacity="0.3"></line>
+            <line class="stub" x1="140" y1="190" x2="140" y2="222"></line>
+          </g>
+          <g class="brk brkR">
+            <line class="edge" x1="646" y1="272" x2="674" y2="272"></line>
+            <line class="debris" x1="667" y1="234" x2="659" y2="242" opacity="0.5"></line>
+            <line class="debris" x1="653" y1="246" x2="661" y2="253" opacity="0.4"></line>
+            <line class="debris" x1="663" y1="258" x2="656" y2="264" opacity="0.3"></line>
+            <line class="stub" x1="660" y1="190" x2="660" y2="222"></line>
+          </g>
+
+          <!-- the conduct rule: draws through -->
+          <path class="pCenter" pathLength="1"
+                d="M 400 470 C 400 396, 397 268, 400 168 L 400 98"></path>
+          <polygon class="arrow" points="400,72 391,98 409,98"></polygon>
+          <text class="t-clab" text-anchor="middle" transform="rotate(-90 378 300)" x="378" y="300">JUDGE THE CONDUCT</text>
+          <text class="t-top" x="400" y="42" text-anchor="middle">SAME TEST, BOTH SIDES</text>
+
+          <!-- generous hover targets -->
+          <path class="hit hitL" d="M 400 470 C 336 442, 232 408, 176 348 C 152 322, 140 300, 140 276 L 140 150"></path>
+          <path class="hit hitR" d="M 400 470 C 464 442, 568 408, 624 348 C 648 322, 660 300, 660 276 L 660 150"></path>
+        </svg>
+
+        <div class="rail">
+          <p class="railhead">Press a rule. Walk it to its end.</p>
+          <div class="rule">
+            <button type="button" class="rulebtn" id="ruleL" aria-expanded="false" aria-controls="whyL">
+              <span class="rb-name">Everything public is fair game</span>
+              <span class="rb-sub">the rule you state when copying</span>
+            </button>
+            <p class="why" id="whyL">&rarr; then distillation is fair use too.</p>
+          </div>
+          <div class="rule">
+            <button type="button" class="rulebtn" id="ruleR" aria-expanded="false" aria-controls="whyR">
+              <span class="rb-name">Nothing without consent</span>
+              <span class="rb-sub">the rule you state when copied</span>
+            </button>
+            <p class="why" id="whyR">&rarr; then the models were built on theft.</p>
+          </div>
+          <button type="button" class="replay" id="replayFork">Replay the draw</button>
+        </div>
+
+      </div>
+      <figcaption>Two stated rules, walked to their ends: each dead-ends on its own side&rsquo;s conduct. The path that survives symmetric application is the one that judges conduct itself &mdash; the same test for the lab and for its imitator. <span class="src">Demonstrative diagram; the dead ends restate the claim above. Hover or press a rule to see where it breaks.</span></figcaption>
+    </figure>
+  </section>
+
+  <div class="ridge-divider" aria-hidden="true"></div>
+
+  <!-- The essay -->
+  <div class="col essay">
+
+    <h2>Why conduct, and not intent or identity</h2>
+
+    <div class="pair">
+      <p>The <em>Bartz</em> court even quoted an exhibit in the record on what the models retain:</p>
+
+      <blockquote class="qs reveal">
+        <span class="qtag">Exhibit 03-A &middot; Bartz v. Anthropic, order p. 11</span>
+        <p>&ldquo;The LLMs &lsquo;memorize[d] A LOT, like A LOT.&rsquo;&rdquo;</p>
+        <footer>(<em>Bartz v. Anthropic</em> 11)</footer>
+      </blockquote>
+    </div>
+
+    <p>If the machines are able to reproduce copies on a whim, the &ldquo;we only learned&rdquo; argument stops working as a defense and becomes a technical question. The only way to get a concrete answer is by auditing the conduct of the parties involved.</p>
+
+    <hr class="hr rule-draw" aria-hidden="true">
+    <h2>The rule is buildable, not hypothetical</h2>
+
+    <div class="pair">
+      <p>Matthew Sag, who defends AI training as &ldquo;nonexpressive use&rdquo; (295), refuses to wave the risk away:</p>
+
+      <blockquote class="qs reveal">
+        <span class="qtag">Exhibit 03-B &middot; Sag, Houston Law Review, p. 295</span>
+        <p>&ldquo;At the moment, memorization is an edge case.&rdquo;</p>
+        <footer>(295)</footer>
+      </blockquote>
+    </div>
+
+    <figure class="exhibit reveal">
+      <span class="etag"><b>Exhibit 03-C</b> &middot; the concession, in print</span>
+      <img src="assets/evidence/sag-edgecase-zoom.png" alt="Scan from page 295 of Sag's article: at the moment, memorization is an edge case." loading="lazy">
+      <figcaption>The defense&rsquo;s own scholar, time-stamping his defense. <span class="src">Sag, Houston Law Review, p. 295.</span></figcaption>
+    </figure>
+
+    <p>Looking carefully at his wording, you can see Sag hedging. He explains later why the problem keeps growing:</p>
+
+    <div class="pair pair--lead">
+      <blockquote class="qs reveal">
+        <span class="qtag">Exhibit 03-D &middot; Sag, p. 327</span>
+        <p>&ldquo;[T]he more abstractly a copyrighted work is protected, the more likely it is that a generative AI model will &lsquo;copy&rsquo; it.&rdquo;</p>
+        <footer>(327)</footer>
+      </blockquote>
+
+      <p>He came up with a list of 10 &ldquo;Best Practices for Copyright Safety&rdquo; (337&ndash;44). All of them focus on regulating what systems do instead of on ownership.</p>
+    </div>
+
+    <hr class="hr rule-draw" aria-hidden="true">
+    <h2>What would prove me wrong</h2>
+    <p>If the fights over distillation resolve on contract/computer-fraud grounds instead of new copyright laws being enacted, then it means the system failed to step in and make a decision, and instead let the companies police it between themselves.</p>
+
+    <figure class="exhibit reveal">
+      <span class="etag"><b>Exhibit 03-E</b> &middot; Bartz v. Anthropic, order p. 14</span>
+      <img src="assets/evidence/bartz-carveout-zoom.png" width="2212" height="534" loading="lazy"
+           alt="Scanned lines from the order, reading: 'There is no carveout, however, from the Copyright Act for AI companies.'">
+      <figcaption>The court refusing anyone a special lane: &ldquo;There is no carveout, however, from the Copyright Act for AI companies&rdquo; <span class="cite">(<em>Bartz v. Anthropic</em> 14)</span>. This is the acquisition line my first falsifier lives on &mdash; if it proves fully administrable by itself, the conduct test collapses into it. <span class="src">Scan: Order on Fair Use, p. 14, lines 10&ndash;14 &middot; <a href="assets/evidence/bartz-carveout-page.png">view the full page</a></span></figcaption>
+    </figure>
+
+  </div>
+</main>
+
+<footer class="site">
+  <span>Neel Anshu &mdash; Critical Thinking &amp; Writing</span>
+  <span>Prev &mdash; <a href="dilemma.html">02 The Dilemma</a>&nbsp;&middot;&nbsp;Next &mdash; <a href="frameworks.html">04 Frameworks</a></span>
+</footer>
+
+<script>window.SITE_PAGES = [{"href": "index.html", "num": "01", "label": "Home"}, {"href": "dilemma.html", "num": "02", "label": "The Dilemma"}, {"href": "thesis.html", "num": "03", "label": "Thesis"}, {"href": "frameworks.html", "num": "04", "label": "Frameworks"}, {"href": "argument-1.html", "num": "05", "label": "Argument I"}, {"href": "argument-2.html", "num": "06", "label": "Argument II"}, {"href": "argument-3.html", "num": "07", "label": "Argument III"}, {"href": "argument-4.html", "num": "08", "label": "Argument IV"}, {"href": "rebuttal.html", "num": "09", "label": "Rebuttal"}, {"href": "conclusion.html", "num": "10", "label": "Conclusion"}, {"href": "works-cited.html", "num": "11", "label": "Works Cited"}];</script>
+<script src="snake.js"></script>
+<script src="site.js"></script>
+<script src="quest.js"></script>
+<script>buildMini(document.getElementById('minimap'), window.SITE_PAGES, 2);</script>
+<script>
+/* Page 03 signature: the fork — dead ends first, the conduct path draws through. */
+(function () {
+  var fig = document.getElementById('forkfig');
+  if (!fig) return;
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var btnL = document.getElementById('ruleL');
+  var btnR = document.getElementById('ruleR');
+  var replay = document.getElementById('replayFork');
+
+  function setPin(btn, cls) {
+    var on = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', on ? 'false' : 'true');
+    fig.classList.toggle(cls, !on);
+  }
+  btnL.addEventListener('click', function () { setPin(btnL, 'oL'); });
+  btnR.addEventListener('click', function () { setPin(btnR, 'oR'); });
+
+  function hoverSync(el, cls) {
+    if (!el) return;
+    el.addEventListener('mouseenter', function () { fig.classList.add(cls); });
+    el.addEventListener('mouseleave', function () { fig.classList.remove(cls); });
+  }
+  hoverSync(btnL.closest('.rule'), 'sL');
+  hoverSync(btnR.closest('.rule'), 'sR');
+  btnL.addEventListener('focus', function () { fig.classList.add('sL'); });
+  btnL.addEventListener('blur', function () { fig.classList.remove('sL'); });
+  btnR.addEventListener('focus', function () { fig.classList.add('sR'); });
+  btnR.addEventListener('blur', function () { fig.classList.remove('sR'); });
+
+  var hitL = fig.querySelector('.hitL');
+  var hitR = fig.querySelector('.hitR');
+  hoverSync(hitL, 'sL');
+  hoverSync(hitR, 'sR');
+  if (hitL) hitL.addEventListener('click', function () { btnL.click(); });
+  if (hitR) hitR.addEventListener('click', function () { btnR.click(); });
+
+  if (reduced) {
+    fig.classList.add('go');
+    if (replay) replay.hidden = true;
+    return;
+  }
+
+  fig.classList.add('arm');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          fig.classList.add('go');
+          io.disconnect();
+        }
+      });
+    }, { threshold: 0.2, rootMargin: '0px 0px -10% 0px' });
+    io.observe(fig);
+  } else {
+    fig.classList.add('go');
+  }
+
+  if (replay) replay.addEventListener('click', function () {
+    fig.classList.remove('go');
+    void fig.offsetWidth;
+    fig.classList.add('go');
+  });
+})();
+</script>
+
+</body>
+</html>

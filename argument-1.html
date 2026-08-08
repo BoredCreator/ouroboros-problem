@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Argument I: They Don&rsquo;t Believe Their Own Rule &mdash; The Ouroboros Problem</title>
+<meta name="description" content="A project on AI, fair use, and the loop that feeds itself.">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ── Page 05 · Argument I · afternoon haze ─────────────────────────
+   Firewatch register: one vista (the switchback — the flip), one
+   ridge-divider treatment, placard evidence. Flat fills only,
+   radius 0. Scoped under body.p-arg1. */
+
+body.p-arg1 main { padding-bottom: 4.5rem; }
+
+/* ---- Hero vista: haze over the switchback ---- */
+body.p-arg1 .vista { min-height: clamp(420px, 62vh, 620px); }
+body.p-arg1 .vista .vista-content { padding-bottom: clamp(2.8rem, 8vh, 5rem); }
+body.p-arg1 .vista h1.display { max-width: 12ch; }
+body.p-arg1 .vista .pagehead { align-items: flex-start; }
+body.p-arg1 .vista .quest-strip {
+  color: var(--ink);
+  border-top-color: rgba(29, 27, 22, 0.28);
+}
+body.p-arg1 .vista .quest-strip .q-chap,
+body.p-arg1 .vista .quest-strip .q-prog b { color: var(--ink); }
+@media (max-width: 1160px) {
+  body.p-arg1 .vista .quest-strip {
+    background: rgba(247, 241, 227, 0.82);
+    border-top: 0;
+    padding: 0.7rem 0.8rem;
+  }
+}
+
+/* ---- Pull-alongside pairing: prose + placard share a bench ---- */
+body.p-arg1 .duo {
+  max-width: var(--col);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "m1" "side" "m2";
+  gap: 1.5rem;
+}
+body.p-arg1 .duo > .dmain { grid-area: m1; min-width: 0; }
+body.p-arg1 .duo > aside { grid-area: side; }
+body.p-arg1 .duo > .dmore { grid-area: m2; min-width: 0; }
+@media (min-width: 900px) {
+  body.p-arg1 .duo {
+    max-width: 68rem;
+    grid-template-columns: minmax(0, 43rem) minmax(14rem, 19rem);
+    grid-template-areas: "m1 side" "m2 side";
+    grid-template-rows: auto 1fr;
+    column-gap: clamp(2.2rem, 4vw, 3.6rem);
+    align-items: start;
+    justify-content: center;
+  }
+  body.p-arg1 .duo > aside { position: sticky; top: 7.5rem; align-self: start; }
+}
+
+/* ---- Placards: the flip demonstrative + chain of custody ---- */
+body.p-arg1 .flippanel,
+body.p-arg1 .doccard {
+  border: 1px solid var(--ink);
+  border-top: 5px solid var(--accent);
+  background: var(--paper-dim);
+  padding: 1.15rem 1.25rem 1.2rem;
+}
+body.p-arg1 .ptag {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+body.p-arg1 .ptag b { color: var(--accent-ink); font-weight: 600; }
+
+body.p-arg1 .fliprows { margin: 1rem 0 0; border-top: 1px solid var(--hairline); }
+body.p-arg1 .fliprow {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--hairline);
+}
+body.p-arg1 .dir {
+  flex: 0 0 auto;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+}
+body.p-arg1 .lead {
+  flex: 1 1 auto;
+  border-bottom: 1px dotted var(--hairline);
+  transform: translateY(-0.28em);
+  min-width: 1rem;
+}
+body.p-arg1 .w {
+  flex: 0 0 auto;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: clamp(1.05rem, 1.5vw, 1.4rem);
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  transition: opacity 0.19s var(--ease-stamp), transform 0.19s var(--ease-stamp);
+}
+body.p-arg1 .w.is-red { color: var(--accent-ink); }
+body.p-arg1 .w.out { opacity: 0; transform: translateY(-0.4em); }
+
+body.p-arg1 .flipfoot {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+body.p-arg1 .flipnote {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  margin: 0;
+}
+body.p-arg1 .flipbtn {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  padding: 0.62em 1.05em;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+body.p-arg1 .flipbtn:hover { background: var(--ink); color: var(--paper); }
+body.p-arg1 .flipbtn:active { transform: translateY(1px); }
+body.p-arg1 .flipbtn:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
+
+body.p-arg1 .doccard dl { margin-top: 1rem; }
+body.p-arg1 .docrow {
+  display: grid;
+  grid-template-columns: 5.8em minmax(0, 1fr);
+  gap: 0.8rem;
+  padding: 0.58rem 0;
+  border-top: 1px solid var(--hairline);
+}
+body.p-arg1 .docrow dt {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  padding-top: 0.22em;
+}
+body.p-arg1 .docrow dd {
+  font-family: var(--font-mono);
+  font-size: 0.73rem;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+/* Woodcut plate riding in the rail under the flip panel */
+body.p-arg1 .duo aside figure.exhibit { margin: 1.5rem 0 0; }
+
+/* ---- The overlook: dark elevation band for the statlines ---- */
+body.p-arg1 .scaleband { margin: 3.4rem 0 3.2rem; }
+body.p-arg1 .scaleband .ridge-divider { background-color: var(--near); }
+body.p-arg1 .ridge-down { transform: scale(-1, -1); }
+body.p-arg1 .scale-strip { background: var(--near); color: var(--paper); }
+body.p-arg1 .scale-strip .bandinner {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 2.1rem 1.5rem 2.6rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 2rem 4.5rem;
+}
+body.p-arg1 .scale-strip .srule {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+body.p-arg1 .scale-strip .srule i {
+  display: block;
+  height: 2px;
+  background: var(--sky);
+}
+body.p-arg1 .scale-strip .statline { border-left-color: var(--sky); }
+body.p-arg1 .scale-strip .n { color: var(--paper); }
+body.p-arg1 .scale-strip .n.red { color: var(--sky); }
+body.p-arg1 .scale-strip .u { color: var(--paper-dim); }
+body.p-arg1 .statline.sub .n { font-size: clamp(1.9rem, 4.2vw, 3.1rem); }
+
+/* ---- Exhibit SVG text registers (the two charts) ---- */
+body.p-arg1 .exhibit svg text {
+  font-family: var(--font-mono);
+  letter-spacing: 0.06em;
+}
+body.p-arg1 .exhibit svg .lab { font-weight: 600; fill: var(--ink); }
+body.p-arg1 .exhibit svg .soft { fill: var(--ink-soft); letter-spacing: 0.02em; }
+body.p-arg1 .exhibit svg .onbar { font-weight: 600; fill: var(--paper); }
+body.p-arg1 .exhibit svg .redt { font-weight: 600; fill: var(--accent-ink); }
+body.p-arg1 .exhibit svg .bar-ink { fill: var(--ink); }
+body.p-arg1 .exhibit svg .bar-red { fill: var(--accent-ink); }
+body.p-arg1 .exhibit svg .hl { stroke: var(--hairline); stroke-width: 1; }
+
+/* ---- Record page tucked behind a summary ---- */
+body.p-arg1 details.docpage { margin-top: 0.9rem; border-top: 1px solid var(--hairline); padding-top: 0.8rem; }
+body.p-arg1 details.docpage summary {
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+}
+body.p-arg1 details.docpage summary::marker { color: var(--accent-ink); }
+body.p-arg1 details.docpage img { margin-top: 0.8rem; }
+
+/* ---- Small screens ---- */
+@media (max-width: 560px) {
+  body.p-arg1 .duo { padding: 0 1.25rem; }
+  body.p-arg1 .fliprow { flex-wrap: wrap; row-gap: 0.35rem; }
+  body.p-arg1 .lead { display: none; }
+  body.p-arg1 .fliprow .w { margin-left: auto; }
+  body.p-arg1 .scale-strip .bandinner { flex-direction: column; align-items: flex-start; gap: 1.7rem; }
+  body.p-arg1 .scale-strip .statline { flex-direction: column; align-items: flex-start; gap: 0.45rem; }
+}
+
+/* ---- Reduced motion: swap instantly, keep everything readable ---- */
+@media (prefers-reduced-motion: reduce) {
+  body.p-arg1 .w { transition: none; }
+  body.p-arg1 .w.out { opacity: 1; transform: none; }
+  body.p-arg1 .flipbtn:active { transform: none; }
+}
+</style>
+</head>
+<body class="p-arg1">
+
+<header class="site">
+  <div class="masthead">
+    <a class="mark" href="index.html">The Ouroboros <em>Problem</em></a>
+    <span class="tag">Neel Anshu &middot; ENGL C1001</span>
+  </div>
+  <nav class="toolbar" aria-label="Pages">
+    <a href="index.html"><span class="num">01</span>Home</a>
+    <a href="dilemma.html"><span class="num">02</span>The Dilemma</a>
+    <a href="thesis.html"><span class="num">03</span>Thesis</a>
+    <a href="frameworks.html"><span class="num">04</span>Frameworks</a>
+    <a href="argument-1.html" aria-current="page"><span class="num">05</span>Argument I</a>
+    <a href="argument-2.html"><span class="num">06</span>Argument II</a>
+    <a href="argument-3.html"><span class="num">07</span>Argument III</a>
+    <a href="argument-4.html"><span class="num">08</span>Argument IV</a>
+    <a href="rebuttal.html"><span class="num">09</span>Rebuttal</a>
+    <a href="conclusion.html"><span class="num">10</span>Conclusion</a>
+    <a href="works-cited.html"><span class="num">11</span>Works Cited</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ── Vista: afternoon haze; the switchback trail reverses its way up ── -->
+  <section class="vista" id="vista" aria-label="Afternoon haze: a switchback trail reversing direction up the near slope">
+    <svg viewBox="0 0 1440 620" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">
+      <!-- hazy afternoon sun -->
+      <circle cx="955" cy="118" r="52" fill="var(--paper)" opacity="0.5"/>
+      <!-- three distant birds -->
+      <g fill="var(--mid)">
+        <path d="M566 198l11-7 11 7-11-3z"/>
+        <path d="M614 178l10-6 10 6-10-3z"/>
+        <path d="M652 208l9-6 9 6-9-2z"/>
+      </g>
+      <!-- far ridge -->
+      <g class="vista-band plx-far">
+        <path fill="var(--far)" d="M0 528 Q120 514 250 522 Q380 530 480 518 Q570 508 650 468 Q730 428 810 404 Q890 380 980 372 Q1080 364 1180 384 Q1300 408 1440 400 L1440 800 L0 800 Z"/>
+      </g>
+      <!-- mid ridge, one coil-curve in the shoulder -->
+      <g class="vista-band plx-mid">
+        <path fill="var(--mid)" d="M0 556 Q160 548 320 556 Q470 562 600 540 Q720 518 820 484 Q920 452 1020 440 Q1140 428 1280 446 Q1360 456 1440 452 L1440 800 L0 800 Z"/>
+      </g>
+      <!-- near slope + the switchback trail (the flip) -->
+      <g class="vista-band plx-near">
+        <path fill="var(--near)" d="M0 580 L140 577 Q280 572 420 578 L520 581 Q610 572 690 534 Q770 496 830 456 Q890 416 945 378 Q985 350 1030 344 Q1080 338 1140 356 Q1260 390 1440 402 L1440 800 L0 800 Z"/>
+        <path fill="var(--sky)" d="M690 587 L1080 558 L840 521 L1100 482 L905 445 L1070 406 L985 374.5 L1042 345 L1042 351 L985 381.5 L1070 414 L905 455 L1100 494 L840 535 L1080 574 L690 605 Z"/>
+        <path fill="var(--ground)" d="M1042 312 L1046 312 L1046 348 L1042 348 Z"/>
+        <path fill="var(--ground)" d="M1046 314 L1066 320 L1046 326 Z"/>
+      </g>
+      <!-- foreground -->
+      <path fill="var(--ground)" d="M0 604 Q240 596 480 600 Q720 606 960 600 Q1200 592 1440 598 L1440 800 L0 800 Z"/>
+    </svg>
+    <div class="vista-content">
+      <div class="pagehead">
+        <div class="headings">
+          <p class="kicker">Page 05 of 11 &mdash; Supporting Argument I</p>
+          <h1 class="display">They Don&rsquo;t Believe Their Own Rule</h1>
+        </div>
+        <svg class="minimap" id="minimap" viewBox="0 0 120 120" role="navigation"
+             aria-label="Site map: the ouroboros with this page highlighted"></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── First movement: the indictment, with the source placard alongside ── -->
+  <section class="essay">
+    <div class="duo">
+      <div class="dmain">
+        <p>In February 2026 Anthropic put out a security report that read like an indictment:</p>
+
+        <blockquote class="qs reveal">
+          <span class="qtag">Exhibit 05-A &middot; Anthropic, Feb. 23, 2026</span>
+          <p>&ldquo;We have identified industrial-scale campaigns by three AI laboratories&mdash;DeepSeek, Moonshot, and MiniMax&mdash;to illicitly extract Claude&rsquo;s capabilities to improve their own models.&rdquo;</p>
+          <footer>(&ldquo;Detecting&rdquo;)</footer>
+        </blockquote>
+
+      </div>
+
+      <aside class="doccard reveal d1" aria-label="The document under examination">
+        <span class="ptag"><b>Source</b> &middot; document under examination</span>
+        <dl>
+          <div class="docrow">
+            <dt>Title</dt>
+            <dd>&ldquo;Detecting and preventing distillation attacks&rdquo;</dd>
+          </div>
+          <div class="docrow">
+            <dt>Publisher</dt>
+            <dd>Anthropic &mdash; corporate security report</dd>
+          </div>
+          <div class="docrow">
+            <dt>Published</dt>
+            <dd>Feb. 23, 2026</dd>
+          </div>
+          <div class="docrow">
+            <dt>Accuses</dt>
+            <dd>DeepSeek &middot; Moonshot &middot; MiniMax</dd>
+          </div>
+          <div class="docrow">
+            <dt>Never says</dt>
+            <dd>&ldquo;theft&rdquo; &middot; &ldquo;copyright&rdquo;</dd>
+          </div>
+        </dl>
+      </aside>
+
+      <div class="dmore">
+        <p>The scale of the distillation is important to note:</p>
+
+        <blockquote class="qs reveal">
+          <span class="qtag">Exhibit 05-B &middot; Anthropic</span>
+          <p>&ldquo;These labs generated over 16 million exchanges with Claude through approximately 24,000 fraudulent accounts, in violation of our terms of service and regional access restrictions.&rdquo;</p>
+          <footer>(&ldquo;Detecting&rdquo;)</footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── The overlook: the scale, in numbers ── -->
+  <section class="scaleband" aria-label="The scale, in numbers">
+    <div class="ridge-divider" aria-hidden="true"></div>
+    <div class="scale-strip">
+      <div class="srule" aria-hidden="true"><i class="rule-draw"></i></div>
+      <div class="bandinner">
+        <div class="statline reveal">
+          <span class="n red">16,000,000</span>
+          <span class="u">exchanges with Claude, generated by three rival labs</span>
+        </div>
+        <div class="statline sub reveal d1">
+          <span class="n">24,000</span>
+          <span class="u">fraudulent accounts used to generate them</span>
+        </div>
+      </div>
+    </div>
+    <div class="ridge-divider ridge-down" aria-hidden="true"></div>
+  </section>
+
+  <!-- ── Second movement: the vocabulary flip, demonstrated alongside ── -->
+  <section class="essay">
+    <div class="duo">
+      <div class="dmain">
+        <p>Sixteen million exchanges. Keep in mind, scale was an attribute the AI industry used to use to get around copyright laws. Swallowing the entire internet was what supposedly made training &ldquo;transformative&rdquo; (<em>Bartz v. Anthropic</em> 13). But when the direction flips, the vocabulary flips with it. Harvesting everyone&rsquo;s books is learning. Mining Claude is an attack. The report even admits the contradiction:</p>
+
+        <blockquote class="qs reveal">
+          <span class="qtag">Exhibit 05-C &middot; Anthropic</span>
+          <p>&ldquo;Distillation is a widely used and legitimate training method. For example, frontier AI labs routinely distill their own models to create smaller, cheaper versions for their customers.&rdquo;</p>
+          <footer>(&ldquo;Detecting&rdquo;)</footer>
+        </blockquote>
+      </div>
+
+      <aside aria-label="Demonstratives for the vocabulary flip">
+        <div class="flippanel reveal d1" id="flip-panel">
+          <span class="ptag"><b>Demonstrative</b> &middot; the vocabulary flip</span>
+          <div class="fliprows" id="flip-rows" aria-live="polite">
+            <div class="fliprow">
+              <span class="dir">when we mine:</span>
+              <span class="lead" aria-hidden="true"></span>
+              <span class="w" id="word-a">LEARNING</span>
+            </div>
+            <div class="fliprow">
+              <span class="dir">when we&rsquo;re mined:</span>
+              <span class="lead" aria-hidden="true"></span>
+              <span class="w is-red" id="word-b">ATTACK</span>
+            </div>
+          </div>
+          <div class="flipfoot">
+            <p class="flipnote">Same act on both lines &mdash; only the word moves.</p>
+            <button class="flipbtn" id="flip-btn" type="button" aria-pressed="false">Reverse the direction</button>
+          </div>
+        </div>
+
+        <figure class="exhibit reveal d2">
+          <span class="etag"><b>Plate 05</b> &middot; The flip, in the chapter&rsquo;s woodcut</span>
+          <img src="assets/art/oro_mirror.jpg" loading="lazy"
+               alt="Woodcut: a snake studies itself in a standing oval mirror; the reflection looking back is an ouroboros, swallowing its own tail.">
+          <figcaption>One snake, two names &mdash; it depends which side of the glass is doing the taking. <span class="src">Chapter plate, The Ouroboros Problem.</span></figcaption>
+        </figure>
+      </aside>
+
+      <div class="dmore">
+        <p>So the technique itself is fine. The problem is apparently just who was on which end of it. The rivals got &ldquo;powerful capabilities from other labs in a fraction of the time, and at a fraction of the cost&rdquo; (&ldquo;Detecting&rdquo;). That&rsquo;s word for word the same complaint every novelist has been making about the labs since 2022.</p>
+
+        <figure class="exhibit reveal">
+          <span class="etag"><b>Exhibit 05-D</b> &middot; Two minings, to scale</span>
+          <svg viewBox="0 0 640 198" role="img" focusable="false"
+               aria-label="Two horizontal bands drawn to scale, seven to sixteen. Ink band: over seven million pirated books copied for training, cited to Bartz v. Anthropic. Red band, more than twice as thick: over sixteen million exchanges extracted from Claude, cited to Anthropic.">
+            <text class="lab" x="10" y="20" font-size="13">PIRATED BOOKS, DOWNLOADED FOR ITS LIBRARY</text>
+            <text class="soft" x="630" y="20" font-size="12" text-anchor="end" font-style="italic">(Bartz v. Anthropic)</text>
+            <rect class="bar-ink" x="10" y="30" width="620" height="35" shape-rendering="crispEdges"></rect>
+            <text class="onbar" x="618" y="47.5" font-size="15" text-anchor="end" dominant-baseline="middle">7,000,000+</text>
+
+            <text class="lab" x="10" y="96" font-size="13">EXCHANGES, EXTRACTED FROM CLAUDE</text>
+            <text class="soft" x="630" y="96" font-size="12" text-anchor="end">(Anthropic)</text>
+            <rect class="bar-red" x="10" y="106" width="620" height="80" shape-rendering="crispEdges"></rect>
+            <text class="onbar" x="618" y="146" font-size="17" text-anchor="end" dominant-baseline="middle">16,000,000+</text>
+          </svg>
+          <figcaption>The taking the industry calls theft is bigger than the taking it called fair use. Body widths drawn to scale, 7&nbsp;:&nbsp;16. <span class="src">Sources: <em>Bartz v. Anthropic</em>; Anthropic, Feb. 23, 2026.</span></figcaption>
+        </figure>
+
+        <figure class="exhibit reveal">
+          <span class="etag"><b>Exhibit 05-F</b> &middot; The seven-million line, at source</span>
+          <img src="assets/evidence/bartz-sevenmillion-zoom.png" loading="lazy"
+               alt="Scanned lines from the Bartz v. Anthropic order: Anthropic downloaded over seven million pirated copies of books, paid nothing, and kept these pirated copies in its library.">
+          <figcaption>The ink band in Exhibit 05-D, photographed at its source: the order&rsquo;s own seven-million count. <span class="src">Source: Bartz v. Anthropic.</span></figcaption>
+          <details class="docpage">
+            <summary>Open the full page of the order</summary>
+            <img src="assets/evidence/bartz-sevenmillion-page.png" loading="lazy"
+                 alt="Full page from the Bartz v. Anthropic order containing the seven-million-copies passage.">
+          </details>
+        </figure>
+
+        <p>Two honest notes here. &ldquo;Attack&rdquo; is normal security language for fraud at scale, so the vocabulary flip proves less than it looks like. What it really exposes is that there&rsquo;s no stated principle separating the two minings besides who got mined. And hypocrisy on its own doesn&rsquo;t pick a rule. It just proves nobody in this fight will hand us a neutral one. Funny enough, Anthropic&rsquo;s own test for wrongdoing is &ldquo;the pattern&rdquo;: &ldquo;[m]assive volume concentrated in a few areas, highly repetitive structures&rdquo; (&ldquo;Detecting&rdquo;). That&rsquo;s a conduct test. They conceded the principle without even noticing.</p>
+
+        <figure class="exhibit reveal">
+          <span class="etag"><b>Exhibit 05-E</b> &middot; The scale, sorted by taker</span>
+          <svg viewBox="0 0 640 212" role="img" focusable="false"
+               aria-label="Log-style chart of exchange volume by laboratory, bars drawn to a common scale. DeepSeek: 150,000 plus. Moonshot: 3,400,000 plus. MiniMax: 13,000,000 plus. Total, in red: 16,000,000 plus exchanges through 24,000 fraudulent accounts.">
+            <text class="lab" x="10" y="22" font-size="13">DEEPSEEK</text>
+            <text class="lab" x="630" y="22" font-size="13" text-anchor="end">150,000+</text>
+            <rect class="bar-ink" x="10" y="30" width="5.6" height="9" shape-rendering="crispEdges"></rect>
+
+            <text class="lab" x="10" y="62" font-size="13">MOONSHOT</text>
+            <text class="lab" x="630" y="62" font-size="13" text-anchor="end">3,400,000+</text>
+            <rect class="bar-ink" x="10" y="70" width="127.4" height="9" shape-rendering="crispEdges"></rect>
+
+            <text class="lab" x="10" y="102" font-size="13">MINIMAX</text>
+            <text class="lab" x="630" y="102" font-size="13" text-anchor="end">13,000,000+</text>
+            <rect class="bar-ink" x="10" y="110" width="486.9" height="9" shape-rendering="crispEdges"></rect>
+
+            <line class="hl" x1="10" y1="134" x2="630" y2="134"></line>
+
+            <text class="redt" x="10" y="158" font-size="13">TOTAL OBSERVED</text>
+            <text class="redt" x="630" y="158" font-size="13" text-anchor="end">16,000,000+ EXCHANGES</text>
+            <rect class="bar-red" x="10" y="166" width="620" height="12" shape-rendering="crispEdges"></rect>
+
+            <text class="soft" x="10" y="202" font-size="11">3 laboratories &#183; 24,000 fraudulent accounts &#183; counts per Anthropic, Feb. 23, 2026</text>
+          </svg>
+          <figcaption>Sorted by taker, the volume concentrates just the way Anthropic&rsquo;s own conduct test looks for &mdash; &ldquo;[m]assive volume concentrated in a few areas&rdquo; (&ldquo;Detecting&rdquo;). <span class="src">Counts: Anthropic, &ldquo;Detecting and preventing distillation attacks,&rdquo; Feb. 23, 2026.</span></figcaption>
+        </figure>
+      </div>
+
+  </section>
+
+</main>
+
+<footer class="site">
+  <span>Neel Anshu &mdash; Critical Thinking &amp; Writing</span>
+  <span>Prev &mdash; <a href="frameworks.html">04 Frameworks</a> &nbsp;&middot;&nbsp; Next &mdash; <a href="argument-2.html">06 Argument II</a></span>
+</footer>
+
+<script>window.SITE_PAGES = [{"href": "index.html", "num": "01", "label": "Home"}, {"href": "dilemma.html", "num": "02", "label": "The Dilemma"}, {"href": "thesis.html", "num": "03", "label": "Thesis"}, {"href": "frameworks.html", "num": "04", "label": "Frameworks"}, {"href": "argument-1.html", "num": "05", "label": "Argument I"}, {"href": "argument-2.html", "num": "06", "label": "Argument II"}, {"href": "argument-3.html", "num": "07", "label": "Argument III"}, {"href": "argument-4.html", "num": "08", "label": "Argument IV"}, {"href": "rebuttal.html", "num": "09", "label": "Rebuttal"}, {"href": "conclusion.html", "num": "10", "label": "Conclusion"}, {"href": "works-cited.html", "num": "11", "label": "Works Cited"}];</script>
+<script src="snake.js"></script>
+<script src="site.js"></script>
+<script src="quest.js"></script>
+<script>buildMini(document.getElementById('minimap'), window.SITE_PAGES, 4);</script>
+<script>
+/* Page 05 behavior.
+   Signature animation: slow parallax drift of the vista bands on
+   scroll — transform-only, via the shared --plx/.vista-band contract
+   in styles.css (which also zeroes it under prefers-reduced-motion).
+   Plus the hover/tap-driven vocabulary flip; under reduced motion the
+   words swap instantly with no transition. */
+(function () {
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---- Vista band parallax (signature animation) ---- */
+  var vista = document.getElementById("vista");
+  if (vista && !reduced) {
+    var ticking = false;
+    var onScroll = function () {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(function () {
+        var y = Math.min(window.scrollY || window.pageYOffset || 0, 260);
+        vista.style.setProperty("--plx", y + "px");
+        ticking = false;
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  }
+
+  /* ---- The vocabulary flip (interaction-driven, never looping) ---- */
+  var rows = document.getElementById("flip-rows");
+  var btn = document.getElementById("flip-btn");
+  var wordA = document.getElementById("word-a");
+  var wordB = document.getElementById("word-b");
+  if (rows && btn && wordA && wordB) {
+    var flipped = false, busy = false;
+    function paint() {
+      wordA.textContent = flipped ? "ATTACK" : "LEARNING";
+      wordB.textContent = flipped ? "LEARNING" : "ATTACK";
+      wordA.classList.toggle("is-red", flipped);
+      wordB.classList.toggle("is-red", !flipped);
+      btn.setAttribute("aria-pressed", flipped ? "true" : "false");
+    }
+    function flip() {
+      if (busy) return;
+      flipped = !flipped;
+      if (reduced) { paint(); return; }
+      busy = true;
+      wordA.classList.add("out");
+      wordB.classList.add("out");
+      window.setTimeout(function () {
+        paint();
+        wordA.classList.remove("out");
+        wordB.classList.remove("out");
+        window.setTimeout(function () { busy = false; }, 210);
+      }, 190);
+    }
+    btn.addEventListener("click", flip);
+    if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      rows.addEventListener("pointerenter", flip);
+    }
+  }
+})();
+</script>
+
+</body>
+</html>

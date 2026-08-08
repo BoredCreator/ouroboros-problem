@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home &mdash; The Ouroboros Problem</title>
+<meta name="description" content="A project on AI, fair use, and the loop that feeds itself.">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ── 01 · Home — “first light”. Scoped to body.p-home. ─────────────
+   One day on the lookout begins here: flat five-band vista, the
+   tower far right, headline on the left third. Flat fills only. */
+
+/* Hero vista */
+body.p-home .vista { min-height: clamp(400px, 62vh, 660px); }
+body.p-home .vista .vista-content { padding-bottom: clamp(3rem, 9vh, 5.5rem); }
+body.p-home .vista .kicker { margin-bottom: 1.15rem; max-width: 34ch; }
+body.p-home .vista h1.display { max-width: 12ch; }
+body.p-home .vista h1.display em { font-style: normal; color: var(--paper); }
+body.p-home .vista .inkrule {
+  width: 5.5rem; height: 3px;
+  background: var(--paper);
+  margin-top: 1.7rem;
+}
+
+/* The sun — flat paper disc hung in the sky (scene-motif budget) */
+body.p-home .sun {
+  --motif-size: clamp(52px, 6vw, 84px);
+  left: 56%;
+  top: 26%;
+  background: var(--paper);
+}
+
+/* The lookout tower — true-proportion silhouette pinned to the
+   near-ridge plateau so it never distorts or crops off-screen. */
+body.p-home .lookout {
+  position: absolute;
+  z-index: 2;
+  right: clamp(1.25rem, 7vw, 6rem);
+  bottom: 20.5%;
+  width: clamp(78px, 9vw, 128px);
+  color: var(--ground);
+  pointer-events: none;
+}
+body.p-home .lookout svg { display: block; width: 100%; height: auto; }
+
+/* Signature animation: first light — the sun climbs clear of the
+   far ridge once, on load. */
+@media (prefers-reduced-motion: no-preference) {
+  body.p-home .sun {
+    animation: p-home-sunup 2.6s var(--ease-stamp) both;
+  }
+  @keyframes p-home-sunup {
+    from { transform: translateY(84px); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+  }
+}
+
+/* Trailhead: invite rail left, ouroboros hub right (off-center) */
+body.p-home .trailhead {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 2rem 3rem;
+  align-items: center;
+  padding-top: clamp(1.8rem, 4.5vh, 3rem);
+  padding-bottom: 1rem;
+}
+body.p-home .invite {
+  font-family: var(--font-mono);
+  font-size: 0.73rem;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  line-height: 1.7;
+  max-width: 34ch;
+  min-height: 2.9em;
+}
+body.p-home .invite span { transition: opacity 0.15s var(--ease-stamp); }
+body.p-home .invite span.swap { opacity: 0; }
+body.p-home .invite span.hot { color: var(--accent-ink); }
+body.p-home .trailhead .inkrule {
+  width: 5.5rem; height: 3px;
+  background: var(--ink);
+  margin: 0 0 1.4rem;
+}
+body.p-home .stage { padding: 0.4rem 1rem 1rem; }
+body.p-home .stage svg {
+  display: block;
+  width: 100%;
+  max-width: 560px;
+  height: auto;
+  margin-inline: auto;
+  overflow: visible;
+}
+
+/* Full-bleed woodcut plate */
+body.p-home .banner {
+  margin: 2.4rem 0 0;
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+body.p-home .banner img {
+  display: block;
+  width: 100%;
+  height: clamp(200px, 36vh, 400px);
+  object-fit: cover;
+  object-position: 50% 34%;
+  border-bottom: 1px solid var(--hairline);
+}
+body.p-home .banner figcaption {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0.7rem 1.5rem 0.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* Welcome: quiet reading column */
+body.p-home .welcome { padding: 4rem 0 0.4rem; }
+body.p-home .welcome h2 { margin-top: 0; }
+
+/* Trail log: the route as a day arc — the page motif, interactive */
+body.p-home details.traillog {
+  margin: 2.4rem 0 0;
+  border: 1px solid var(--ink);
+  border-left: 5px solid var(--accent);
+  background: var(--paper-dim);
+}
+body.p-home details.traillog summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 0.95rem 1.1rem;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+body.p-home details.traillog summary::-webkit-details-marker { display: none; }
+body.p-home details.traillog summary::before {
+  content: "+";
+  display: inline-block;
+  width: 1.4em;
+  color: var(--accent-ink);
+}
+body.p-home details.traillog[open] summary::before { content: "\2212"; }
+body.p-home details.traillog summary:hover,
+body.p-home details.traillog summary:focus-visible { color: var(--ink); }
+body.p-home details.traillog .arc { padding: 0.4rem 1.1rem 1.1rem; }
+body.p-home details.traillog .arc svg { display: block; width: 100%; height: auto; }
+
+/* Topic / Impact: two filed statements over one ink rule;
+   Exhibit 01-B rides alongside the Impact paragraph at width. */
+body.p-home .statements { margin-top: 3.6rem; max-width: 64rem; }
+body.p-home .statements .rule { height: 1px; background: var(--ink); margin-bottom: 2.7rem; }
+body.p-home .twocol { display: grid; grid-template-columns: 1fr 1fr; column-gap: 3.4rem; }
+body.p-home .twocol .essay h2 { margin-top: 0; }
+body.p-home .twocol .essay + .essay { border-left: 1px solid var(--hairline); padding-left: 3.4rem; }
+body.p-home .twocol .essay p:last-child { margin-bottom: 0; }
+body.p-home .twocol figure.exhibit { margin-bottom: 0; }
+
+/* Section seam: one ridgeline divider before the case file */
+body.p-home .ridge-divider { margin-top: 4rem; }
+
+/* Case-file teaser: trail placard with a hanging caption rail */
+body.p-home .casefile { max-width: 64rem; padding-top: 3.2rem; padding-bottom: 5rem; }
+body.p-home figure.exhibit.teaser {
+  margin: 0;
+  padding: 1.5rem;
+  display: grid;
+  grid-template-columns: minmax(14rem, 1fr) min(30rem, 56%);
+  grid-template-rows: auto 1fr;
+  column-gap: 2.6rem;
+  align-items: start;
+}
+body.p-home .teaser .etag { grid-column: 1; grid-row: 1; margin-bottom: 0; }
+body.p-home .teaser .shot { grid-column: 2; grid-row: 1 / span 2; display: block; }
+body.p-home .teaser .shot img { transition: border-color 0.18s ease; }
+body.p-home .teaser .shot:hover img { border-color: var(--ink); }
+body.p-home .teaser .shot:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 3px; }
+body.p-home .teaser figcaption {
+  grid-column: 1; grid-row: 2;
+  align-self: end;
+  margin-top: 1.1rem;
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+body.p-home .teaser figcaption a {
+  color: var(--accent-ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--hairline);
+}
+body.p-home .teaser figcaption a:hover { border-bottom-color: var(--accent-ink); }
+body.p-home .teaser figcaption .src { display: block; margin-top: 0.9rem; }
+
+/* Small screens */
+@media (max-width: 900px) {
+  body.p-home .trailhead { grid-template-columns: 1fr; gap: 0.6rem; }
+  body.p-home .invite { min-height: 0; }
+  body.p-home .stage { padding: 0.8rem 0 0.6rem; }
+  body.p-home .stage svg { max-width: min(88vw, 460px); }
+  body.p-home #hub .nlabel { display: none; }
+  body.p-home .twocol { grid-template-columns: 1fr; row-gap: 2.4rem; }
+  body.p-home .twocol .essay + .essay {
+    border-left: 0; padding-left: 0;
+    border-top: 1px solid var(--hairline); padding-top: 2.4rem;
+  }
+  body.p-home figure.exhibit.teaser { display: block; padding: 1.1rem; }
+  body.p-home .teaser .etag { margin-bottom: 0.8rem; }
+  body.p-home .teaser figcaption { margin-top: 0.9rem; }
+  body.p-home .banner img { height: clamp(170px, 30vh, 260px); }
+  body.p-home .sun { left: 60%; top: 20%; }
+}
+
+/* Reduced motion: readout swaps instantly (page JS also checks matchMedia) */
+@media (prefers-reduced-motion: reduce) {
+  body.p-home .invite span { transition: none; }
+  body.p-home .teaser .shot img { transition: none; }
+}
+</style>
+</head>
+<body class="p-home">
+
+<header class="site">
+  <div class="masthead">
+    <a class="mark" href="index.html">The Ouroboros <em>Problem</em></a>
+    <span class="tag">Neel Anshu &middot; ENGL C1001</span>
+  </div>
+  <nav class="toolbar" aria-label="Pages">
+    <a href="index.html" aria-current="page"><span class="num">01</span>Home</a>
+    <a href="dilemma.html"><span class="num">02</span>The Dilemma</a>
+    <a href="thesis.html"><span class="num">03</span>Thesis</a>
+    <a href="frameworks.html"><span class="num">04</span>Frameworks</a>
+    <a href="argument-1.html"><span class="num">05</span>Argument I</a>
+    <a href="argument-2.html"><span class="num">06</span>Argument II</a>
+    <a href="argument-3.html"><span class="num">07</span>Argument III</a>
+    <a href="argument-4.html"><span class="num">08</span>Argument IV</a>
+    <a href="rebuttal.html"><span class="num">09</span>Rebuttal</a>
+    <a href="conclusion.html"><span class="num">10</span>Conclusion</a>
+    <a href="works-cited.html"><span class="num">11</span>Works Cited</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="vista" aria-labelledby="hometitle">
+    <svg viewBox="0 0 1440 560" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+      <!-- far ridge — the first coil -->
+      <path fill="var(--far)" d="M0,332 C120,302 250,352 390,326 C530,300 650,346 806,318 C958,292 1100,336 1258,312 C1330,301 1392,316 1440,308 L1440,560 L0,560 Z"/>
+      <!-- mid ridge -->
+      <path fill="var(--mid)" d="M0,412 C160,382 304,422 472,398 C640,376 762,416 930,394 C1082,376 1204,408 1440,388 L1440,560 L0,560 Z"/>
+      <!-- near ridge — plateaus right, under the tower -->
+      <path fill="var(--near)" d="M0,482 C140,462 262,488 402,470 C560,450 702,478 862,458 C992,442 1084,452 1164,438 C1236,428 1372,427 1440,426 L1440,560 L0,560 Z"/>
+      <!-- ground -->
+      <path fill="var(--ground)" d="M0,528 C180,516 342,532 522,520 C702,508 902,526 1102,514 C1242,506 1362,516 1440,510 L1440,560 L0,560 Z"/>
+      <!-- three birds, first light -->
+      <g fill="var(--ground)">
+        <path d="M496,168 L510,159 L524,168 L510,164 Z"/>
+        <path d="M556,192 L567,185 L578,192 L567,189 Z"/>
+        <path d="M610,158 L619,152 L628,158 L619,155.5 Z"/>
+      </g>
+    </svg>
+    <span class="scene-motif scene-motif--disc sun" aria-hidden="true"></span>
+    <span class="lookout" aria-hidden="true">
+      <svg viewBox="0 0 120 150" fill="currentColor" focusable="false">
+        <path d="M22 150 L48 52 L56 52 L36 150 Z"/>
+        <path d="M98 150 L72 52 L64 52 L84 150 Z"/>
+        <rect x="31" y="104" width="58" height="5"/>
+        <rect x="37" y="76" width="46" height="5"/>
+        <rect x="26" y="52" width="68" height="6"/>
+        <rect x="34" y="20" width="52" height="32"/>
+        <path d="M26 20 L60 3 L94 20 Z"/>
+        <rect x="43" y="28" width="15" height="13" fill="var(--sky)"/>
+      </svg>
+    </span>
+    <div class="vista-content">
+      <p class="kicker reveal">A project on AI, fair&nbsp;use, and the loop that feeds itself</p>
+      <h1 class="display reveal d1" id="hometitle">Everything it learned, it&nbsp;<em>ate</em>.</h1>
+      <div class="inkrule rule-draw d2" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <section class="trailhead wide" aria-label="Site map">
+    <div class="rail">
+      <div class="inkrule rule-draw" aria-hidden="true"></div>
+      <p class="invite reveal"><span id="invite">Pick a segment of the snake to enter the loop.</span></p>
+    </div>
+    <div class="stage reveal d1">
+      <svg id="hub" viewBox="0 0 800 800" overflow="visible" role="navigation"
+           aria-label="Site map drawn as an ouroboros: eleven clickable pages ride the body of a snake devouring its own tail. Works Cited sits at the tail being swallowed."></svg>
+    </div>
+  </section>
+
+  <figure class="banner reveal">
+    <img src="assets/art/oro_banner.jpg" width="1600" height="1066"
+         alt="Woodcut-style engraving of an ouroboros serpent devouring its own tail, its tail tip inked in red.">
+    <figcaption>The ouroboros &mdash; the serpent that survives by consuming its own body &mdash; this project&rsquo;s map, and its subject.</figcaption>
+  </figure>
+
+  <section class="welcome">
+    <div class="col essay">
+      <h2 class="reveal">Welcome</h2>
+      <p class="reveal d1">I&rsquo;m Neel Anshu, and this site is my project for ENGL C1001: Critical Thinking &amp; Writing. It examines a contradiction my own industry is built on: the AI labs that scraped the world&rsquo;s writing, art, and code to build their models are now fighting to stop imitators from doing the same thing to them. Every page of the argument is a segment of the ouroboros &mdash; and the Works Cited sits at the tail, right where the snake is swallowing it.</p>
+      <details class="traillog reveal d2">
+        <summary>Trail log &middot; the route &mdash; eleven segments, dawn to starlight</summary>
+        <div class="arc">
+          <svg viewBox="0 0 660 168" role="img"
+               aria-label="Route diagram: eleven tiles rise and fall like the sun over one day, from first light on this page to starlight at the Works Cited.">
+            <g stroke="var(--ink)" stroke-width="1">
+              <rect x="16"  y="86" width="38" height="38" fill="#f4c95d"/>
+              <rect x="74"  y="66" width="38" height="38" fill="#f6b352"/>
+              <rect x="132" y="48" width="38" height="38" fill="#f2d8a0"/>
+              <rect x="190" y="34" width="38" height="38" fill="#eadfc4"/>
+              <rect x="248" y="26" width="38" height="38" fill="#ecc98f"/>
+              <rect x="306" y="24" width="38" height="38" fill="#f0b45e"/>
+              <rect x="364" y="26" width="38" height="38" fill="#ef9e58"/>
+              <rect x="422" y="34" width="38" height="38" fill="#d97a4a"/>
+              <rect x="480" y="48" width="38" height="38" fill="#7d8aa6"/>
+              <rect x="538" y="66" width="38" height="38" fill="#3c4668"/>
+              <rect x="596" y="86" width="38" height="38" fill="#232948"/>
+            </g>
+            <g font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--ink-soft)">
+              <text x="35"  y="140" text-anchor="middle" fill="var(--accent-ink)" font-weight="600">01</text>
+              <text x="93"  y="120" text-anchor="middle">02</text>
+              <text x="151" y="102" text-anchor="middle">03</text>
+              <text x="209" y="88"  text-anchor="middle">04</text>
+              <text x="267" y="80"  text-anchor="middle">05</text>
+              <text x="325" y="78"  text-anchor="middle">06</text>
+              <text x="383" y="80"  text-anchor="middle">07</text>
+              <text x="441" y="88"  text-anchor="middle">08</text>
+              <text x="499" y="102" text-anchor="middle">09</text>
+              <text x="557" y="120" text-anchor="middle">10</text>
+              <text x="615" y="140" text-anchor="middle">11</text>
+              <text x="16"  y="160">FIRST LIGHT &mdash; YOU ARE HERE</text>
+              <text x="634" y="160" text-anchor="end">STARLIGHT</text>
+            </g>
+          </svg>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section class="statements wide" aria-label="Topic and impact">
+    <div class="rule rule-draw" aria-hidden="true"></div>
+    <div class="twocol">
+      <div class="essay reveal">
+        <h2>Topic</h2>
+        <p>This project is about the fight over the data AI models use to produce their output. Frontier labs built their systems by scraping the internet for everything usable. Books, art, and code were all sucked into these massive systems under the guise of transformative fair use, while bringing in massive stock valuations and profits for the labs.</p>
+      </div>
+      <div class="essay reveal d1">
+        <h2>Impact</h2>
+        <p>The decision that comes out of this fight is imperative to the future of the world. Control over how future models are created could make or break their business models. The incentive to keep producing human writing, art, and code gets more and more eroded. I want every reader to question: what rule about using human data for training would they actually accept, and how realistic would enforcing it be?</p>
+
+<figure class="exhibit reveal">
+  <span class="etag"><b>Exhibit 01-B</b> &middot; what the machine eats</span>
+  <img src="assets/art/oro_library.jpg" alt="Woodcut-style engraving of a mechanical serpent devouring an endless conveyor of open books, one book inked in red." loading="lazy">
+  <figcaption>The diet: everything usable, delivered continuously. One book on the belt is always somebody&rsquo;s. <span class="src">Site illustration &mdash; the ouroboros series.</span></figcaption>
+</figure>
+      </div>
+    </div>
+  </section>
+
+  <div class="ridge-divider" aria-hidden="true"></div>
+
+  <section class="casefile wide" aria-label="Where the argument begins">
+    <figure class="exhibit teaser reveal">
+      <span class="etag"><b>Exhibit 01-A</b> &middot; The argument at a glance</span>
+      <a class="shot" href="dilemma.html" aria-label="Open page 02, The Dilemma — the full case file">
+        <img src="assets/infographic.png" width="1275" height="1650"
+             alt="Poster titled ‘It’s Fair Use When We Do It.’ A snake drawn as a circular pipeline eats its own tail. Its black half — human work copied into an AI model — is stamped ‘quintessentially transformative: FAIR USE,’ Exhibit A, 2025. Its red half — the AI’s answers copied again into a cheaper copycat — is thicker (16 million exchanges by about 24,000 fake accounts vs. 7 million pirated books, drawn to scale) and stamped ‘free-ride: THEFT,’ Exhibit B, 2026. Around the loop, four groups each win under one rule and lose under the other; at center sit the value collisions and the $1.5 billion paid to authors.">
+      </a>
+      <figcaption>One act of copying, two verdicts: the half of the loop that feeds the model is stamped <em>fair use</em>; the half that copies the model is stamped <em>theft</em>. Open <a href="dilemma.html">the full case file</a>.
+        <span class="src">Infographic: Neel Anshu &middot; ENGL C1001 &middot; SU26</span></figcaption>
+    </figure>
+  </section>
+
+</main>
+
+<footer class="site">
+  <span>Neel Anshu &mdash; Critical Thinking &amp; Writing</span>
+  <span>Next &mdash; <a href="dilemma.html">02 The Dilemma</a></span>
+</footer>
+
+<script>window.SITE_PAGES = [{"href": "index.html", "num": "01", "label": "Home"}, {"href": "dilemma.html", "num": "02", "label": "The Dilemma"}, {"href": "thesis.html", "num": "03", "label": "Thesis"}, {"href": "frameworks.html", "num": "04", "label": "Frameworks"}, {"href": "argument-1.html", "num": "05", "label": "Argument I"}, {"href": "argument-2.html", "num": "06", "label": "Argument II"}, {"href": "argument-3.html", "num": "07", "label": "Argument III"}, {"href": "argument-4.html", "num": "08", "label": "Argument IV"}, {"href": "rebuttal.html", "num": "09", "label": "Rebuttal"}, {"href": "conclusion.html", "num": "10", "label": "Conclusion"}, {"href": "works-cited.html", "num": "11", "label": "Works Cited"}];</script>
+<script src="snake.js"></script>
+<script src="site.js"></script>
+<script src="quest.js"></script>
+<script>buildHub(document.getElementById('hub'), window.SITE_PAGES, 0);</script>
+<script>
+/* Docket readout: hover/focus a snake segment and the invite line points to it.
+   Text-only feedback; the fade is skipped under prefers-reduced-motion. */
+(function () {
+  var hub = document.getElementById('hub');
+  var out = document.getElementById('invite');
+  if (!hub || !out) return;
+
+  var idle = out.textContent;
+  var cur = idle;
+  var motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var tm = null;
+
+  function apply(text, hot) {
+    out.textContent = text;
+    out.classList.toggle('hot', !!hot);
+  }
+  function swap(text, hot) {
+    if (text === cur) return;
+    cur = text;
+    if (!motionOK) { apply(text, hot); return; }
+    clearTimeout(tm);
+    out.classList.add('swap');
+    tm = setTimeout(function () {
+      apply(text, hot);
+      out.classList.remove('swap');
+    }, 90);
+  }
+  function point(node) {
+    var label = node.getAttribute('aria-label') || '';
+    swap('Enter ' + label.slice(0, 2) + ' · ' + label.slice(3), true);
+  }
+  function idleOut(related) {
+    if (!(related && related.closest && related.closest('a.node'))) swap(idle, false);
+  }
+
+  hub.addEventListener('mouseover', function (e) {
+    var n = e.target.closest ? e.target.closest('a.node') : null;
+    if (n) point(n);
+  });
+  hub.addEventListener('mouseout', function (e) { idleOut(e.relatedTarget); });
+  hub.addEventListener('focusin', function (e) {
+    var n = e.target.closest ? e.target.closest('a.node') : null;
+    if (n) point(n);
+  });
+  hub.addEventListener('focusout', function (e) { idleOut(e.relatedTarget); });
+})();
+</script>
+
+</body>
+</html>
